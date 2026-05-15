@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${spaceGrotesk.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-[#0a0a12]">
         <Header />
-        <main className="flex-1 pt-[73px]">{children}</main>
+        <main className="flex-1 pt-[69px]">{children}</main>
         <Footer />
       </body>
     </html>
