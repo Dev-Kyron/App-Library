@@ -83,7 +83,7 @@ export default function GameCard({ game }: { game: Game }) {
             ))}
           </div>
 
-          <span className="text-xs font-medium text-[#7c3aed] opacity-0 transition-opacity group-hover:opacity-100">
+          <span className="text-xs font-medium text-[#7c3aed] opacity-60 transition-opacity group-hover:opacity-100">
             View →
           </span>
         </div>

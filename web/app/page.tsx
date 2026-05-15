@@ -22,13 +22,13 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a12]/80 via-transparent to-[#0a0a12]/40" />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-6 py-24">
+        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
           <div className="max-w-2xl">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#2a1a4e] bg-[#7c3aed]/10 px-3 py-1 text-xs text-[#a855f7]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#a855f7] animate-pulse" />
               Independent Studio · Unreal Engine 5
             </div>
-            <h1 className="text-5xl font-bold leading-tight tracking-tight text-[#e2e8f0] md:text-6xl">
+            <h1 className="text-4xl font-bold leading-tight tracking-tight text-[#e2e8f0] sm:text-5xl md:text-6xl">
               Void Soul{' '}
               <span
                 className="text-transparent"
@@ -66,7 +66,7 @@ export default function HomePage() {
 
       {/* Featured game */}
       {featured && (
-        <section className="mx-auto max-w-7xl px-6 py-16">
+        <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
           <h2 className="mb-6 text-xs font-semibold uppercase tracking-widest text-[#7c3aed]">
             Featured
           </h2>
@@ -105,12 +105,12 @@ export default function HomePage() {
               </span>
             </div>
 
-            <div className="flex flex-1 flex-col justify-center gap-5 p-8 md:p-12">
+            <div className="flex flex-1 flex-col justify-center gap-5 p-5 sm:p-8 md:p-12">
               <div>
                 <p className="text-xs font-medium uppercase tracking-widest text-[#7c3aed] mb-2">
                   {featured.genre.join(' · ')}
                 </p>
-                <h3 className="text-3xl font-bold text-[#e2e8f0] group-hover:text-[#a855f7] transition-colors">
+                <h3 className="text-2xl font-bold text-[#e2e8f0] group-hover:text-[#a855f7] transition-colors sm:text-3xl">
                   {featured.title}
                 </h3>
                 <p className="mt-3 text-[#64748b] leading-relaxed">
@@ -135,7 +135,7 @@ export default function HomePage() {
       )}
 
       {/* Game grid */}
-      <section id="games" className="mx-auto max-w-7xl px-6 pb-24">
+      <section id="games" className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24">
         <div className="mb-8 flex items-end justify-between">
           <div>
             <h2 className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed] mb-2">
@@ -155,16 +155,30 @@ export default function HomePage() {
 
       {/* About */}
       <section id="about" className="relative border-t border-[#1e1a3a] overflow-hidden">
-        {/* Ambient glow */}
+        {/* Space background */}
+        <div className="absolute inset-0">
+          <Image
+            src="/VoidBg.jpg"
+            alt=""
+            fill
+            className="object-cover object-center opacity-30"
+          />
+          {/* Soft blur + dark veil over the background */}
+          <div className="absolute inset-0 backdrop-blur-sm bg-[#0a0a12]/60" />
+          {/* Edge fade so it blends with surrounding sections */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a12] via-transparent to-[#0a0a12]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a12]/50 via-transparent to-[#0a0a12]/50" />
+        </div>
+        {/* Ambient purple glow */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             backgroundImage:
-              'radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.12) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(168,85,247,0.06) 0%, transparent 50%)',
+              'radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.15) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(168,85,247,0.08) 0%, transparent 50%)',
           }}
         />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-28">
+        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-28">
           <div className="grid md:grid-cols-2 gap-16 items-center">
 
             {/* Logo display */}
@@ -175,9 +189,9 @@ export default function HomePage() {
                 <Image
                   src="/SqaureLogo.png"
                   alt="Void Soul Studio"
-                  width={320}
-                  height={320}
-                  className="relative rounded-3xl"
+                  width={280}
+                  height={280}
+                  className="relative rounded-3xl w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72"
                 />
               </div>
             </div>
@@ -188,7 +202,7 @@ export default function HomePage() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed] mb-3">
                   About
                 </p>
-                <h2 className="text-4xl font-bold text-[#e2e8f0] leading-tight">
+                <h2 className="text-3xl font-bold text-[#e2e8f0] leading-tight sm:text-4xl">
                   Void Soul Studio
                 </h2>
               </div>

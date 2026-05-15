@@ -34,7 +34,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
   const isPlayable = game.status === 'available' && !!game.url;
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-16">
+    <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-16">
       {/* Back */}
       <Link
         href="/"
@@ -64,7 +64,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         ))}
       </div>
 
-      <h1 className="text-4xl font-bold text-[#e2e8f0] leading-tight mb-8">{game.title}</h1>
+      <h1 className="text-3xl font-bold text-[#e2e8f0] leading-tight mb-8 sm:text-4xl">{game.title}</h1>
 
       {/* Media: player, gallery, or thumbnail */}
       {isPlayable ? (
@@ -85,11 +85,11 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
                 }}
               />
               <Image
-                src="/Logo.png"
+                src="/SqaureLogo.png"
                 alt="Void Soul Studio"
                 width={120}
                 height={120}
-                className="relative z-10 opacity-25"
+                className="relative z-10 opacity-25 rounded-2xl"
               />
             </div>
           )}

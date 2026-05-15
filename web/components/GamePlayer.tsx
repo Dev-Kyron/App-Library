@@ -41,17 +41,17 @@ export default function GamePlayer({ url, title }: { url: string; title: string 
           src={url}
           title={title}
           className="w-full h-full"
-          allow="fullscreen; accelerometer; gyroscope"
+          allow="autoplay; fullscreen; accelerometer; gyroscope"
           style={{ border: 'none', display: 'block' }}
         />
 
-        {/* Fullscreen button overlay */}
+        {/* Fullscreen button — larger hit target on mobile */}
         <button
           onClick={toggleFS}
           title={isFS ? 'Exit Fullscreen' : 'Fullscreen'}
-          className="absolute bottom-3 left-3 flex items-center justify-center rounded-lg transition-all"
+          className="absolute bottom-3 left-3 flex items-center justify-center rounded-lg transition-all active:scale-95"
           style={{
-            width: 40, height: 40,
+            width: 48, height: 48,
             background: 'rgba(10,8,24,0.78)',
             border: '1px solid rgba(124,58,237,0.45)',
             color: '#c084fc',
@@ -71,15 +71,18 @@ export default function GamePlayer({ url, title }: { url: string; title: string 
         </button>
       </div>
 
-      {/* Open in new tab */}
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="self-start text-xs text-[#475569] hover:text-[#a855f7] transition-colors"
-      >
-        Open in new tab ↗
-      </a>
+      {/* Hint + new tab link */}
+      <div className="flex items-center justify-between">
+        <p className="text-xs text-[#334155]">Tap fullscreen for the best experience on mobile.</p>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs text-[#475569] hover:text-[#a855f7] transition-colors"
+        >
+          Open in new tab ↗
+        </a>
+      </div>
     </div>
   );
 }
