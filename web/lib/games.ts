@@ -35,6 +35,18 @@ export const games: Game[] = [
     url: 'https://through-the-void.vercel.app',
   },
   {
+    slug: 'astro-cat',
+    title: 'AstroCat',
+    description:
+      'Load your astronaut cat into a void-powered catapult and launch it into space. Collect coins mid-flight, bounce on landing, and upgrade your way to the stars.',
+    longDescription:
+      'AstroCat is a distance launcher set in the Void Soul universe. Time your angle and power, tap to boost mid-flight, and rack up coins to unlock 8 upgrades across 20 levels each. Push far enough to unlock the Void Ascend prestige system and permanent upgrades that carry through every reset.',
+    genre: ['Arcade', 'Casual', 'Idle'],
+    thumbnail: '/thumbnails/astro-cat.png',
+    status: 'available',
+    url: 'https://astro-cat-one.vercel.app',
+  },
+  {
     slug: 'new-heights',
     title: 'New Heights',
     description:
