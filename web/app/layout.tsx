@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Void Soul Studio — Game Library',
     description: 'Crafting worlds beyond the void.',
-    images: ['/SqaureLogo.png'],
+    images: ['/Logo.png'],
   },
 };
 

@@ -187,11 +187,11 @@ export default function HomePage() {
                 {/* Bloom glow */}
                 <div className="absolute inset-0 scale-[1.4] blur-3xl rounded-full bg-[#7c3aed]/20 pointer-events-none" />
                 <Image
-                  src="/SqaureLogo.png"
+                  src="/Logo.png"
                   alt="Void Soul Studio"
                   width={280}
                   height={280}
-                  className="relative rounded-3xl w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72"
+                  className="relative rounded-3xl w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-white/95 p-3"
                 />
               </div>
             </div>

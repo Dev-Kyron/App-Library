@@ -85,11 +85,11 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
                 }}
               />
               <Image
-                src="/SqaureLogo.png"
+                src="/Logo.png"
                 alt="Void Soul Studio"
                 width={120}
                 height={120}
-                className="relative z-10 opacity-25 rounded-2xl"
+                className="relative z-10 opacity-30 rounded-2xl bg-white/80 p-2"
               />
             </div>
           )}
