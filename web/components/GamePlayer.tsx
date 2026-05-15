@@ -19,11 +19,8 @@ export default function GamePlayer({ url, title }: { url: string; title: string 
     const el = containerRef.current;
     if (!el) return;
     if (!document.fullscreenElement) {
-      (el.requestFullscreen?.() ?? (el as any).webkitRequestFullscreen?.())
-        ?.then?.(() => {
-          (screen.orientation as any)?.lock?.('landscape').catch(() => {});
-        })
-        .catch(() => {});
+      // No orientation lock — games are portrait or landscape, let them decide
+      (el.requestFullscreen?.() ?? (el as any).webkitRequestFullscreen?.())?.catch(() => {});
     } else {
       (document.exitFullscreen?.() ?? (document as any).webkitExitFullscreen?.());
     }
@@ -34,15 +31,22 @@ export default function GamePlayer({ url, title }: { url: string; title: string 
       {/* Player */}
       <div
         ref={containerRef}
-        className="relative w-full overflow-hidden rounded-xl border border-[#1e1a3a] bg-[#0a0818]"
-        style={{ aspectRatio: '16/9' }}
+        className="relative w-full overflow-hidden rounded-xl border border-[#1e1a3a] bg-[#0a0818] select-none"
+        style={{ aspectRatio: '16/9', WebkitUserSelect: 'none', WebkitTouchCallout: 'none' } as React.CSSProperties}
       >
         <iframe
           src={url}
           title={title}
           className="w-full h-full"
           allow="autoplay; fullscreen; accelerometer; gyroscope"
-          style={{ border: 'none', display: 'block' }}
+          style={{
+            border: 'none',
+            display: 'block',
+            // Prevent iOS long-press selection highlight on the iframe
+            WebkitUserSelect: 'none',
+            userSelect: 'none',
+            WebkitTouchCallout: 'none',
+          } as React.CSSProperties}
         />
 
         {/* Fullscreen button — larger hit target on mobile */}
