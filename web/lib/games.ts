@@ -25,6 +25,16 @@ export const games: Game[] = [
     url: 'https://idle-spirits.vercel.app',
   },
   {
+    slug: 'through-the-void',
+    title: 'Through The Void',
+    description:
+      'A void-soaked take on the classic flapper. Guide your spirit orb through glowing purple pillars in the depths of space.',
+    genre: ['Arcade', 'Casual'],
+    thumbnail: '/thumbnails/through-the-void.png',
+    status: 'available',
+    url: 'https://through-the-void.vercel.app',
+  },
+  {
     slug: 'spiritless',
     title: 'Project Spiritless',
     description:
