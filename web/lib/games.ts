@@ -9,6 +9,7 @@ export interface Game {
   url?: string;
   featured?: boolean;
   releaseYear?: number;
+  screenshots?: string[];
 }
 
 export const games: Game[] = [
@@ -81,6 +82,13 @@ export const games: Game[] = [
     thumbnail: '/thumbnails/spiritless.png',
     status: 'coming-soon',
     featured: true,
+    screenshots: [
+      '/spiritless/hero-banner.png',
+      '/spiritless/art.png',
+      '/spiritless/3d.png',
+      '/spiritless/interaction.jpg',
+      '/spiritless/store-icon.png',
+    ],
   },
   {
     slug: 'void-echo',

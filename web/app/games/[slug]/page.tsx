@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { games, getGame } from '@/lib/games';
 import GamePlayer from '@/components/GamePlayer';
+import ScreenshotGallery from '@/components/ScreenshotGallery';
 
 export function generateStaticParams() {
   return games.map((g) => ({ slug: g.slug }));
@@ -65,9 +66,11 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
 
       <h1 className="text-4xl font-bold text-[#e2e8f0] leading-tight mb-8">{game.title}</h1>
 
-      {/* Embedded player for available games, thumbnail for others */}
+      {/* Media: player, gallery, or thumbnail */}
       {isPlayable ? (
         <GamePlayer url={game.url!} title={game.title} />
+      ) : game.screenshots && game.screenshots.length > 0 ? (
+        <ScreenshotGallery shots={game.screenshots} title={game.title} />
       ) : (
         <div className="relative w-full overflow-hidden rounded-xl border border-[#1e1a3a] bg-[#0f0f1e] mb-6" style={{ aspectRatio: '16/9' }}>
           {game.thumbnail ? (

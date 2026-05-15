@@ -171,6 +171,18 @@ export default function HomePage() {
               game we make lives at the intersection of dark aesthetics and tight
               gameplay. Follow our devlog to watch it all get built from scratch.
             </p>
+            <div className="flex items-start gap-3 rounded-xl border border-[#2a1a4e] bg-[#7c3aed]/8 px-5 py-4 text-left">
+              <span className="mt-0.5 text-[#a855f7]">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                </svg>
+              </span>
+              <p className="text-sm text-[#94a3b8] leading-relaxed">
+                All ad revenue from our mini games goes directly toward funding{' '}
+                <span className="text-[#a855f7] font-medium">Project Spiritless</span>{' '}
+                development. Every ad watched is a direct contribution to the game.
+              </p>
+            </div>
             <a
               href="https://www.youtube.com/@voidsoul_studio"
               target="_blank"
