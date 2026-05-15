@@ -154,43 +154,84 @@ export default function HomePage() {
       </section>
 
       {/* About */}
-      <section id="about" className="border-t border-[#1e1a3a] bg-[#0f0f1e]">
-        <div className="mx-auto max-w-7xl px-6 py-24">
-          <div className="flex flex-col items-center text-center gap-6 max-w-2xl mx-auto">
-            <Image
-              src="/SqaureLogo.png"
-              alt="Void Soul Studio"
-              width={80}
-              height={80}
-              className="rounded-2xl"
-            />
-            <h2 className="text-3xl font-bold text-[#e2e8f0]">About Void Soul Studio</h2>
-            <p className="text-[#64748b] leading-relaxed">
-              We&apos;re a small indie studio obsessed with atmosphere, feel, and the
-              details most people won&apos;t notice — but will definitely feel. Every
-              game we make lives at the intersection of dark aesthetics and tight
-              gameplay. Follow our devlog to watch it all get built from scratch.
-            </p>
-            <div className="flex items-start gap-3 rounded-xl border border-[#2a1a4e] bg-[#7c3aed]/8 px-5 py-4 text-left">
-              <span className="mt-0.5 text-[#a855f7]">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-                </svg>
-              </span>
-              <p className="text-sm text-[#94a3b8] leading-relaxed">
-                All ad revenue from our mini games goes directly toward funding{' '}
-                <span className="text-[#a855f7] font-medium">Project Spiritless</span>{' '}
-                development. Every ad watched is a direct contribution to the game.
-              </p>
+      <section id="about" className="relative border-t border-[#1e1a3a] overflow-hidden">
+        {/* Ambient glow */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage:
+              'radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.12) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(168,85,247,0.06) 0%, transparent 50%)',
+          }}
+        />
+
+        <div className="relative mx-auto max-w-7xl px-6 py-28">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+
+            {/* Logo display */}
+            <div className="flex justify-center md:justify-end">
+              <div className="relative">
+                {/* Bloom glow */}
+                <div className="absolute inset-0 scale-[1.4] blur-3xl rounded-full bg-[#7c3aed]/20 pointer-events-none" />
+                <Image
+                  src="/Logo.png"
+                  alt="Void Soul Studio"
+                  width={300}
+                  height={300}
+                  className="relative"
+                  style={{
+                    filter: 'invert(1) hue-rotate(215deg) brightness(1.5) saturate(1.3)',
+                  }}
+                />
+              </div>
             </div>
-            <a
-              href="https://www.youtube.com/@voidsoul_studio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg border border-[#2a1a4e] bg-[#7c3aed]/10 px-6 py-3 text-sm font-medium text-[#a855f7] transition-all hover:bg-[#7c3aed]/20"
-            >
-              Follow the journey ↗
-            </a>
+
+            {/* Text */}
+            <div className="flex flex-col gap-7 max-w-lg">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed] mb-3">
+                  About
+                </p>
+                <h2 className="text-4xl font-bold text-[#e2e8f0] leading-tight">
+                  Void Soul Studio
+                </h2>
+              </div>
+
+              <p className="text-[#64748b] leading-relaxed">
+                We&apos;re a small indie studio obsessed with atmosphere, feel, and the
+                details most people won&apos;t notice — but will definitely feel.
+              </p>
+              <p className="text-[#64748b] leading-relaxed">
+                Every game we make lives at the intersection of dark aesthetics and tight
+                gameplay. Follow our devlog to watch it all get built from scratch.
+              </p>
+
+              {/* AdSense callout */}
+              <div className="flex items-start gap-3 rounded-xl border border-[#2a1a4e] bg-[#7c3aed]/8 px-5 py-4">
+                <span className="mt-0.5 flex-none text-[#a855f7]">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                  </svg>
+                </span>
+                <p className="text-sm text-[#94a3b8] leading-relaxed">
+                  All ad revenue from our mini games goes directly toward funding{' '}
+                  <span className="text-[#a855f7] font-medium">Project Spiritless</span>.
+                  {' '}Every ad watched is a direct contribution to the game.
+                </p>
+              </div>
+
+              <a
+                href="https://www.youtube.com/@voidsoul_studio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-fit items-center gap-2 rounded-lg bg-[#7c3aed] px-6 py-3 text-sm font-medium text-white transition-all hover:bg-[#6d28d9] hover:shadow-[0_0_20px_rgba(124,58,237,0.4)]"
+              >
+                Follow the journey
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </a>
+            </div>
+
           </div>
         </div>
       </section>

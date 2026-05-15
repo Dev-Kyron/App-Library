@@ -90,24 +90,6 @@ export const games: Game[] = [
       '/spiritless/store-icon.png',
     ],
   },
-  {
-    slug: 'void-echo',
-    title: 'Void Echo',
-    description:
-      'Navigate pulsating sound waves through a dark dimension where every beat reshapes reality.',
-    genre: ['Puzzle', 'Rhythm', 'Ambient'],
-    thumbnail: '',
-    status: 'coming-soon',
-  },
-  {
-    slug: 'soul-fracture',
-    title: 'Soul Fracture',
-    description:
-      'A brutally precise roguelike where death splinters your soul into fragments you must reclaim.',
-    genre: ['Roguelike', 'Action'],
-    thumbnail: '',
-    status: 'coming-soon',
-  },
 ];
 
 export function getGame(slug: string): Game | undefined {
