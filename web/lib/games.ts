@@ -35,6 +35,18 @@ export const games: Game[] = [
     url: 'https://through-the-void.vercel.app',
   },
   {
+    slug: 'new-heights',
+    title: 'New Heights',
+    description:
+      'Leap through the void on crumbling platforms, bouncing pads, and shifting ground. How high can your spirit climb before the darkness swallows you?',
+    longDescription:
+      'New Heights is a fast-paced vertical platformer inspired by Doodle Jump, built with the Void Soul aesthetic. Land on glowing platforms to keep climbing — but watch out for crumbling tiles and moving platforms as the difficulty ramps up. Compete against your best score and chase milestone rewards as you ascend into the unknown.',
+    genre: ['Platformer', 'Arcade', 'Casual'],
+    thumbnail: '/thumbnails/new-heights.png',
+    status: 'available',
+    url: 'https://new-heights-neon.vercel.app',
+  },
+  {
     slug: 'spiritless',
     title: 'Project Spiritless',
     description:
