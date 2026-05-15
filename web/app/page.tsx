@@ -173,14 +173,11 @@ export default function HomePage() {
                 {/* Bloom glow */}
                 <div className="absolute inset-0 scale-[1.4] blur-3xl rounded-full bg-[#7c3aed]/20 pointer-events-none" />
                 <Image
-                  src="/Logo.png"
+                  src="/SqaureLogo.png"
                   alt="Void Soul Studio"
-                  width={300}
-                  height={300}
-                  className="relative"
-                  style={{
-                    filter: 'invert(1) hue-rotate(215deg) brightness(1.5) saturate(1.3)',
-                  }}
+                  width={320}
+                  height={320}
+                  className="relative rounded-3xl"
                 />
               </div>
             </div>

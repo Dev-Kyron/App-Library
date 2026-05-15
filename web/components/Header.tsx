@@ -25,15 +25,11 @@ export default function Header() {
           >
             {/* Logo image — filter converts white bg → near-black (invisible on dark nav) */}
             <Image
-              src="/Logo.png"
+              src="/SqaureLogo.png"
               alt="Void Soul Studio"
-              width={52}
-              height={52}
-              className="transition-all duration-300 group-hover:scale-105"
-              style={{
-                filter:
-                  'invert(1) hue-rotate(215deg) brightness(1.5) saturate(1.3)',
-              }}
+              width={44}
+              height={44}
+              className="rounded-xl transition-all duration-300 group-hover:opacity-90"
             />
             <div className="flex flex-col leading-none">
               <span className="text-[13px] font-bold tracking-widest text-[#e2e8f0] uppercase transition-colors group-hover:text-[#c084fc]">
