@@ -31,7 +31,7 @@ export default function Header() {
             About
           </Link>
           <a
-            href="https://youtube.com/@voidsoulstudio"
+            href="https://www.youtube.com/@voidsoul_studio"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[#94a3b8] hover:text-[#a855f7] transition-colors text-sm tracking-wide"
@@ -67,7 +67,7 @@ export default function Header() {
           <Link href="#about" className="text-[#94a3b8] hover:text-[#a855f7] transition-colors text-sm" onClick={() => setMenuOpen(false)}>
             About
           </Link>
-          <a href="https://youtube.com/@voidsoulstudio" target="_blank" rel="noopener noreferrer" className="text-[#94a3b8] hover:text-[#a855f7] transition-colors text-sm">
+          <a href="https://www.youtube.com/@voidsoul_studio" target="_blank" rel="noopener noreferrer" className="text-[#94a3b8] hover:text-[#a855f7] transition-colors text-sm">
             Devlog
           </a>
         </div>

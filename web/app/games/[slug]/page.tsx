@@ -116,7 +116,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
                 <p className="text-xs text-[#334155]">
                   Follow our{' '}
                   <a
-                    href="https://youtube.com/@voidsoulstudio"
+                    href="https://www.youtube.com/@voidsoul_studio"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[#7c3aed] hover:underline"

@@ -23,7 +23,7 @@ export default function Footer() {
           <div className="flex items-center gap-6 text-xs text-[#475569]">
             <Link href="/" className="hover:text-[#a855f7] transition-colors">Games</Link>
             <Link href="#about" className="hover:text-[#a855f7] transition-colors">About</Link>
-            <a href="https://youtube.com/@voidsoulstudio" target="_blank" rel="noopener noreferrer" className="hover:text-[#a855f7] transition-colors">
+            <a href="https://www.youtube.com/@voidsoul_studio" target="_blank" rel="noopener noreferrer" className="hover:text-[#a855f7] transition-colors">
               YouTube
             </a>
           </div>

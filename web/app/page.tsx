@@ -52,7 +52,7 @@ export default function HomePage() {
                 Explore Games
               </a>
               <a
-                href="https://youtube.com/@voidsoulstudio"
+                href="https://www.youtube.com/@voidsoul_studio"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-lg border border-[#1e1a3a] px-6 py-3 text-sm font-medium text-[#94a3b8] transition-all hover:border-[#7c3aed] hover:text-[#e2e8f0]"
@@ -172,7 +172,7 @@ export default function HomePage() {
               gameplay. Follow our devlog to watch it all get built from scratch.
             </p>
             <a
-              href="https://youtube.com/@voidsoulstudio"
+              href="https://www.youtube.com/@voidsoul_studio"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-lg border border-[#2a1a4e] bg-[#7c3aed]/10 px-6 py-3 text-sm font-medium text-[#a855f7] transition-all hover:bg-[#7c3aed]/20"
