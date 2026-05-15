@@ -59,6 +59,18 @@ export const games: Game[] = [
     url: 'https://new-heights-neon.vercel.app',
   },
   {
+    slug: 'space-worm',
+    title: 'SpaceWorm',
+    description:
+      'A snake remake set in the void. Eat food to grow, collect power orbs, and survive as long as you can in the depths of space.',
+    longDescription:
+      'SpaceWorm is a void-aesthetic snake game with multiple food types, four power-ups (shield, slow, score doubler, shrink), speed progression, and particle effects. Collect normal pellets, cyan crystals, and rare pink stars for bonus points. Watch for roaming power orbs — grab them before they vanish. Mobile-ready with swipe and D-pad controls.',
+    genre: ['Arcade', 'Casual'],
+    thumbnail: '/thumbnails/space-worm.png',
+    status: 'available',
+    url: 'https://space-worm-delta.vercel.app',
+  },
+  {
     slug: 'spiritless',
     title: 'Project Spiritless',
     description:
