@@ -72,6 +72,18 @@ export const games: Game[] = [
     url: 'https://space-worm-delta.vercel.app',
   },
   {
+    slug: 'asteroids',
+    title: 'Asteroids',
+    description:
+      'A wave-survival remake of the arcade classic. Blast splitting rocks, chain combos, and outlast hunting UFOs and boss cores deep in the void.',
+    longDescription:
+      'Asteroids is a wave-survival arcade shooter set in the Void Soul universe. Survive escalating waves of splitting rocks, dodge UFOs that hunt you down and fire back, and tear apart mega-core bosses every few rounds. Chain fast back-to-back kills to stack a score multiplier up to 9x, grab power-ups — Rapid Fire, Spread Shot, Shield and Pierce — and pick your challenge across Casual, Normal and Insane. Plays on desktop with keyboard controls and on mobile with an on-screen virtual joystick.',
+    genre: ['Arcade', 'Action', 'Shooter'],
+    thumbnail: '/thumbnails/asteroids.jpg',
+    status: 'available',
+    url: 'https://asteroids-navy.vercel.app',
+  },
+  {
     slug: 'spiritless',
     title: 'Project Spiritless',
     description:
