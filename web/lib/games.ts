@@ -84,6 +84,18 @@ export const games: Game[] = [
     url: 'https://asteroids-navy.vercel.app',
   },
   {
+    slug: 'space-builder',
+    title: 'Space Builder',
+    description:
+      'A block-stacking puzzler with a twist — every line you clear builds a space station that arms you with power-ups.',
+    longDescription:
+      'Space Builder is a Tetris-style puzzler set in the Void Soul universe. Drop and rotate falling blocks to clear full lines — and every clear feeds a six-module space station alongside the well. Each completed module hands you a power-up: Bomb to blast the bottom rows, Laser to wipe a line, or Single to shrink your piece into one block for tight gaps. Play Marathon for an endless climb, Sprint to race 40 lines against the clock, or Zen for a relaxed no-fail build. Keyboard on desktop, on-screen controls and swipe gestures on mobile.',
+    genre: ['Puzzle', 'Arcade', 'Casual'],
+    thumbnail: '/thumbnails/space-builder.jpg',
+    status: 'available',
+    url: 'https://space-builder.vercel.app',
+  },
+  {
     slug: 'spiritless',
     title: 'Project Spiritless',
     description:
