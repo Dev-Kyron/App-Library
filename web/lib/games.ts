@@ -91,7 +91,7 @@ export const games: Game[] = [
     longDescription:
       'Space Builder is a Tetris-style puzzler set in the Void Soul universe. Drop and rotate falling blocks to clear full lines — and every clear feeds a six-module space station alongside the well. Each completed module hands you a power-up: Bomb to blast the bottom rows, Laser to wipe a line, or Single to shrink your piece into one block for tight gaps. Play Marathon for an endless climb, Sprint to race 40 lines against the clock, or Zen for a relaxed no-fail build. Keyboard on desktop, on-screen controls and swipe gestures on mobile.',
     genre: ['Puzzle', 'Arcade', 'Casual'],
-    thumbnail: '/thumbnails/space-builder.jpg',
+    thumbnail: '/thumbnails/space-builder.png',
     status: 'available',
     url: 'https://space-builder.vercel.app',
   },
