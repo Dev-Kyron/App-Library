@@ -7,6 +7,11 @@ import { useEffect, useState } from 'react';
  * the kind of tool calls the real agent makes during a multi-step task.
  * Mirrors the in-app `LiveToolStep` styling so the marketing page feels
  * like it lifted the look straight from the running product.
+ *
+ * When multiple streams render side-by-side (e.g. the close-up card's
+ * stacked rows), pass a different `startIndex` to each so they don't all
+ * land on the same task — without that, three mounted-at-once instances
+ * stay in lockstep and the panel reads like a stuck progress bar.
  */
 
 const TASKS = [
@@ -20,8 +25,15 @@ const TASKS = [
   { verb: 'Writing file', detail: 'CHANGELOG.md', icon: '✏️' },
 ];
 
-export default function AgentToolStream({ className = '' }: { className?: string }) {
-  const [i, setI] = useState(0);
+interface Props {
+  className?: string;
+  /** Where in the TASKS rotation this stream should start. Used to desync
+   *  multiple instances mounted at once. */
+  startIndex?: number;
+}
+
+export default function AgentToolStream({ className = '', startIndex = 0 }: Props) {
+  const [i, setI] = useState(startIndex % TASKS.length);
   useEffect(() => {
     const id = window.setInterval(() => setI((n) => (n + 1) % TASKS.length), 1700);
     return () => window.clearInterval(id);

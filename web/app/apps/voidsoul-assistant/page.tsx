@@ -443,30 +443,30 @@ export default function VoidSoulAssistantPage() {
             </p>
           </div>
 
-          <div className="grid gap-6 sm:gap-8 lg:grid-cols-12">
-            <Tilt3D strength={8} className="lg:col-span-5 lg:translate-y-4">
+          <div className="grid gap-8 sm:gap-10 lg:gap-12 lg:grid-cols-12">
+            <Tilt3D strength={8} className="h-full lg:col-span-5 lg:translate-y-4">
               <CloseUpPanel
                 tag="Floating orb"
                 title="Always there, never in the way."
                 caption="Drag-to-move. Click-to-summon. Tray-resident on every OS."
               >
-                <div className="flex items-center justify-center py-14">
+                <div className="flex items-center justify-center py-16 sm:py-20">
                   <VoidSoulOrb size={200} />
                 </div>
               </CloseUpPanel>
             </Tilt3D>
 
-            <Tilt3D strength={8} className="lg:col-span-7">
+            <Tilt3D strength={8} className="h-full lg:col-span-7">
               <CloseUpPanel
                 tag="Live agent"
                 title="See what it's doing, as it does it."
                 caption="A live strip while the agent works — searching, reading, running, clicking — never silent."
               >
-                <div className="flex flex-col gap-2 p-5 pt-2">
-                  <AgentToolStream />
-                  <AgentToolStream className="opacity-60" />
-                  <AgentToolStream className="opacity-30" />
-                  <p className="pt-2 text-[10px] text-[#475569]">
+                <div className="flex flex-col gap-2.5 px-6 py-6 sm:px-7 sm:py-7">
+                  <AgentToolStream startIndex={0} />
+                  <AgentToolStream startIndex={3} className="opacity-60" />
+                  <AgentToolStream startIndex={6} className="opacity-30" />
+                  <p className="pt-3 text-[10px] leading-relaxed text-[#475569]">
                     Six-step agent loop cap · partial content preserved on Stop · every step
                     logged.
                   </p>
@@ -474,25 +474,25 @@ export default function VoidSoulAssistantPage() {
               </CloseUpPanel>
             </Tilt3D>
 
-            <Tilt3D strength={8} className="lg:col-span-7 lg:-translate-y-4">
+            <Tilt3D strength={8} className="h-full lg:col-span-7 lg:-translate-y-4">
               <CloseUpPanel
                 tag="Quick AI"
                 title="One shortcut. Every answer."
                 caption="Press Cmd+Shift+J from anywhere — Word, Photoshop, your terminal. Ask. Done."
               >
-                <div className="flex items-center justify-center py-10">
+                <div className="flex items-center justify-center px-6 py-12 sm:px-8 sm:py-14">
                   <QuickAIMock />
                 </div>
               </CloseUpPanel>
             </Tilt3D>
 
-            <Tilt3D strength={8} className="lg:col-span-5">
+            <Tilt3D strength={8} className="h-full lg:col-span-5">
               <CloseUpPanel
                 tag="Cost honesty"
                 title="Spend, daily. Budget, enforced."
                 caption="Pay for tokens, not for a chat UI. Alerts at 75 / 90 / 100% of monthly cap."
               >
-                <div className="flex items-center justify-center py-6">
+                <div className="flex items-center justify-center px-6 py-10 sm:px-7 sm:py-12">
                   <CostChartMock />
                 </div>
               </CloseUpPanel>
@@ -952,7 +952,7 @@ function CloseUpPanel({
 }) {
   return (
     <div
-      className={`group relative overflow-hidden rounded-3xl border border-[#1e1a3a] bg-[#0f0f1e] transition-all duration-500 hover:-translate-y-1 hover:border-[#7c3aed]/60 hover:shadow-[0_0_32px_rgba(124,58,237,0.18)] ${className}`}
+      className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-[#1e1a3a] bg-[#0f0f1e] transition-all duration-500 hover:border-[#7c3aed]/60 hover:shadow-[0_0_32px_rgba(124,58,237,0.18)] ${className}`}
     >
       <div
         aria-hidden
@@ -962,15 +962,17 @@ function CloseUpPanel({
             'radial-gradient(ellipse at top, rgba(124,58,237,0.12), transparent 60%)',
         }}
       />
-      <div className="relative">
-        <div className="px-7 pt-7">
-          <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-[#7c3aed]">
+      <div className="relative flex flex-1 flex-col">
+        <div className="px-7 pb-2 pt-7 sm:px-8 sm:pb-3 sm:pt-8">
+          <p className="mb-2.5 text-[10px] font-semibold uppercase tracking-widest text-[#7c3aed]">
             {tag}
           </p>
-          <h3 className="text-xl font-semibold text-[#e2e8f0]">{title}</h3>
-          <p className="mt-2 text-sm text-[#64748b] leading-relaxed">{caption}</p>
+          <h3 className="text-xl font-semibold leading-snug text-[#e2e8f0]">{title}</h3>
+          <p className="mt-2.5 text-sm leading-relaxed text-[#64748b]">{caption}</p>
         </div>
-        <div className="border-t border-[#1e1a3a] bg-[#0a0a18]/60 mt-5">{children}</div>
+        <div className="mt-6 flex-1 border-t border-[#1e1a3a] bg-[#0a0a18]/60 sm:mt-8">
+          {children}
+        </div>
       </div>
     </div>
   );
