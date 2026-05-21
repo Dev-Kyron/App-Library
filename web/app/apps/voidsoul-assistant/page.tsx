@@ -111,7 +111,7 @@ export default function VoidSoulAssistantPage() {
       />
 
       {/* Back link */}
-      <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6">
+      <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 sm:pt-8">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-sm text-[#64748b] hover:text-[#a855f7] transition-colors"
@@ -125,14 +125,38 @@ export default function VoidSoulAssistantPage() {
 
       {/* ============================== HERO ============================== */}
       <section className="relative">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 pt-10 pb-24 sm:px-6 sm:pt-16 sm:pb-32 lg:grid-cols-[1.15fr_1fr] lg:items-center">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 pt-8 pb-16 sm:px-6 sm:pt-14 sm:pb-24 lg:pb-32 lg:grid-cols-[1.15fr_1fr] lg:items-center">
+          {/* Orb — sits ABOVE the copy on mobile so the visual lands first
+              when scrolling. Order flips back on lg so the copy is left. */}
+          <div className="relative order-first flex items-center justify-center reveal-fade lg:order-last">
+            <div className="relative">
+              {/* Mobile orb: smaller so it fits in a single phone screen
+                  alongside the chip + headline. Desktop orb stays at the
+                  cinematic size. */}
+              <div className="sm:hidden">
+                <VoidSoulOrb size={200} />
+              </div>
+              <div className="hidden sm:block lg:hidden">
+                <VoidSoulOrb size={280} />
+              </div>
+              <div className="hidden lg:block">
+                <VoidSoulOrb size={360} />
+              </div>
+              {/* Tool-stream chip — narrower on mobile so it never overflows
+                  the orb's bottom or the screen edge. */}
+              <div className="absolute -bottom-2 left-1/2 w-[88vw] max-w-[300px] -translate-x-1/2 reveal-up-delay">
+                <AgentToolStream />
+              </div>
+            </div>
+          </div>
+
           {/* Copy */}
-          <div className="relative z-10 reveal-up">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2a1a4e] bg-[#7c3aed]/10 px-3 py-1 text-xs text-[#a855f7]">
+          <div className="relative z-10 reveal-up lg:order-first">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#2a1a4e] bg-[#7c3aed]/10 px-3 py-1 text-[11px] sm:text-xs text-[#a855f7]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#a855f7] animate-pulse" />
               Apps &amp; Tools · Coming Soon
             </div>
-            <h1 className="text-5xl font-bold leading-[1.02] tracking-tight text-[#e2e8f0] sm:text-6xl lg:text-7xl">
+            <h1 className="text-[2.5rem] font-bold leading-[1.05] tracking-tight text-[#e2e8f0] sm:text-6xl lg:text-7xl">
               VoidSoul
               <br />
               <span
@@ -145,56 +169,48 @@ export default function VoidSoulAssistantPage() {
                 Assistant
               </span>
             </h1>
-            <p className="mt-5 max-w-xl text-lg italic leading-snug text-[#a855f7]">
+            <p className="mt-4 max-w-xl text-base italic leading-snug text-[#a855f7] sm:mt-5 sm:text-lg">
               The Jarvis loop, finally local.
             </p>
-            <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-[#94a3b8]">
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-[#94a3b8] sm:text-[15px] sm:mt-6">
               A floating desktop AI that talks, listens, sees your screen, drives your mouse,
               opens your apps, edits your files, and remembers every conversation. Bring
               whichever AI you already love — twelve providers, one body.
             </p>
 
-            <div className="mt-9 flex flex-wrap items-center gap-3">
+            {/* Stacked on mobile (full-width buttons), inline on sm+. */}
+            <div className="mt-7 flex flex-col gap-2.5 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
               <DownloadButton platform="windows" primary />
-              <DownloadButton platform="macos" />
-              <DownloadButton platform="linux" />
+              <div className="grid grid-cols-2 gap-2.5 sm:flex sm:gap-3">
+                <DownloadButton platform="macos" />
+                <DownloadButton platform="linux" />
+              </div>
             </div>
-            <p className="mt-3 text-xs text-[#475569]">
+            <p className="mt-3 text-[11px] leading-relaxed text-[#475569] sm:text-xs">
               Builds aren&apos;t live yet — Founder&apos;s Edition launches when downloads go public.
               <Link href="#pricing" className="ml-1 text-[#7c3aed] hover:underline">
                 See pricing →
               </Link>
             </p>
           </div>
-
-          {/* Orb */}
-          <div className="relative flex items-center justify-center reveal-fade">
-            <div className="relative">
-              <VoidSoulOrb size={360} />
-              <div className="absolute -bottom-2 left-1/2 w-[300px] -translate-x-1/2 reveal-up-delay">
-                <AgentToolStream />
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* ====================== 3D SHOWCASE STAGE ====================== */}
       <section className="relative">
-        {/* Heading floats against the left margin; not a centered block */}
-        <div className="mx-auto max-w-7xl px-4 pb-6 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed]">
+        <div className="mx-auto max-w-7xl px-4 pb-4 sm:px-6 sm:pb-6">
+          <p className="text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
             Live surface
           </p>
-          <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <h2 className="text-4xl font-bold leading-[1.05] text-[#e2e8f0] sm:text-5xl">
+          <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
+            <h2 className="text-3xl font-bold leading-[1.05] text-[#e2e8f0] sm:text-4xl lg:text-5xl">
               See it,
               <span className="text-[#7c3aed]">{' '}floating.</span>
             </h2>
             <p className="max-w-md text-sm text-[#94a3b8]">
               Real panels from the running app — chat with live agent steps, the
               multi-provider picker, the cost dashboard, the Raycast-style overlay.
-              Hover the canvas; it tilts with you.
+              <span className="hidden sm:inline">{' '}Hover the canvas; it tilts with you.</span>
             </p>
           </div>
         </div>
@@ -266,18 +282,18 @@ export default function VoidSoulAssistantPage() {
 
       {/* ======================= WHY + POSSIBILITIES ======================= */}
       <section className="relative">
-        <div className="mx-auto grid max-w-7xl gap-14 px-4 py-24 sm:px-6 sm:py-32 lg:grid-cols-12">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:gap-14 lg:py-32 lg:grid-cols-12">
           {/* Why */}
           <div className="lg:col-span-7">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed] mb-3">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
               Why it exists
             </p>
-            <h2 className="text-3xl font-bold leading-tight text-[#e2e8f0] sm:text-4xl lg:text-5xl">
+            <h2 className="text-[1.75rem] font-bold leading-tight text-[#e2e8f0] sm:text-4xl lg:text-5xl">
               The AI you already pay for —
               <br />
               <span className="text-[#a855f7]">with a body.</span>
             </h2>
-            <div className="mt-7 space-y-5 text-[15px] leading-relaxed text-[#94a3b8] max-w-2xl">
+            <div className="mt-5 space-y-4 text-sm leading-relaxed text-[#94a3b8] max-w-2xl sm:mt-7 sm:space-y-5 sm:text-[15px]">
               <p>
                 Today&apos;s AI apps split awkwardly. Cloud chatbots can&apos;t touch your computer.
                 Editor copilots are trapped in one IDE. Closed ecosystems lock you to one
@@ -296,22 +312,24 @@ export default function VoidSoulAssistantPage() {
             </div>
           </div>
 
-          {/* Possibilities — staggered, asymmetric */}
+          {/* Possibilities — staggered, asymmetric on desktop; flush on mobile. */}
           <div className="lg:col-span-5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed] mb-3">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
               What you can do
             </p>
-            <h3 className="text-2xl font-semibold text-[#e2e8f0] mb-6">
+            <h3 className="mb-5 text-xl font-semibold text-[#e2e8f0] sm:mb-6 sm:text-2xl">
               Real workflows, not chat-toy demos.
             </h3>
             <ul className="space-y-2.5">
               {POSSIBILITIES.map((line, i) => (
                 <li
                   key={i}
-                  className="flex items-start gap-3 rounded-xl border border-[#1e1a3a]/60 bg-gradient-to-br from-[#0f0f1e]/80 to-transparent px-4 py-3 transition-all hover:translate-x-1 hover:border-[#7c3aed]/60 hover:bg-[#7c3aed]/5 reveal-stagger"
+                  className="possibility-row flex items-start gap-3 rounded-xl border border-[#1e1a3a]/60 bg-gradient-to-br from-[#0f0f1e]/80 to-transparent px-4 py-3 transition-all hover:translate-x-1 hover:border-[#7c3aed]/60 hover:bg-[#7c3aed]/5 reveal-stagger"
                   style={{
                     animationDelay: `${i * 50}ms`,
-                    marginLeft: i % 2 === 0 ? 0 : 12,
+                    // Asymmetric only on lg+ — alternating margin on a phone
+                    // looks broken because the rows already span the column.
+                    ['--ml' as string]: i % 2 === 0 ? '0px' : '12px',
                   }}
                 >
                   <span
@@ -325,25 +343,30 @@ export default function VoidSoulAssistantPage() {
             </ul>
           </div>
         </div>
+        <style>{`
+          @media (min-width: 1024px) {
+            .possibility-row { margin-left: var(--ml, 0); }
+          }
+        `}</style>
       </section>
 
       {/* ============================ PILLARS ============================ */}
       <section className="relative">
-        <div className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 sm:pb-32">
-          <div className="mb-12 max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed] mb-2">
+        <div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24 lg:pb-32">
+          <div className="mb-8 max-w-2xl sm:mb-12">
+            <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
               What&apos;s in the box
             </p>
-            <h2 className="text-3xl font-bold text-[#e2e8f0] sm:text-4xl">
+            <h2 className="text-[1.75rem] font-bold text-[#e2e8f0] sm:text-4xl">
               Nine pillars.
             </h2>
           </div>
 
-          <div className="grid gap-px overflow-hidden rounded-3xl border border-[#1e1a3a] bg-[#1e1a3a]/50 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-[#1e1a3a] bg-[#1e1a3a]/50 sm:rounded-3xl md:grid-cols-2 lg:grid-cols-3">
             {PILLARS.map((p, i) => (
               <div
                 key={p.title}
-                className="group relative overflow-hidden bg-[#0a0a18] p-7 transition-all duration-300 hover:bg-[#0f0f1e] reveal-stagger"
+                className="group relative overflow-hidden bg-[#0a0a18] p-5 transition-all duration-300 hover:bg-[#0f0f1e] reveal-stagger sm:p-7"
                 style={{ animationDelay: `${i * 50}ms` }}
               >
                 <div
@@ -378,18 +401,18 @@ export default function VoidSoulAssistantPage() {
             'radial-gradient(ellipse 50% 50% at 50% 0%, rgba(124,58,237,0.10) 0%, transparent 60%), linear-gradient(to bottom, #06060f 0%, #0a0a12 100%)',
         }}
       >
-        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32">
-          <div className="mb-12 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:py-32">
+          <div className="mb-8 flex flex-col gap-3 sm:mb-12 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed] mb-2">
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
                 Full setup
               </p>
-              <h2 className="text-3xl font-bold text-[#e2e8f0] sm:text-4xl lg:text-5xl leading-tight">
+              <h2 className="text-[1.75rem] font-bold leading-tight text-[#e2e8f0] sm:text-4xl lg:text-5xl">
                 Seven steps to unlock everything.
               </h2>
             </div>
             <p className="max-w-sm text-sm text-[#94a3b8]">
-              From first launch to wake-word voice, MCP plugins, and budget alerts. Click a
+              From first launch to wake-word voice, MCP plugins, and budget alerts. Tap a
               step to preview what setup actually looks like.
             </p>
           </div>
@@ -400,24 +423,24 @@ export default function VoidSoulAssistantPage() {
 
       {/* ======================== UI CLOSE-UPS ======================== */}
       <section className="relative">
-        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32">
-          <div className="mb-14 grid gap-4 sm:grid-cols-[auto_1fr] sm:items-end">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:py-32">
+          <div className="mb-8 flex flex-col gap-3 sm:mb-14 sm:grid sm:grid-cols-[auto_1fr] sm:items-end sm:gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed] mb-2">
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
                 Up close
               </p>
-              <h2 className="text-3xl font-bold text-[#e2e8f0] sm:text-4xl lg:text-5xl leading-tight">
+              <h2 className="text-[1.75rem] font-bold leading-tight text-[#e2e8f0] sm:text-4xl lg:text-5xl">
                 The details
                 <br />
                 <span className="text-[#a855f7]">you&apos;ll feel.</span>
               </h2>
             </div>
-            <p className="max-w-sm justify-self-end text-sm text-[#94a3b8]">
+            <p className="max-w-sm text-sm text-[#94a3b8] sm:justify-self-end">
               Real UI surfaces from the running app. Hover for the small lift.
             </p>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-12">
+          <div className="grid gap-6 sm:gap-8 lg:grid-cols-12">
             <CloseUpPanel
               className="lg:col-span-5 lg:translate-y-4"
               tag="Floating orb"
@@ -476,18 +499,18 @@ export default function VoidSoulAssistantPage() {
         id="security"
         className="relative border-y border-[#1e1a3a] bg-[#06060f]/60"
       >
-        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32">
-          <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr]">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:py-32">
+          <div className="grid gap-10 lg:gap-14 lg:grid-cols-[1fr_1.2fr]">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed] mb-2">
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
                 Privacy &amp; permissions
               </p>
-              <h2 className="text-3xl font-bold text-[#e2e8f0] sm:text-4xl lg:text-5xl leading-tight">
+              <h2 className="text-[1.75rem] font-bold leading-tight text-[#e2e8f0] sm:text-4xl lg:text-5xl">
                 It never
                 <br />
                 <span className="text-[#a855f7]">acts silently.</span>
               </h2>
-              <p className="mt-6 max-w-md text-[#94a3b8] leading-relaxed">
+              <p className="mt-5 max-w-md text-sm text-[#94a3b8] leading-relaxed sm:mt-6 sm:text-base">
                 Every capability that touches your machine is gated behind a permission you
                 explicitly grant — and can revoke any time. File writes are reversible.
                 Every action is logged. Private mode strips the chat: no save, no facts,
@@ -555,13 +578,13 @@ export default function VoidSoulAssistantPage() {
 
       {/* =========================== VIDEO DEMO =========================== */}
       <section className="relative">
-        <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32">
-          <div className="mb-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:py-32">
+          <div className="mb-8 flex flex-col gap-3 sm:mb-10 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed] mb-2">
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
                 See the loop
               </p>
-              <h2 className="text-3xl font-bold text-[#e2e8f0] sm:text-4xl">
+              <h2 className="text-[1.75rem] font-bold text-[#e2e8f0] sm:text-4xl">
                 90-second demo.
               </h2>
             </div>
@@ -618,25 +641,25 @@ export default function VoidSoulAssistantPage() {
               'radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.22) 0%, transparent 60%)',
           }}
         />
-        <div className="relative mx-auto max-w-5xl px-4 py-24 sm:px-6 sm:py-32">
-          <div className="mb-14 text-center">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed] mb-2">
+        <div className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24 lg:py-32">
+          <div className="mb-10 text-center sm:mb-14">
+            <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
               Pricing
             </p>
-            <h2 className="text-3xl font-bold text-[#e2e8f0] sm:text-4xl lg:text-5xl">
+            <h2 className="text-[1.75rem] font-bold text-[#e2e8f0] sm:text-4xl lg:text-5xl">
               One price. Yours forever.
             </h2>
-            <p className="mt-4 mx-auto max-w-xl text-[#94a3b8] leading-relaxed">
+            <p className="mt-4 mx-auto max-w-xl text-sm text-[#94a3b8] leading-relaxed sm:text-base">
               Cancel ChatGPT Plus. Cancel Claude Pro. Pay once. Bring your own keys.
               No subscription floor, ever.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="relative rounded-3xl border border-[#1e1a3a] bg-[#0f0f1e] p-8 transition-all hover:border-[#2a1a4e]">
+          <div className="grid gap-5 sm:gap-6 md:grid-cols-2">
+            <div className="relative rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-6 transition-all hover:border-[#2a1a4e] sm:rounded-3xl sm:p-8">
               <p className="text-xs uppercase tracking-widest text-[#64748b] mb-3">Free</p>
               <p className="text-4xl font-bold text-[#e2e8f0] mb-1">$0</p>
-              <p className="text-sm text-[#64748b] mb-7">Local-only. Forever.</p>
+              <p className="text-sm text-[#64748b] mb-6 sm:mb-7">Local-only. Forever.</p>
               <ul className="space-y-2.5 text-sm text-[#94a3b8]">
                 {['Ollama, LM Studio, llama.cpp', 'Five threads max', 'Local voice loop', 'Basic agent tools'].map(
                   (l) => (
@@ -655,16 +678,16 @@ export default function VoidSoulAssistantPage() {
               </button>
             </div>
 
-            <div className="relative rounded-3xl border border-[#7c3aed] bg-gradient-to-b from-[#1a0a3a]/40 to-[#0f0f1e] p-8 shadow-2xl shadow-[#7c3aed]/30">
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#7c3aed] px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-white">
+            <div className="relative rounded-2xl border border-[#7c3aed] bg-gradient-to-b from-[#1a0a3a]/40 to-[#0f0f1e] p-6 shadow-2xl shadow-[#7c3aed]/30 sm:rounded-3xl sm:p-8">
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#7c3aed] px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-white">
                 Founder&apos;s Edition · First 100
               </span>
               <p className="text-xs uppercase tracking-widest text-[#a855f7] mb-3">Lifetime</p>
               <div className="flex items-baseline gap-2 mb-1">
-                <p className="text-5xl font-bold text-[#e2e8f0]">$129</p>
+                <p className="text-4xl font-bold text-[#e2e8f0] sm:text-5xl">$129</p>
                 <p className="text-sm text-[#64748b] line-through">$199</p>
               </div>
-              <p className="text-sm text-[#a855f7] mb-7">AUD · one-time · yours forever</p>
+              <p className="mb-6 text-sm text-[#a855f7] sm:mb-7">AUD · one-time · yours forever</p>
               <ul className="space-y-2.5 text-sm text-[#cbd0e2]">
                 {[
                   'All 12 providers · MCP support',
@@ -701,27 +724,27 @@ export default function VoidSoulAssistantPage() {
 
       {/* ============================ FINAL CTA ============================ */}
       <section className="relative">
-        <div className="mx-auto max-w-5xl px-4 py-28 sm:px-6 text-center">
-          <VoidSoulOrb size={140} className="mx-auto mb-6" />
+        <div className="mx-auto max-w-5xl px-4 py-16 text-center sm:px-6 sm:py-24 lg:py-28">
+          <VoidSoulOrb size={120} className="mx-auto mb-5 sm:mb-6" />
           <h2 className="text-3xl font-bold text-[#e2e8f0] sm:text-5xl">
             Talk to the orb.
           </h2>
-          <p className="mt-4 mx-auto max-w-lg text-[#94a3b8]">
+          <p className="mt-4 mx-auto max-w-lg text-sm text-[#94a3b8] sm:text-base">
             When the first build ships, you&apos;ll see it here. Until then, follow the
             studio devlog for the build-in-public ride.
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-7 flex flex-col items-center justify-center gap-2.5 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-3">
             <a
               href="https://www.youtube.com/@voidsoul_studio"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-lg bg-[#7c3aed] px-6 py-3 text-sm font-medium text-white transition-all hover:bg-[#6d28d9] hover:shadow-[0_0_28px_rgba(124,58,237,0.5)]"
+              className="w-full max-w-xs rounded-lg bg-[#7c3aed] px-6 py-3 text-sm font-medium text-white transition-all hover:bg-[#6d28d9] hover:shadow-[0_0_28px_rgba(124,58,237,0.5)] sm:w-auto"
             >
               Follow the devlog ↗
             </a>
             <Link
               href="/"
-              className="rounded-lg border border-[#1e1a3a] px-6 py-3 text-sm font-medium text-[#94a3b8] transition-all hover:border-[#7c3aed] hover:text-[#e2e8f0]"
+              className="w-full max-w-xs rounded-lg border border-[#1e1a3a] px-6 py-3 text-sm font-medium text-[#94a3b8] transition-all hover:border-[#7c3aed] hover:text-[#e2e8f0] sm:w-auto"
             >
               Back to the Library
             </Link>
@@ -805,15 +828,22 @@ function DownloadButton({
   return (
     <button
       disabled
-      className={`group/dl flex items-center gap-2.5 rounded-xl px-5 py-3 text-sm font-medium transition-all disabled:cursor-not-allowed ${
+      className={`group/dl flex w-full items-center justify-center gap-2.5 rounded-xl px-4 py-3 text-sm font-medium transition-all disabled:cursor-not-allowed sm:w-auto sm:justify-start sm:px-5 ${
         primary
           ? 'bg-[#7c3aed] text-white shadow-[0_0_22px_rgba(124,58,237,0.35)] hover:bg-[#6d28d9] hover:shadow-[0_0_32px_rgba(124,58,237,0.55)]'
           : 'border border-[#1e1a3a] bg-[#0f0f1e] text-[#cbd0e2] hover:border-[#7c3aed] hover:text-[#c084fc]'
       }`}
     >
       {c.icon}
-      <span>Download for {c.label}</span>
-      <span className={`text-[10px] font-medium uppercase tracking-widest ${primary ? 'text-white/70' : 'text-[#7c3aed]/70'}`}>
+      <span className="whitespace-nowrap">
+        <span className="sm:hidden">{c.label}</span>
+        <span className="hidden sm:inline">Download for {c.label}</span>
+      </span>
+      <span
+        className={`text-[10px] font-medium uppercase tracking-widest ${
+          primary ? 'text-white/70' : 'text-[#7c3aed]/70'
+        }`}
+      >
         Soon
       </span>
     </button>

@@ -79,9 +79,10 @@ export default function SetupJourney() {
   const step = STEPS[active];
 
   return (
-    <div className="grid gap-12 lg:grid-cols-[280px_1fr] lg:items-start">
-      {/* Step rail */}
-      <ol className="relative flex flex-row gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-0 lg:overflow-visible lg:pb-0 scrollbar-thin">
+    <div className="grid gap-6 lg:grid-cols-[280px_1fr] lg:items-start lg:gap-12">
+      {/* Step rail — horizontal scroller on mobile (snap + edge-fade so the
+          user knows they can scroll), vertical list on desktop. */}
+      <ol className="step-rail relative -mx-1 flex flex-row gap-1.5 overflow-x-auto px-1 pb-2 lg:mx-0 lg:flex-col lg:gap-0 lg:overflow-visible lg:px-0 lg:pb-0">
         {/* Vertical accent line behind the dots (desktop only) */}
         <div
           aria-hidden
@@ -90,17 +91,17 @@ export default function SetupJourney() {
         {STEPS.map((s, i) => {
           const isActive = i === active;
           return (
-            <li key={s.number} className="lg:py-1">
+            <li key={s.number} className="snap-start shrink-0 lg:py-1">
               <button
                 onClick={() => setActive(i)}
-                className={`group flex items-center gap-3 rounded-xl px-3 py-2 transition-all w-full text-left ${
+                className={`group flex w-full items-center gap-2.5 rounded-xl px-2.5 py-1.5 text-left transition-all lg:gap-3 lg:px-3 lg:py-2 ${
                   isActive
                     ? 'bg-[#7c3aed]/10 text-[#e2e8f0]'
                     : 'text-[#64748b] hover:bg-white/5 hover:text-[#cbd0e2]'
                 }`}
               >
                 <span
-                  className={`flex h-9 w-9 flex-none items-center justify-center rounded-full font-mono text-[11px] transition-all ${
+                  className={`flex h-8 w-8 flex-none items-center justify-center rounded-full font-mono text-[10px] transition-all lg:h-9 lg:w-9 lg:text-[11px] ${
                     isActive
                       ? 'bg-[#7c3aed] text-white shadow-[0_0_18px_rgba(124,58,237,0.6)]'
                       : 'border border-[#1e1a3a] bg-[#0a0a18] text-[#475569] group-hover:border-[#7c3aed]/60'
@@ -120,7 +121,7 @@ export default function SetupJourney() {
       {/* Active step card */}
       <div
         key={active}
-        className="relative overflow-hidden rounded-2xl border border-[#1e1a3a] bg-gradient-to-br from-[#0f0f1e] via-[#0f0f1e] to-[#1a0a3a]/30 p-6 sm:p-8 reveal-up-soft"
+        className="reveal-up-soft relative overflow-hidden rounded-2xl border border-[#1e1a3a] bg-gradient-to-br from-[#0f0f1e] via-[#0f0f1e] to-[#1a0a3a]/30 p-5 sm:p-7 lg:p-8"
       >
         <div
           aria-hidden
@@ -130,25 +131,25 @@ export default function SetupJourney() {
               'radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 70%)',
           }}
         />
-        <div className="relative grid gap-6 md:grid-cols-[1fr_320px] md:items-start">
+        <div className="relative grid gap-5 sm:gap-6 md:grid-cols-[1fr_320px] md:items-start">
           <div>
             <p
-              className="font-mono text-sm font-semibold tracking-widest"
+              className="font-mono text-xs font-semibold tracking-widest sm:text-sm"
               style={{ color: ACCENTS[active % ACCENTS.length] }}
             >
               Step {step.number}
             </p>
-            <h3 className="mt-2 text-2xl font-bold text-[#e2e8f0] sm:text-3xl">
+            <h3 className="mt-2 text-xl font-bold leading-tight text-[#e2e8f0] sm:text-2xl lg:text-3xl">
               {step.title}
             </h3>
-            <p className="mt-4 text-[15px] leading-relaxed text-[#cbd0e2]">
+            <p className="mt-3 text-sm leading-relaxed text-[#cbd0e2] sm:mt-4 sm:text-[15px]">
               {step.blurb}
             </p>
-            <p className="mt-3 text-[13px] leading-relaxed text-[#64748b]">
+            <p className="mt-2.5 text-[12px] leading-relaxed text-[#64748b] sm:mt-3 sm:text-[13px]">
               {step.detail}
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3">
+            <div className="mt-5 flex flex-wrap items-center gap-2.5 sm:mt-6 sm:gap-3">
               <button
                 onClick={() => setActive((i) => Math.max(0, i - 1))}
                 disabled={active === 0}
