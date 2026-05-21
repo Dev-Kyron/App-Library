@@ -4,54 +4,74 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 /**
  * 3D perspective stage that holds floating "windows" at different depths
- * and rotations. The whole stage parallax-tilts with the mouse, and each
- * floating panel breathes slowly so the scene never feels static.
+ * and rotations. Two render modes:
  *
- * Panels are absolutely positioned inside the stage. The container picks
- * a tall enough min-height for mobile and scales down on smaller screens.
+ *  - **Desktop (≥ 1024px)** — panels are absolutely positioned at their
+ *    chosen `x` / `y` percentage with `rotateX` / `rotateY` / `translateZ`
+ *    applied. The whole stage parallax-tilts with the mouse. Each panel
+ *    breathes on its own staggered loop.
+ *  - **Mobile / tablet (< 1024px)** — falls back to a clean vertical stack
+ *    with each panel slightly tilted, no parallax. The 3D effect needs
+ *    horizontal room to work; on narrow viewports it just produces
+ *    overlapping clipped cards, so we don't try.
+ *
+ * The container uses `overflow-visible` so panel captions sitting just
+ * below the panel never get clipped at the stage edge.
  */
 
 interface FloatingPanel {
   id: string;
   caption?: string;
-  /** % values, relative to the stage. */
+  /** % values, relative to the stage. Desktop-only. */
   x: number;
   y: number;
-  width: number; // px max
-  /** Tilt in degrees — rotateY (yaw), rotateX (pitch). */
+  width: number;
+  /** Tilt in degrees — rotateY (yaw), rotateX (pitch). Desktop-only. */
   rotY: number;
   rotX: number;
-  /** Negative depth pushes the panel further away (smaller); positive nearer. */
+  /** Z depth — negative pushes away, positive pulls forward. Desktop-only. */
   z: number;
-  /** 0–N — staggers the breathing animation start. */
+  /** Staggers the breathing animation start. */
   delay?: number;
   children: ReactNode;
 }
 
 interface Stage3DProps {
   panels: FloatingPanel[];
-  /** Total stage height in px on desktop. Scales down via CSS. */
+  /** Stage height in px on desktop. The mobile stack ignores this. */
   height?: number;
 }
 
-export default function Stage3D({ panels, height = 720 }: Stage3DProps) {
+export default function Stage3D({ panels, height = 860 }: Stage3DProps) {
   const stageRef = useRef<HTMLDivElement | null>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  // Disable mouse-parallax on touch / coarse-pointer devices — feels janky
-  // when the user is scrolling rather than hovering.
-  const [enabled, setEnabled] = useState(false);
+  // Render mode + parallax both depend on the viewport — start in a safe
+  // state, then upgrade on mount once we know the actual width.
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [parallaxEnabled, setParallaxEnabled] = useState(false);
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    setEnabled(window.matchMedia('(pointer: fine)').matches);
+    const desktopMq = window.matchMedia('(min-width: 1024px)');
+    const finePointerMq = window.matchMedia('(pointer: fine)');
+    const update = () => {
+      setIsDesktop(desktopMq.matches);
+      setParallaxEnabled(desktopMq.matches && finePointerMq.matches);
+    };
+    update();
+    desktopMq.addEventListener('change', update);
+    finePointerMq.addEventListener('change', update);
+    return () => {
+      desktopMq.removeEventListener('change', update);
+      finePointerMq.removeEventListener('change', update);
+    };
   }, []);
 
   function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    if (!enabled || !stageRef.current) return;
+    if (!parallaxEnabled || !stageRef.current) return;
     const rect = stageRef.current.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
-    // Normalise to roughly [-1, 1], then scale down so the parallax is
-    // a hint not a swing.
     const nx = (e.clientX - cx) / (rect.width / 2);
     const ny = (e.clientY - cy) / (rect.height / 2);
     setTilt({ x: ny * -4, y: nx * 6 });
@@ -61,17 +81,83 @@ export default function Stage3D({ panels, height = 720 }: Stage3DProps) {
     setTilt({ x: 0, y: 0 });
   }
 
+  /* ---------------------------- mobile stack ---------------------------- */
+
+  if (!isDesktop) {
+    return (
+      <div className="relative w-full">
+        {/* Ambient bloom backdrop — same vibe as the 3D mode */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              'radial-gradient(ellipse 60% 30% at 50% 20%, rgba(124,58,237,0.18) 0%, transparent 70%), radial-gradient(ellipse 60% 30% at 50% 80%, rgba(168,85,247,0.14) 0%, transparent 70%)',
+          }}
+        />
+        <div className="relative flex flex-col items-center gap-10 px-4 py-10">
+          {panels.map((panel, i) => (
+            <div
+              key={panel.id}
+              className="flex w-full flex-col items-center panel-float-soft"
+              style={{
+                animationDelay: `${(panel.delay ?? 0) * 0.4}s`,
+                maxWidth: 'min(94vw, 480px)',
+              }}
+            >
+              <div
+                className="relative rounded-2xl shadow-2xl"
+                style={{
+                  boxShadow:
+                    '0 30px 60px -15px rgba(0,0,0,0.6), 0 0 30px rgba(124,58,237,0.18)',
+                  // Subtle tilt only — full 3D rotations look bad on
+                  // narrow viewports where the panel is most of the width.
+                  transform: `rotate(${(i % 2 === 0 ? 1 : -1) * 0.6}deg)`,
+                }}
+              >
+                {panel.children}
+              </div>
+              {panel.caption && (
+                <p className="mt-3 text-center text-[11px] uppercase tracking-widest text-[#7c3aed]">
+                  {panel.caption}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <style jsx>{`
+          @keyframes panelFloatSoft {
+            0%, 100% { translate: 0 0; }
+            50% { translate: 0 -4px; }
+          }
+          .panel-float-soft {
+            animation: panelFloatSoft 8s ease-in-out infinite;
+            will-change: translate;
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .panel-float-soft { animation: none; }
+          }
+        `}</style>
+      </div>
+    );
+  }
+
+  /* ---------------------------- desktop 3D ---------------------------- */
+
   return (
     <div
       ref={stageRef}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="relative w-full overflow-hidden"
+      className="relative w-full"
       style={{
+        // overflow-visible so panel captions hanging just below each panel
+        // never get clipped by the stage's bottom edge.
         perspective: '2400px',
         perspectiveOrigin: '50% 40%',
         height,
-        minHeight: 520,
+        minHeight: 600,
       }}
     >
       {/* Ambient bloom behind the panels */}
@@ -84,7 +170,6 @@ export default function Stage3D({ panels, height = 720 }: Stage3DProps) {
         }}
       />
 
-      {/* The 3D scene */}
       <div
         className="absolute inset-0 transition-transform duration-700 ease-out"
         style={{
@@ -135,6 +220,9 @@ export default function Stage3D({ panels, height = 720 }: Stage3DProps) {
         .panel-float {
           animation: panelFloat 7s ease-in-out infinite;
           will-change: transform, translate;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .panel-float { animation: none; }
         }
       `}</style>
     </div>

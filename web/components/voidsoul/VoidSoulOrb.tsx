@@ -118,6 +118,11 @@ export default function VoidSoulOrb({ size = 240, className = '' }: VoidSoulOrbP
         .orb-ring { animation: orbSpin 14s linear infinite; transform-origin: center; }
         .orb-ring-reverse { animation: orbSpinReverse 22s linear infinite; transform-origin: center; }
         .orb-core { animation: orbCore 6s ease-in-out infinite; transform-origin: center; }
+        @media (prefers-reduced-motion: reduce) {
+          .orb-bloom, .orb-glow, .orb-ring, .orb-ring-reverse, .orb-core {
+            animation: none;
+          }
+        }
       `}</style>
     </div>
   );

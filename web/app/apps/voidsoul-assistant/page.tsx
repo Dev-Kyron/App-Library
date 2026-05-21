@@ -134,8 +134,7 @@ export default function VoidSoulAssistantPage() {
             </div>
             <h1 className="text-5xl font-bold leading-[1.02] tracking-tight text-[#e2e8f0] sm:text-6xl lg:text-7xl">
               VoidSoul
-            </h1>
-            <h1 className="text-5xl font-bold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
+              <br />
               <span
                 className="text-transparent"
                 style={{
@@ -203,12 +202,13 @@ export default function VoidSoulAssistantPage() {
         {/* 3D stage spans full width for the parallax effect */}
         <div className="relative mx-auto max-w-[1400px] px-2 sm:px-6">
           <Stage3D
-            height={780}
+            height={880}
             panels={[
               {
+                // Chat is the centrepiece — closest to camera, left of centre.
                 id: 'chat',
-                x: 28,
-                y: 50,
+                x: 30,
+                y: 38,
                 width: 420,
                 rotY: 10,
                 rotX: -2,
@@ -218,9 +218,11 @@ export default function VoidSoulAssistantPage() {
                 children: <ChatPanelMock />,
               },
               {
+                // Top-right of the stage so the provider list reads alongside
+                // the chat without overlapping it.
                 id: 'providers',
-                x: 70,
-                y: 28,
+                x: 74,
+                y: 26,
                 width: 340,
                 rotY: -12,
                 rotX: 3,
@@ -230,9 +232,11 @@ export default function VoidSoulAssistantPage() {
                 children: <ProviderRotator />,
               },
               {
+                // Mid-right — sits below the providers card, far enough from
+                // the bottom edge that the caption never clips.
                 id: 'cost',
                 x: 76,
-                y: 70,
+                y: 64,
                 width: 340,
                 rotY: -8,
                 rotX: -4,
@@ -242,9 +246,11 @@ export default function VoidSoulAssistantPage() {
                 children: <CostChartMock />,
               },
               {
+                // Bottom-left — Quick AI is short so we can keep it lower
+                // without clipping. Pulled in from the left edge a touch.
                 id: 'quickai',
-                x: 22,
-                y: 88,
+                x: 26,
+                y: 82,
                 width: 380,
                 rotY: 8,
                 rotX: 4,
@@ -723,7 +729,7 @@ export default function VoidSoulAssistantPage() {
         </div>
       </section>
 
-      {/* In-page CSS for reveals */}
+      {/* In-page CSS for reveals — respects prefers-reduced-motion */}
       <style>{`
         @keyframes revealUp {
           from { opacity: 0; transform: translateY(28px); }
@@ -742,6 +748,17 @@ export default function VoidSoulAssistantPage() {
         .reveal-up-soft { animation: revealUpSoft 500ms ease-out backwards; }
         .reveal-fade { animation: revealFade 900ms ease-out backwards; }
         .reveal-stagger { animation: revealUp 600ms ease-out backwards; }
+        @media (prefers-reduced-motion: reduce) {
+          .reveal-up,
+          .reveal-up-delay,
+          .reveal-up-soft,
+          .reveal-fade,
+          .reveal-stagger {
+            animation: none;
+            opacity: 1;
+            transform: none;
+          }
+        }
       `}</style>
     </div>
   );
