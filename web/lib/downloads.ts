@@ -26,7 +26,7 @@ export const DOWNLOAD_CONFIG = {
   /** Flip to true once the first release ships on GitHub. */
   enabled: true,
   /** Cosmetic — shown next to the download button. */
-  version: 'v0.1.0-beta',
+  version: 'v1.0.0',
   releasesPage: 'https://github.com/Dev-Kyron/SoulVoidAI/releases',
   baseUrl: 'https://github.com/Dev-Kyron/SoulVoidAI/releases/latest/download',
   assets: {
