@@ -29,6 +29,28 @@ export const FORMS = {
   earliestAdoptersEndpoint: 'https://formspree.io/f/xjgzwypy',
 } as const;
 
+/**
+ * Launch-giveaway counter.
+ *
+ * Bump `claimed` by 1 each time a Formspree notification email lands in
+ * your inbox, commit, push. Vercel redeploys in ~30s and the pricing
+ * card reflects the new state.
+ *
+ * When `claimed === total`:
+ *   - Earliest-Adopters card swaps to a "sealed" celebration state.
+ *   - Founder's card unlocks its own email-capture for paid waitlist.
+ *
+ * Formspree free tier doesn't expose submission counts via API, so this
+ * stays manual. With only 3 spots total, that's fine — by the time you'd
+ * notice latency, you've already hit the cap.
+ */
+export const LAUNCH: { claimed: number; total: number } = {
+  claimed: 0,
+  total: 3,
+};
+
+export const isFirst3Open = (): boolean => LAUNCH.claimed < LAUNCH.total;
+
 /** True once a real Formspree URL has been pasted in. */
 export function isFormReady(endpoint: string): boolean {
   return endpoint.startsWith('https://formspree.io/f/');

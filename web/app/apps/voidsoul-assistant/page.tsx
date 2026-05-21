@@ -13,6 +13,7 @@ import Tilt3D from '@/components/voidsoul/Tilt3D';
 import SmartDownloadButton from '@/components/voidsoul/SmartDownloadButton';
 import EmailCaptureForm from '@/components/voidsoul/EmailCaptureForm';
 import { DOWNLOAD_CONFIG, getDownloadUrl, type Platform } from '@/lib/downloads';
+import { LAUNCH, isFirst3Open } from '@/lib/forms';
 
 const app = getApp('voidsoul-assistant')!;
 
@@ -725,12 +726,16 @@ export default function VoidSoulAssistantPage() {
             {/* First 3 — launch giveaway. Emerald accent. Stronger Tilt3D.
                 Outer wrapper has no overflow clipping so the floating badge
                 sits half-above the card; only the inner card hides the
-                radial gradient. */}
+                radial gradient.
+
+                Two states driven by LAUNCH.claimed:
+                  - open  (claimed < total): live email capture + counter
+                  - sealed (claimed >= total): celebration + ↓ Founder's CTA */}
             <Tilt3D strength={7} liftZ={20}>
               <div className="relative h-full pt-3">
                 <span className="absolute top-0 left-1/2 z-20 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-emerald-500 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-[#052e16] shadow-lg shadow-emerald-500/30">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#052e16] animate-pulse" />
-                  Launch giveaway · First 3
+                  <span className={`h-1.5 w-1.5 rounded-full bg-[#052e16] ${isFirst3Open() ? 'animate-pulse' : ''}`} />
+                  {isFirst3Open() ? 'Launch giveaway · First 3' : 'All 3 claimed · sealed'}
                 </span>
                 <div className="relative h-full overflow-hidden rounded-2xl border-2 border-emerald-400/60 bg-gradient-to-b from-emerald-500/[0.08] via-[#0f0f1e] to-[#0f0f1e] p-6 shadow-2xl shadow-emerald-500/20 sm:rounded-3xl sm:p-8">
                   <div
@@ -746,24 +751,34 @@ export default function VoidSoulAssistantPage() {
                     Earliest adopters
                   </p>
                   <div className="mb-1 flex items-baseline gap-2">
-                    <p className="text-4xl font-bold text-[#e2e8f0] sm:text-5xl">FREE</p>
+                    <p className="text-4xl font-bold text-[#e2e8f0] sm:text-5xl">
+                      {isFirst3Open() ? 'FREE' : 'CLAIMED'}
+                    </p>
                     <p className="text-sm text-[#64748b] line-through">$129</p>
                   </div>
                   <p className="mb-6 text-sm text-emerald-300 sm:mb-7">
-                    Full app · lifetime · zero cost
+                    {isFirst3Open()
+                      ? 'Full app · lifetime · zero cost'
+                      : 'Three lifetimes locked in. Founder’s tier just opened.'}
                   </p>
 
-                  {/* Visual claim counter — three slots, none filled yet. */}
+                  {/* Dynamic claim counter — fills emerald for each claim. */}
                   <div className="mb-6 rounded-lg border border-emerald-400/30 bg-emerald-500/5 px-3 py-2.5 sm:mb-7">
                     <div className="mb-1.5 flex items-center justify-between text-[10px] font-semibold uppercase tracking-widest">
                       <span className="text-emerald-300">Claimed</span>
-                      <span className="text-emerald-200">0 / 3</span>
+                      <span className="text-emerald-200">
+                        {LAUNCH.claimed} / {LAUNCH.total}
+                      </span>
                     </div>
                     <div className="flex gap-1">
-                      {[0, 1, 2].map((i) => (
+                      {Array.from({ length: LAUNCH.total }).map((_, i) => (
                         <div
                           key={i}
-                          className="h-1.5 flex-1 rounded-full bg-emerald-500/15 ring-1 ring-emerald-400/30"
+                          className={`h-1.5 flex-1 rounded-full ring-1 transition-colors ${
+                            i < LAUNCH.claimed
+                              ? 'bg-emerald-400 ring-emerald-300/60 shadow-[0_0_10px_rgba(52,211,153,0.55)]'
+                              : 'bg-emerald-500/15 ring-emerald-400/30'
+                          }`}
                         />
                       ))}
                     </div>
@@ -782,11 +797,29 @@ export default function VoidSoulAssistantPage() {
                       </li>
                     ))}
                   </ul>
-                  <EmailCaptureForm />
-                  <p className="mt-3 text-center text-xs text-[#64748b]">
-                    First three at v1.0 launch. Then{' '}
-                    <span className="text-[#cbd0e2]">Founder&apos;s Edition</span> unlocks.
-                  </p>
+                  {isFirst3Open() ? (
+                    <>
+                      <EmailCaptureForm source="voidsoul-assistant/first-3" cta="Get on the list →" />
+                      <p className="mt-3 text-center text-xs text-[#64748b]">
+                        First three at v1.0 launch. Then{' '}
+                        <span className="text-[#cbd0e2]">Founder&apos;s Edition</span> unlocks.
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <div className="mt-8 flex flex-col items-center gap-2 rounded-lg border border-emerald-400/40 bg-emerald-500/10 px-4 py-3 text-center">
+                        <p className="text-sm font-semibold text-emerald-300">
+                          ✓ All three spots claimed
+                        </p>
+                        <p className="text-[11px] leading-relaxed text-emerald-200/80">
+                          Thanks to the three earliest souls. Founder&apos;s tier is live.
+                        </p>
+                      </div>
+                      <p className="mt-3 text-center text-xs text-[#64748b]">
+                        Founder&apos;s lifetime is now open — see the next card.
+                      </p>
+                    </>
+                  )}
                   </div>
                 </div>
               </div>
@@ -818,20 +851,36 @@ export default function VoidSoulAssistantPage() {
                     </li>
                   ))}
                 </ul>
-                <button
-                  disabled
-                  className="mt-8 flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-lg border border-[#7c3aed]/40 bg-[#7c3aed]/15 py-3 text-sm font-semibold text-[#a855f7] opacity-90"
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                    <rect x="4" y="11" width="16" height="10" rx="2" />
-                    <path d="M8 11V7a4 4 0 0 1 8 0v4" />
-                  </svg>
-                  Locked · First-3 still open
-                </button>
-                <p className="mt-3 text-center text-xs text-[#64748b]">
-                  Unlocks once the first three free spots fill ·{' '}
-                  <span className="text-[#cbd0e2]">$129 lifetime</span>
-                </p>
+                {isFirst3Open() ? (
+                  <>
+                    <button
+                      disabled
+                      className="mt-8 flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-lg border border-[#7c3aed]/40 bg-[#7c3aed]/15 py-3 text-sm font-semibold text-[#a855f7] opacity-90"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                        <rect x="4" y="11" width="16" height="10" rx="2" />
+                        <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                      </svg>
+                      Locked · First-3 still open
+                    </button>
+                    <p className="mt-3 text-center text-xs text-[#64748b]">
+                      Unlocks once the first three free spots fill ·{' '}
+                      <span className="text-[#cbd0e2]">$129 lifetime</span>
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <EmailCaptureForm
+                      source="voidsoul-assistant/founders-notify"
+                      cta="Notify me when checkout opens →"
+                    />
+                    <p className="mt-3 text-center text-xs text-[#64748b]">
+                      Stripe checkout opens soon ·{' '}
+                      <span className="text-[#cbd0e2]">$129 lifetime</span>, climbs to $249
+                      after the first 100.
+                    </p>
+                  </>
+                )}
               </div>
             </Tilt3D>
           </div>

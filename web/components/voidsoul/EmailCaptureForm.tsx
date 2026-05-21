@@ -6,9 +6,11 @@ import { FORMS, isFormReady } from '@/lib/forms';
 type Status = 'idle' | 'expanded' | 'submitting' | 'success' | 'error';
 
 /**
- * Inline-expanding email-capture button for the Earliest-Adopters tier.
+ * Inline-expanding email-capture button. Used by:
+ *   - Earliest-Adopters tier (source = first-3)
+ *   - Founder's tier once First-3 fills (source = founders-notify)
  *
- *   idle      → green "Get on the list →" button
+ *   idle      → green "Get on the list →" button (configurable CTA)
  *   expanded  → email input + submit, button collapses on outside click
  *   submitting→ spinner state
  *   success   → "✓ You're on the list" message with deletion reassurance
@@ -17,7 +19,17 @@ type Status = 'idle' | 'expanded' | 'submitting' | 'success' | 'error';
  * Falls back to a "DM the devlog" link if the Formspree URL hasn't
  * been pasted into lib/forms.ts yet.
  */
-export default function EmailCaptureForm() {
+interface Props {
+  /** Tag attached to the submission so you can filter in Formspree. */
+  source?: string;
+  /** Idle-state button label. */
+  cta?: string;
+}
+
+export default function EmailCaptureForm({
+  source = 'voidsoul-assistant/first-3',
+  cta = 'Get on the list →',
+}: Props = {}) {
   const [status, setStatus] = useState<Status>('idle');
   const [email, setEmail] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -51,7 +63,7 @@ export default function EmailCaptureForm() {
       const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ email, source: 'voidsoul-assistant/first-3' }),
+        body: JSON.stringify({ email, source }),
       });
       if (!res.ok) throw new Error(`status ${res.status}`);
       setStatus('success');
@@ -94,7 +106,7 @@ export default function EmailCaptureForm() {
           onClick={() => setStatus('expanded')}
           className="flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-500 py-3 text-sm font-semibold text-[#052e16] transition-all hover:opacity-95 hover:shadow-[0_0_28px_rgba(52,211,153,0.55)]"
         >
-          Get on the list →
+          {cta}
         </button>
       )}
 
