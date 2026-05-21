@@ -158,9 +158,14 @@ export default function VoidSoulAssistantPage() {
 
           {/* Copy */}
           <div className="relative z-10 reveal-up lg:order-first">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#2a1a4e] bg-[#7c3aed]/10 px-3 py-1 text-[11px] sm:text-xs text-[#a855f7]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#a855f7] animate-pulse" />
-              Apps &amp; Tools · Coming Soon
+            <div className="mb-4 flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#2a1a4e] bg-[#7c3aed]/10 px-3 py-1 text-[11px] sm:text-xs text-[#a855f7]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#a855f7] animate-pulse" />
+                Apps &amp; Tools · Beta
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest text-emerald-300">
+                New in {DOWNLOAD_CONFIG.version} · auto-routing · 1h tasks
+              </span>
             </div>
             <h1 className="text-[2.5rem] font-bold leading-[1.05] tracking-tight text-[#e2e8f0] sm:text-6xl lg:text-7xl">
               VoidSoul
