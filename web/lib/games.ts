@@ -29,7 +29,7 @@ export const games: Game[] = [
     slug: 'through-the-void',
     title: 'Through The Void',
     description:
-      'A void-soaked take on the classic flapper. Guide your spirit orb through glowing purple pillars in the depths of space.',
+      'A void-soaked take on the flappy formula. Guide your spirit orb through glowing purple pillars in the depths of space.',
     genre: ['Arcade', 'Casual'],
     thumbnail: '/thumbnails/through-the-void.png',
     status: 'available',

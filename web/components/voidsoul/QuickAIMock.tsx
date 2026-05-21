@@ -46,7 +46,7 @@ export default function QuickAIMock({ className = '' }: { className?: string }) 
   }, [promptIdx]);
 
   return (
-    <div className={`relative w-full max-w-[440px] ${className}`}>
+    <div aria-hidden className={`relative w-full max-w-[440px] ${className}`}>
       {/* Backdrop tint */}
       <div className="absolute inset-0 -m-6 rounded-3xl bg-black/40 backdrop-blur-md" />
       <div

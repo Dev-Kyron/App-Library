@@ -80,6 +80,7 @@ export default function ChatPanelMock({ className = '' }: { className?: string }
 
   return (
     <div
+      aria-hidden
       className={`relative w-full max-w-[420px] rounded-2xl border border-[#1e1a3a] shadow-2xl shadow-[#7c3aed]/20 overflow-hidden ${className}`}
       style={{
         background:

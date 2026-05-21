@@ -23,7 +23,7 @@ export const apps: AppItem[] = [
     title: 'VoidSoul Assistant',
     tagline: 'The Jarvis loop, finally local.',
     description:
-      'A floating desktop AI that talks, listens, sees your screen, drives your mouse, and remembers every conversation. Bring whichever AI you already love — 12 providers, one body.',
+      'A floating desktop AI that talks, listens, sees your screen, drives your mouse, opens your apps, edits your files, and remembers every conversation. Bring whichever AI you already love — 12 providers, one body.',
     href: '/apps/voidsoul-assistant',
     status: 'coming-soon',
     platforms: ['windows', 'macos', 'linux'],

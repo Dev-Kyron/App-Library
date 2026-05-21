@@ -234,7 +234,7 @@ export default function HomePage() {
 
               <p className="text-[#64748b] leading-relaxed">
                 We&apos;re a small indie studio obsessed with atmosphere, feel, and the
-                details most people won&apos;t notice — but will definitely feel.
+                details most people won&apos;t notice — but will feel.
               </p>
               <p className="text-[#64748b] leading-relaxed">
                 Every game we make lives at the intersection of dark aesthetics and tight
@@ -249,9 +249,8 @@ export default function HomePage() {
                   </svg>
                 </span>
                 <p className="text-sm text-[#94a3b8] leading-relaxed">
-                  All ad revenue from our mini games goes directly toward funding{' '}
+                  Every ad watched on our mini games funds{' '}
                   <span className="text-[#a855f7] font-medium">Project Spiritless</span>.
-                  {' '}Every ad watched is a direct contribution to the game.
                 </p>
               </div>
 

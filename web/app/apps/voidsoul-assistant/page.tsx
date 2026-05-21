@@ -42,7 +42,7 @@ const PILLARS = [
   {
     icon: '🎙️',
     title: 'Local voice loop',
-    body: 'Whisper STT and wake-word run locally — no API key, no audio leaving your machine. Speak mid-reply to interrupt.',
+    body: 'Whisper STT and the wake word run locally — no API key, no audio leaving your machine. Speak mid-reply to interrupt.',
   },
   {
     icon: '🌐',
@@ -52,7 +52,7 @@ const PILLARS = [
   {
     icon: '🪟',
     title: 'Raycast-style Quick AI',
-    body: 'Cmd+Shift+J from anywhere. One-shot answers, reads your clipboard, no thread, no config. The fastest path to "I have a tiny question".',
+    body: 'Cmd+Shift+J from anywhere. One-shot answers, reads your clipboard, no thread, no config. The fastest path from question to answer.',
   },
   {
     icon: '📁',
@@ -88,7 +88,7 @@ const PERMISSIONS = [
   { name: 'App control', unlocks: 'Launch apps, foreground windows', risk: 'Medium' },
   { name: 'Input access', unlocks: 'Keyboard + mouse control', risk: 'High' },
   { name: 'Screen capture', unlocks: 'Screenshots, OCR, vision', risk: 'Medium' },
-  { name: 'Microphone', unlocks: 'Voice input + wake-word', risk: 'Medium' },
+  { name: 'Microphone', unlocks: 'Voice input + wake word', risk: 'Medium' },
   { name: 'Browser', unlocks: 'Opening URLs', risk: 'Low' },
 ];
 
@@ -178,7 +178,7 @@ export default function VoidSoulAssistantPage() {
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-[#94a3b8] sm:text-[15px] sm:mt-6">
               A floating desktop AI that talks, listens, sees your screen, drives your mouse,
               opens your apps, edits your files, and remembers every conversation. Bring
-              whichever AI you already love — twelve providers, one body.
+              whichever AI you already love — 12 providers, one body.
             </p>
 
             {/* Stacked on mobile (full-width buttons), inline on sm+. */}
@@ -309,8 +309,7 @@ export default function VoidSoulAssistantPage() {
                 through plugins, MCP servers, and per-mode memory.
               </p>
               <p className="text-[#e2e8f0] font-medium border-l-2 border-[#7c3aed] pl-4">
-                It&apos;s not a better chatbot. It&apos;s an operating layer that turns whatever AI
-                you pay for into Jarvis.
+                Not a better chatbot — an operating layer for whatever AI you already pay for.
               </p>
             </div>
           </div>
@@ -467,7 +466,7 @@ export default function VoidSoulAssistantPage() {
                   <AgentToolStream startIndex={3} className="opacity-60" />
                   <AgentToolStream startIndex={6} className="opacity-30" />
                   <p className="pt-3 text-[10px] leading-relaxed text-[#475569]">
-                    Six-step agent loop cap · partial content preserved on Stop · every step
+                    Capped at six agent steps · partial output preserved on Stop · every step
                     logged.
                   </p>
                 </div>
@@ -611,9 +610,13 @@ export default function VoidSoulAssistantPage() {
             >
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-5">
                 <VoidSoulOrb size={170} />
-                <button className="flex items-center gap-3 rounded-full border border-[#7c3aed]/40 bg-black/60 px-5 py-3 text-sm font-medium text-[#e2e8f0] backdrop-blur transition-all hover:border-[#7c3aed] hover:bg-[#7c3aed]/20 hover:scale-105">
+                <button
+                  disabled
+                  aria-label="Demo video — coming soon"
+                  className="flex cursor-not-allowed items-center gap-3 rounded-full border border-[#7c3aed]/40 bg-black/60 px-5 py-3 text-sm font-medium text-[#e2e8f0] backdrop-blur transition-all hover:border-[#7c3aed] hover:bg-[#7c3aed]/20"
+                >
                   <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#7c3aed] text-white">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                       <path d="M8 5v14l11-7z" />
                     </svg>
                   </span>
@@ -777,7 +780,7 @@ export default function VoidSoulAssistantPage() {
                 <ul className="space-y-2.5 text-sm text-[#cbd0e2]">
                   {[
                     'All 12 providers · MCP support',
-                    'Full voice loop · wake-word · barge-in',
+                    'Full voice loop · wake word · barge-in',
                     'Projects · Notebooks · Quick AI',
                     'Scheduled tasks · cost dashboard',
                     'All themes & languages',
@@ -803,8 +806,8 @@ export default function VoidSoulAssistantPage() {
           </div>
 
           <p className="mt-10 text-center text-xs text-[#475569]">
-            Paid plans handle their own provider costs (you bring your own API keys).
-            VoidSoul never proxies your model traffic.
+            All prices in AUD. Paid plans handle their own provider costs (you bring your own
+            API keys). VoidSoul never proxies your model traffic.
           </p>
         </div>
       </section>

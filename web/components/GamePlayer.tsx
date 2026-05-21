@@ -18,11 +18,19 @@ export default function GamePlayer({ url, title }: { url: string; title: string 
   const toggleFS = () => {
     const el = containerRef.current;
     if (!el) return;
+    // Both APIs can return either a Promise (modern Chromium/Safari) or
+    // `undefined` (older Safari). Coerce to a Promise so `.catch` is safe
+    // either way — without this, an older browser hits "cannot read
+    // properties of undefined (reading 'catch')" when the request resolves
+    // synchronously.
+    const fsEl = el as HTMLElement & { webkitRequestFullscreen?: () => Promise<void> | void };
+    const fsDoc = document as Document & { webkitExitFullscreen?: () => Promise<void> | void };
     if (!document.fullscreenElement) {
-      // No orientation lock — games are portrait or landscape, let them decide
-      (el.requestFullscreen?.() ?? (el as any).webkitRequestFullscreen?.())?.catch(() => {});
+      const req = fsEl.requestFullscreen?.() ?? fsEl.webkitRequestFullscreen?.();
+      Promise.resolve(req).catch(() => {});
     } else {
-      (document.exitFullscreen?.() ?? (document as any).webkitExitFullscreen?.());
+      const exit = fsDoc.exitFullscreen?.() ?? fsDoc.webkitExitFullscreen?.();
+      Promise.resolve(exit).catch(() => {});
     }
   };
 
@@ -52,7 +60,8 @@ export default function GamePlayer({ url, title }: { url: string; title: string 
         {/* Fullscreen button — larger hit target on mobile */}
         <button
           onClick={toggleFS}
-          title={isFS ? 'Exit Fullscreen' : 'Fullscreen'}
+          title={isFS ? 'Exit fullscreen' : 'Fullscreen'}
+          aria-label={isFS ? 'Exit fullscreen' : 'Enter fullscreen'}
           className="absolute bottom-3 left-3 flex items-center justify-center rounded-lg transition-all active:scale-95"
           style={{
             width: 48, height: 48,

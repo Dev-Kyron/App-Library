@@ -56,9 +56,6 @@ export default function ProviderRotator({ className = '' }: { className?: string
                   ? 'border-[#7c3aed] bg-[#7c3aed]/15 shadow-[0_0_20px_rgba(124,58,237,0.35)]'
                   : 'border-[#1e1a3a] bg-black/30 opacity-50'
               }`}
-              style={{
-                transform: isActive ? 'translateX(0)' : 'translateX(0)',
-              }}
             >
               <div className="flex items-center gap-2 min-w-0">
                 {p.vision && (

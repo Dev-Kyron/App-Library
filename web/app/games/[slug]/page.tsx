@@ -16,6 +16,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${game.title} — Void Soul Studio`,
     description: game.description,
+    openGraph: {
+      title: `${game.title} — Void Soul Studio`,
+      description: game.description,
+      images: [game.thumbnail ?? '/Logo.png'],
+    },
   };
 }
 

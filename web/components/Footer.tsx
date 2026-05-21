@@ -89,7 +89,7 @@ export default function Footer() {
         <div className="border-t border-[#0f0f1e] mx-6">
           <div className="mx-auto max-w-7xl py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-[#1e1a3a]">
             <p>© {new Date().getFullYear()} Void Soul Studio. All rights reserved.</p>
-            <p>Made with passion and purple pixels.</p>
+            <p>Built in Australia.</p>
           </div>
         </div>
       </div>

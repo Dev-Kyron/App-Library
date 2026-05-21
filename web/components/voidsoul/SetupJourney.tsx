@@ -31,8 +31,8 @@ const STEPS: Step[] = [
   {
     number: '02',
     title: 'Connect a model',
-    blurb: 'Already running Ollama, LM Studio, or llama.cpp? VoidSoul auto-detects them on boot — zero setup. Otherwise drop a key in Settings → Providers.',
-    detail: 'OpenAI, Anthropic, Gemini, Groq, xAI, OpenRouter, DeepSeek, Mistral — twelve in total. Pay-per-token only, no subscription floor.',
+    blurb: 'Already running Ollama, LM Studio, or llama.cpp? VoidSoul auto-detects them on launch — zero setup. Otherwise drop a key in Settings → Providers.',
+    detail: 'OpenAI, Anthropic, Gemini, Groq, xAI, OpenRouter, DeepSeek, Mistral, plus the three local runners and a custom-endpoint slot — 12 in total. Pay-per-token only, no subscription floor.',
     mock: 'provider',
   },
   {
