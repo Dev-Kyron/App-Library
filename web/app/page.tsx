@@ -11,13 +11,14 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative flex min-h-[70vh] items-center overflow-hidden">
+      <section className="relative flex min-h-[70dvh] items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/VoidBg.jpg"
             alt=""
             fill
             priority
+            sizes="100vw"
             className="object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a12]/60 via-transparent to-[#0a0a12]" />
@@ -82,6 +83,7 @@ export default function HomePage() {
                   src={featured.thumbnail}
                   alt={featured.title}
                   fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               ) : (
@@ -186,6 +188,7 @@ export default function HomePage() {
             src="/VoidBg.jpg"
             alt=""
             fill
+            sizes="100vw"
             className="object-cover object-center opacity-30"
           />
           {/* Soft blur + dark veil over the background */}

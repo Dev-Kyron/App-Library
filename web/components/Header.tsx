@@ -14,9 +14,14 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header
+      className="fixed left-0 right-0 top-0 z-50"
+      // Respect the notch / Dynamic Island on iPhones in landscape — without
+      // this the logo sits underneath the system UI.
+      style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
+    >
       <div className="bg-[#06060f]/92 backdrop-blur-lg">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 h-[68px]">
+        <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 sm:px-6">
 
           {/* Logo */}
           <Link
@@ -72,11 +77,12 @@ export default function Header() {
             </a>
           </nav>
 
-          {/* Mobile hamburger */}
+          {/* Mobile hamburger — 44×44 for the Apple HIG minimum tap target. */}
           <button
-            className="md:hidden flex h-9 w-9 items-center justify-center rounded-lg text-[#64748b] transition-all hover:bg-white/5 hover:text-[#a855f7]"
-            onClick={() => setMenuOpen(o => !o)}
-            aria-label="Toggle menu"
+            className="flex h-11 w-11 items-center justify-center rounded-lg text-[#64748b] transition-all hover:bg-white/5 hover:text-[#a855f7] md:hidden"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               {menuOpen ? (

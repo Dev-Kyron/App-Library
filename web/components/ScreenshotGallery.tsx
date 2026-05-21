@@ -41,6 +41,7 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
           src={shots[active]}
           alt={`${title} screenshot ${active + 1}`}
           fill
+          sizes="(min-width: 1024px) 1024px, 100vw"
           className="object-cover"
           priority={active === 0}
         />
@@ -84,7 +85,7 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
             }`}
             style={{ width: 96, height: 60 }}
           >
-            <Image src={src} alt={`Screenshot ${i + 1}`} fill className="object-cover" />
+            <Image src={src} alt={`Screenshot ${i + 1}`} fill sizes="96px" className="object-cover" />
           </button>
         ))}
       </div>

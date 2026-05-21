@@ -189,7 +189,7 @@ export default function VoidSoulAssistantPage() {
                 <DownloadButton platform="linux" />
               </div>
             </div>
-            <p className="mt-3 text-[11px] leading-relaxed text-[#475569] sm:text-xs">
+            <p className="mt-3 text-xs leading-relaxed text-[#475569]">
               Builds aren&apos;t live yet — Founder&apos;s Edition launches when downloads go public.
               <Link href="#pricing" className="ml-1 text-[#7c3aed] hover:underline">
                 See pricing →
@@ -438,7 +438,7 @@ export default function VoidSoulAssistantPage() {
               </h2>
             </div>
             <p className="max-w-sm text-sm text-[#94a3b8] sm:justify-self-end">
-              Real UI surfaces from the running app. Hover for the small lift.
+              Real UI surfaces from the running app — each one tilts as you scroll.
             </p>
           </div>
 
@@ -465,7 +465,7 @@ export default function VoidSoulAssistantPage() {
                   <AgentToolStream startIndex={0} />
                   <AgentToolStream startIndex={3} className="opacity-60" />
                   <AgentToolStream startIndex={6} className="opacity-30" />
-                  <p className="pt-3 text-[10px] leading-relaxed text-[#475569]">
+                  <p className="pt-3 text-[11px] leading-relaxed text-[#475569]">
                     Capped at six agent steps · partial output preserved on Stop · every step
                     logged.
                   </p>

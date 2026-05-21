@@ -79,7 +79,13 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
       ) : (
         <div className="relative w-full overflow-hidden rounded-xl border border-[#1e1a3a] bg-[#0f0f1e] mb-6" style={{ aspectRatio: '16/9' }}>
           {game.thumbnail ? (
-            <Image src={game.thumbnail} alt={game.title} fill className="object-cover" />
+            <Image
+              src={game.thumbnail}
+              alt={game.title}
+              fill
+              sizes="(min-width: 1024px) 1024px, 100vw"
+              className="object-cover"
+            />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
               <div

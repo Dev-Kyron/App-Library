@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="h-px bg-gradient-to-r from-transparent via-[#7c3aed]/40 to-transparent" />
 
       <div className="bg-[#06060f]">
-        <div className="mx-auto max-w-7xl px-6 py-14">
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6">
 
             {/* Brand */}
@@ -86,8 +86,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-[#0f0f1e] mx-6">
-          <div className="mx-auto max-w-7xl py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-[#1e1a3a]">
+        <div className="border-t border-[#0f0f1e] mx-4 sm:mx-6">
+          <div className="mx-auto max-w-7xl py-5 flex flex-col items-center justify-between gap-3 text-xs text-[#334155] md:flex-row">
             <p>© {new Date().getFullYear()} Void Soul Studio. All rights reserved.</p>
             <p>Built in Australia.</p>
           </div>

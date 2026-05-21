@@ -82,7 +82,7 @@ export default function SetupJourney() {
     <div className="grid gap-6 lg:grid-cols-[280px_1fr] lg:items-start lg:gap-12">
       {/* Step rail — horizontal scroller on mobile (snap + edge-fade so the
           user knows they can scroll), vertical list on desktop. */}
-      <ol className="step-rail relative -mx-1 flex flex-row gap-1.5 overflow-x-auto px-1 pb-2 lg:mx-0 lg:flex-col lg:gap-0 lg:overflow-visible lg:px-0 lg:pb-0">
+      <ol className="step-rail relative -mx-1 flex snap-x snap-mandatory flex-row gap-2 overflow-x-auto px-1 pb-2 lg:mx-0 lg:flex-col lg:gap-0 lg:overflow-visible lg:px-0 lg:pb-0">
         {/* Vertical accent line behind the dots (desktop only) */}
         <div
           aria-hidden
@@ -101,7 +101,7 @@ export default function SetupJourney() {
                 }`}
               >
                 <span
-                  className={`flex h-8 w-8 flex-none items-center justify-center rounded-full font-mono text-[10px] transition-all lg:h-9 lg:w-9 lg:text-[11px] ${
+                  className={`flex h-11 w-11 flex-none items-center justify-center rounded-full font-mono text-[11px] transition-all lg:h-9 lg:w-9 ${
                     isActive
                       ? 'bg-[#7c3aed] text-white shadow-[0_0_18px_rgba(124,58,237,0.6)]'
                       : 'border border-[#1e1a3a] bg-[#0a0a18] text-[#475569] group-hover:border-[#7c3aed]/60'
