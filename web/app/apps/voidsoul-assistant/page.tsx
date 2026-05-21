@@ -696,22 +696,26 @@ export default function VoidSoulAssistantPage() {
               </div>
             </Tilt3D>
 
-            {/* First 3 — launch giveaway. Emerald accent. Stronger Tilt3D. */}
+            {/* First 3 — launch giveaway. Emerald accent. Stronger Tilt3D.
+                Outer wrapper has no overflow clipping so the floating badge
+                sits half-above the card; only the inner card hides the
+                radial gradient. */}
             <Tilt3D strength={7} liftZ={20}>
-              <div className="relative h-full overflow-hidden rounded-2xl border-2 border-emerald-400/60 bg-gradient-to-b from-emerald-500/[0.08] via-[#0f0f1e] to-[#0f0f1e] p-6 shadow-2xl shadow-emerald-500/20 sm:rounded-3xl sm:p-8">
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0"
-                  style={{
-                    background:
-                      'radial-gradient(ellipse at top, rgba(52,211,153,0.18) 0%, transparent 60%)',
-                  }}
-                />
-                <span className="absolute -top-3 left-1/2 z-10 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-emerald-500 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-[#052e16]">
+              <div className="relative h-full pt-3">
+                <span className="absolute top-0 left-1/2 z-20 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-emerald-500 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-[#052e16] shadow-lg shadow-emerald-500/30">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#052e16] animate-pulse" />
                   Launch giveaway · First 3
                 </span>
-                <div className="relative">
+                <div className="relative h-full overflow-hidden rounded-2xl border-2 border-emerald-400/60 bg-gradient-to-b from-emerald-500/[0.08] via-[#0f0f1e] to-[#0f0f1e] p-6 shadow-2xl shadow-emerald-500/20 sm:rounded-3xl sm:p-8">
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      background:
+                        'radial-gradient(ellipse at top, rgba(52,211,153,0.18) 0%, transparent 60%)',
+                    }}
+                  />
+                  <div className="relative">
                   <p className="mb-3 text-xs uppercase tracking-widest text-emerald-300">
                     Earliest adopters
                   </p>
@@ -762,6 +766,7 @@ export default function VoidSoulAssistantPage() {
                     First three downloads at launch. Then{' '}
                     <span className="text-[#cbd0e2]">Founder&apos;s Edition</span> kicks in.
                   </p>
+                  </div>
                 </div>
               </div>
             </Tilt3D>
