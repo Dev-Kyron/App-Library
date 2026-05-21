@@ -26,7 +26,7 @@
  */
 
 export const FORMS = {
-  earliestAdoptersEndpoint: '', // <-- paste Formspree URL here
+  earliestAdoptersEndpoint: 'https://formspree.io/f/xjgzwypy',
 } as const;
 
 /** True once a real Formspree URL has been pasted in. */
