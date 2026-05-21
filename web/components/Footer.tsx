@@ -14,15 +14,13 @@ export default function Footer() {
             {/* Brand */}
             <div className="flex flex-col gap-4">
               <Link href="/" className="flex items-center gap-3 group w-fit">
-                <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/95 transition-all duration-300 group-hover:opacity-90 flex-none">
-                  <Image
-                    src="/Logo.png"
-                    alt="Void Soul Studio"
-                    width={36}
-                    height={36}
-                    className="rounded-lg"
-                  />
-                </span>
+                <Image
+                  src="/Logo.png"
+                  alt="Void Soul Studio"
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 flex-none transition-opacity duration-300 group-hover:opacity-80"
+                />
                 <div className="leading-none">
                   <p className="text-[13px] font-bold tracking-widest text-[#e2e8f0] uppercase group-hover:text-[#c084fc] transition-colors">
                     Void Soul

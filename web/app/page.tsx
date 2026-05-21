@@ -219,7 +219,7 @@ export default function HomePage() {
                   alt="Void Soul Studio"
                   width={280}
                   height={280}
-                  className="relative rounded-3xl w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-white/95 p-3"
+                  className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72"
                 />
               </div>
             </div>

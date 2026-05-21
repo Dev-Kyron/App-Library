@@ -29,16 +29,15 @@ export default function Header() {
             className="flex items-center gap-3 group"
             onClick={() => setMenuOpen(false)}
           >
-            {/* Logo image — filter converts white bg → near-black (invisible on dark nav) */}
-            <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-white/95 transition-all duration-300 group-hover:opacity-90 flex-none">
-              <Image
-                src="/Logo.png"
-                alt="Void Soul Studio"
-                width={40}
-                height={40}
-                className="rounded-lg"
-              />
-            </span>
+              {/* Transparent PNG — show directly on the dark nav, no white tile. */}
+            <Image
+              src="/Logo.png"
+              alt="Void Soul Studio"
+              width={44}
+              height={44}
+              className="h-11 w-11 flex-none transition-opacity duration-300 group-hover:opacity-80"
+              priority
+            />
             <div className="flex flex-col leading-none">
               <span className="text-[13px] font-bold tracking-widest text-[#e2e8f0] uppercase transition-colors group-hover:text-[#c084fc]">
                 Void Soul
