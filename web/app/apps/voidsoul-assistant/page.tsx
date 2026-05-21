@@ -9,6 +9,7 @@ import QuickAIMock from '@/components/voidsoul/QuickAIMock';
 import CostChartMock from '@/components/voidsoul/CostChartMock';
 import Stage3D from '@/components/voidsoul/Stage3D';
 import SetupJourney from '@/components/voidsoul/SetupJourney';
+import Tilt3D from '@/components/voidsoul/Tilt3D';
 
 const app = getApp('voidsoul-assistant')!;
 
@@ -129,25 +130,27 @@ export default function VoidSoulAssistantPage() {
           {/* Orb — sits ABOVE the copy on mobile so the visual lands first
               when scrolling. Order flips back on lg so the copy is left. */}
           <div className="relative order-first flex items-center justify-center reveal-fade lg:order-last">
-            <div className="relative">
-              {/* Mobile orb: smaller so it fits in a single phone screen
-                  alongside the chip + headline. Desktop orb stays at the
-                  cinematic size. */}
-              <div className="sm:hidden">
-                <VoidSoulOrb size={200} />
+            <Tilt3D strength={10} liftZ={24}>
+              <div className="relative">
+                {/* Mobile orb: smaller so it fits in a single phone screen
+                    alongside the chip + headline. Desktop orb stays at the
+                    cinematic size. */}
+                <div className="sm:hidden">
+                  <VoidSoulOrb size={200} />
+                </div>
+                <div className="hidden sm:block lg:hidden">
+                  <VoidSoulOrb size={280} />
+                </div>
+                <div className="hidden lg:block">
+                  <VoidSoulOrb size={360} />
+                </div>
+                {/* Tool-stream chip — narrower on mobile so it never
+                    overflows the orb's bottom or the screen edge. */}
+                <div className="absolute -bottom-2 left-1/2 w-[88vw] max-w-[300px] -translate-x-1/2 reveal-up-delay">
+                  <AgentToolStream />
+                </div>
               </div>
-              <div className="hidden sm:block lg:hidden">
-                <VoidSoulOrb size={280} />
-              </div>
-              <div className="hidden lg:block">
-                <VoidSoulOrb size={360} />
-              </div>
-              {/* Tool-stream chip — narrower on mobile so it never overflows
-                  the orb's bottom or the screen edge. */}
-              <div className="absolute -bottom-2 left-1/2 w-[88vw] max-w-[300px] -translate-x-1/2 reveal-up-delay">
-                <AgentToolStream />
-              </div>
-            </div>
+            </Tilt3D>
           </div>
 
           {/* Copy */}
@@ -441,55 +444,59 @@ export default function VoidSoulAssistantPage() {
           </div>
 
           <div className="grid gap-6 sm:gap-8 lg:grid-cols-12">
-            <CloseUpPanel
-              className="lg:col-span-5 lg:translate-y-4"
-              tag="Floating orb"
-              title="Always there, never in the way."
-              caption="Drag-to-move. Click-to-summon. Tray-resident on every OS."
-            >
-              <div className="flex items-center justify-center py-14">
-                <VoidSoulOrb size={200} />
-              </div>
-            </CloseUpPanel>
+            <Tilt3D strength={8} className="lg:col-span-5 lg:translate-y-4">
+              <CloseUpPanel
+                tag="Floating orb"
+                title="Always there, never in the way."
+                caption="Drag-to-move. Click-to-summon. Tray-resident on every OS."
+              >
+                <div className="flex items-center justify-center py-14">
+                  <VoidSoulOrb size={200} />
+                </div>
+              </CloseUpPanel>
+            </Tilt3D>
 
-            <CloseUpPanel
-              className="lg:col-span-7"
-              tag="Live agent"
-              title="See what it's doing, as it does it."
-              caption="A live strip while the agent works — searching, reading, running, clicking — never silent."
-            >
-              <div className="flex flex-col gap-2 p-5 pt-2">
-                <AgentToolStream />
-                <AgentToolStream className="opacity-60" />
-                <AgentToolStream className="opacity-30" />
-                <p className="pt-2 text-[10px] text-[#475569]">
-                  Six-step agent loop cap · partial content preserved on Stop · every step
-                  logged.
-                </p>
-              </div>
-            </CloseUpPanel>
+            <Tilt3D strength={8} className="lg:col-span-7">
+              <CloseUpPanel
+                tag="Live agent"
+                title="See what it's doing, as it does it."
+                caption="A live strip while the agent works — searching, reading, running, clicking — never silent."
+              >
+                <div className="flex flex-col gap-2 p-5 pt-2">
+                  <AgentToolStream />
+                  <AgentToolStream className="opacity-60" />
+                  <AgentToolStream className="opacity-30" />
+                  <p className="pt-2 text-[10px] text-[#475569]">
+                    Six-step agent loop cap · partial content preserved on Stop · every step
+                    logged.
+                  </p>
+                </div>
+              </CloseUpPanel>
+            </Tilt3D>
 
-            <CloseUpPanel
-              className="lg:col-span-7 lg:-translate-y-4"
-              tag="Quick AI"
-              title="One shortcut. Every answer."
-              caption="Press Cmd+Shift+J from anywhere — Word, Photoshop, your terminal. Ask. Done."
-            >
-              <div className="flex items-center justify-center py-10">
-                <QuickAIMock />
-              </div>
-            </CloseUpPanel>
+            <Tilt3D strength={8} className="lg:col-span-7 lg:-translate-y-4">
+              <CloseUpPanel
+                tag="Quick AI"
+                title="One shortcut. Every answer."
+                caption="Press Cmd+Shift+J from anywhere — Word, Photoshop, your terminal. Ask. Done."
+              >
+                <div className="flex items-center justify-center py-10">
+                  <QuickAIMock />
+                </div>
+              </CloseUpPanel>
+            </Tilt3D>
 
-            <CloseUpPanel
-              className="lg:col-span-5"
-              tag="Cost honesty"
-              title="Spend, daily. Budget, enforced."
-              caption="Pay for tokens, not for a chat UI. Alerts at 75 / 90 / 100% of monthly cap."
-            >
-              <div className="flex items-center justify-center py-6">
-                <CostChartMock />
-              </div>
-            </CloseUpPanel>
+            <Tilt3D strength={8} className="lg:col-span-5">
+              <CloseUpPanel
+                tag="Cost honesty"
+                title="Spend, daily. Budget, enforced."
+                caption="Pay for tokens, not for a chat UI. Alerts at 75 / 90 / 100% of monthly cap."
+              >
+                <div className="flex items-center justify-center py-6">
+                  <CostChartMock />
+                </div>
+              </CloseUpPanel>
+            </Tilt3D>
           </div>
         </div>
       </section>
@@ -594,37 +601,39 @@ export default function VoidSoulAssistantPage() {
             </p>
           </div>
 
-          <div
-            className="group relative aspect-video w-full overflow-hidden rounded-3xl border border-[#1e1a3a] bg-[#0a0a20] shadow-2xl shadow-[#7c3aed]/20"
-            style={{
-              backgroundImage:
-                'radial-gradient(ellipse at 30% 50%, rgba(124,58,237,0.25) 0%, transparent 60%), radial-gradient(ellipse at 70% 30%, rgba(168,85,247,0.15) 0%, transparent 50%)',
-            }}
-          >
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-5">
-              <VoidSoulOrb size={170} />
-              <button className="flex items-center gap-3 rounded-full border border-[#7c3aed]/40 bg-black/60 px-5 py-3 text-sm font-medium text-[#e2e8f0] backdrop-blur transition-all hover:border-[#7c3aed] hover:bg-[#7c3aed]/20 hover:scale-105">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#7c3aed] text-white">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </span>
-                Demo video — coming soon
-              </button>
-              <p className="text-xs text-[#475569]">
-                Devlog clips on{' '}
-                <a
-                  href="https://www.youtube.com/@voidsoul_studio"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#7c3aed] hover:underline"
-                >
-                  YouTube
-                </a>{' '}
-                meanwhile.
-              </p>
+          <Tilt3D strength={6} liftZ={12}>
+            <div
+              className="group relative aspect-video w-full overflow-hidden rounded-3xl border border-[#1e1a3a] bg-[#0a0a20] shadow-2xl shadow-[#7c3aed]/20"
+              style={{
+                backgroundImage:
+                  'radial-gradient(ellipse at 30% 50%, rgba(124,58,237,0.25) 0%, transparent 60%), radial-gradient(ellipse at 70% 30%, rgba(168,85,247,0.15) 0%, transparent 50%)',
+              }}
+            >
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-5">
+                <VoidSoulOrb size={170} />
+                <button className="flex items-center gap-3 rounded-full border border-[#7c3aed]/40 bg-black/60 px-5 py-3 text-sm font-medium text-[#e2e8f0] backdrop-blur transition-all hover:border-[#7c3aed] hover:bg-[#7c3aed]/20 hover:scale-105">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#7c3aed] text-white">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </span>
+                  Demo video — coming soon
+                </button>
+                <p className="text-xs text-[#475569]">
+                  Devlog clips on{' '}
+                  <a
+                    href="https://www.youtube.com/@voidsoul_studio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#7c3aed] hover:underline"
+                  >
+                    YouTube
+                  </a>{' '}
+                  meanwhile.
+                </p>
+              </div>
             </div>
-          </div>
+          </Tilt3D>
         </div>
       </section>
 
@@ -656,29 +665,32 @@ export default function VoidSoulAssistantPage() {
           </div>
 
           <div className="grid gap-5 sm:gap-6 md:grid-cols-2">
-            <div className="relative rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-6 transition-all hover:border-[#2a1a4e] sm:rounded-3xl sm:p-8">
-              <p className="text-xs uppercase tracking-widest text-[#64748b] mb-3">Free</p>
-              <p className="text-4xl font-bold text-[#e2e8f0] mb-1">$0</p>
-              <p className="text-sm text-[#64748b] mb-6 sm:mb-7">Local-only. Forever.</p>
-              <ul className="space-y-2.5 text-sm text-[#94a3b8]">
-                {['Ollama, LM Studio, llama.cpp', 'Five threads max', 'Local voice loop', 'Basic agent tools'].map(
-                  (l) => (
-                    <li key={l} className="flex items-start gap-2">
-                      <span className="text-emerald-400 mt-0.5">✓</span>
-                      <span>{l}</span>
-                    </li>
-                  ),
-                )}
-              </ul>
-              <button
-                disabled
-                className="mt-8 w-full rounded-lg border border-[#1e1a3a] bg-black/40 py-3 text-sm font-medium text-[#64748b] cursor-not-allowed"
-              >
-                Free when downloads open
-              </button>
-            </div>
+            <Tilt3D strength={5} liftZ={10}>
+              <div className="relative rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-6 transition-colors hover:border-[#2a1a4e] sm:rounded-3xl sm:p-8">
+                <p className="text-xs uppercase tracking-widest text-[#64748b] mb-3">Free</p>
+                <p className="text-4xl font-bold text-[#e2e8f0] mb-1">$0</p>
+                <p className="text-sm text-[#64748b] mb-6 sm:mb-7">Local-only. Forever.</p>
+                <ul className="space-y-2.5 text-sm text-[#94a3b8]">
+                  {['Ollama, LM Studio, llama.cpp', 'Five threads max', 'Local voice loop', 'Basic agent tools'].map(
+                    (l) => (
+                      <li key={l} className="flex items-start gap-2">
+                        <span className="text-emerald-400 mt-0.5">✓</span>
+                        <span>{l}</span>
+                      </li>
+                    ),
+                  )}
+                </ul>
+                <button
+                  disabled
+                  className="mt-8 w-full rounded-lg border border-[#1e1a3a] bg-black/40 py-3 text-sm font-medium text-[#64748b] cursor-not-allowed"
+                >
+                  Free when downloads open
+                </button>
+              </div>
+            </Tilt3D>
 
-            <div className="relative rounded-2xl border border-[#7c3aed] bg-gradient-to-b from-[#1a0a3a]/40 to-[#0f0f1e] p-6 shadow-2xl shadow-[#7c3aed]/30 sm:rounded-3xl sm:p-8">
+            <Tilt3D strength={6} liftZ={16}>
+              <div className="relative rounded-2xl border border-[#7c3aed] bg-gradient-to-b from-[#1a0a3a]/40 to-[#0f0f1e] p-6 shadow-2xl shadow-[#7c3aed]/30 sm:rounded-3xl sm:p-8">
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#7c3aed] px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-white">
                 Founder&apos;s Edition · First 100
               </span>
@@ -712,7 +724,8 @@ export default function VoidSoulAssistantPage() {
               <p className="mt-3 text-center text-xs text-[#64748b]">
                 Climbs to <span className="text-[#cbd0e2]">$249</span> after the first 100.
               </p>
-            </div>
+              </div>
+            </Tilt3D>
           </div>
 
           <p className="mt-10 text-center text-xs text-[#475569]">
