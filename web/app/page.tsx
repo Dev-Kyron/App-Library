@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import GameCard from '@/components/GameCard';
+import AppCard from '@/components/AppCard';
 import { games, getFeaturedGame } from '@/lib/games';
+import { apps } from '@/lib/apps';
 
 export default function HomePage() {
   const featured = getFeaturedGame();
@@ -152,6 +154,29 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* Apps & Tools */}
+      {apps.length > 0 && (
+        <section id="apps" className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24">
+          <div className="mb-8 flex items-end justify-between">
+            <div>
+              <h2 className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed] mb-2">
+                Apps &amp; Tools
+              </h2>
+              <p className="text-2xl font-bold text-[#e2e8f0]">From the studio</p>
+            </div>
+            <p className="text-sm text-[#475569]">
+              {apps.length} {apps.length === 1 ? 'release' : 'releases'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {apps.map((app) => (
+              <AppCard key={app.slug} app={app} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* About */}
       <section id="about" className="relative border-t border-[#1e1a3a] overflow-hidden">
