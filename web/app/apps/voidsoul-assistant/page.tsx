@@ -779,7 +779,7 @@ export default function VoidSoulAssistantPage() {
                 <p className="text-xs uppercase tracking-widest text-[#a855f7] mb-3">Lifetime</p>
                 <div className="flex items-baseline gap-2 mb-1">
                   <p className="text-4xl font-bold text-[#e2e8f0] sm:text-5xl">$129</p>
-                  <p className="text-sm text-[#64748b] line-through">$199</p>
+                  <p className="text-sm text-[#64748b] line-through">$249</p>
                 </div>
                 <p className="mb-6 text-sm text-[#a855f7] sm:mb-7">AUD · one-time · yours forever</p>
                 <ul className="space-y-2.5 text-sm text-[#cbd0e2]">
@@ -814,6 +814,148 @@ export default function VoidSoulAssistantPage() {
             All prices in AUD. Paid plans handle their own provider costs (you bring your own
             API keys). VoidSoul never proxies your model traffic.
           </p>
+        </div>
+      </section>
+
+      {/* ============================ REVIEWS ============================
+          Pre-launch placeholder treatment — three dashed-border "spots"
+          show what a review will look like once shipped. Flip the
+          REVIEWS array to real entries when the first builds go out. */}
+      <section id="reviews" className="relative">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:py-28">
+          <div className="mb-10 flex flex-col gap-3 sm:mb-12 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+            <div>
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
+                Reactions
+              </p>
+              <h2 className="text-[1.75rem] font-bold leading-tight text-[#e2e8f0] sm:text-4xl lg:text-5xl">
+                Reviews <span className="text-[#a855f7]">open at launch.</span>
+              </h2>
+            </div>
+            <p className="max-w-sm text-sm text-[#94a3b8]">
+              Build is still in the void. First three users get the app free —
+              their words seed the first three reviews.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
+            {[1, 2, 3].map((n) => (
+              <div
+                key={n}
+                className="flex flex-col gap-4 rounded-2xl border border-dashed border-[#1e1a3a] bg-[#0a0a18]/60 p-6"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#1e1a3a]/80 font-mono text-sm text-[#475569]">
+                    0{n}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-[#64748b]">
+                      First-3 spot · open
+                    </p>
+                    <div className="mt-0.5 flex gap-0.5 text-[#1e1a3a]">
+                      {[0, 1, 2, 3, 4].map((s) => (
+                        <svg key={s} width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 2l3 7h7l-5.5 4.5L18.5 22 12 17.5 5.5 22l2-8.5L2 9h7z" />
+                        </svg>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <p className="text-sm leading-relaxed text-[#334155]">
+                  Reviews land here once the build ships. Until then — quiet.
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 text-center sm:mt-12 sm:flex-row sm:gap-5">
+            <Link
+              href="#pricing"
+              className="rounded-lg bg-[#7c3aed] px-6 py-3 text-sm font-medium text-white transition-all hover:bg-[#6d28d9] hover:shadow-[0_0_28px_rgba(124,58,237,0.5)]"
+            >
+              Claim a First-3 spot →
+            </Link>
+            <a
+              href="https://www.youtube.com/@voidsoul_studio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-[#94a3b8] transition-colors hover:text-[#a855f7]"
+            >
+              Or watch the build-in-public devlog ↗
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================ BUG REPORT ============================ */}
+      <section id="report" className="relative border-y border-[#1e1a3a] bg-[#06060f]/40">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:py-28">
+          <div className="mb-10 max-w-2xl sm:mb-12">
+            <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
+              Spotted something off?
+            </p>
+            <h2 className="text-[1.75rem] font-bold leading-tight text-[#e2e8f0] sm:text-4xl">
+              Bugs welcome.
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-[#94a3b8] sm:text-[15px]">
+              VoidSoul is built in public. Every bug report gets read by the
+              developer — no support queue, no scripted reply. Pick your channel.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
+            <a
+              href="https://github.com/Dev-Kyron/SoulVoidAI/issues/new"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col gap-3 rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-6 transition-all hover:border-[#7c3aed]/60 hover:bg-[#7c3aed]/5 hover:shadow-[0_0_28px_rgba(124,58,237,0.15)]"
+            >
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-[#1e1a3a]/80 text-[#a855f7] transition-colors group-hover:bg-[#7c3aed]/20">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                  </svg>
+                </span>
+                <div className="min-w-0">
+                  <p className="text-base font-semibold text-[#e2e8f0]">Open a GitHub issue</p>
+                  <p className="text-xs text-[#475569]">Public · tracked · fastest reply</p>
+                </div>
+              </div>
+              <p className="text-sm leading-relaxed text-[#94a3b8]">
+                Most bug reports land here. Search first to avoid dupes, then file
+                with repro steps. Every issue gets read.
+              </p>
+              <span className="mt-auto inline-flex items-center gap-2 text-sm font-medium text-[#a855f7]">
+                File an issue ↗
+              </span>
+            </a>
+
+            <a
+              href="https://www.youtube.com/@voidsoul_studio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col gap-3 rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-6 transition-all hover:border-[#7c3aed]/60 hover:bg-[#7c3aed]/5 hover:shadow-[0_0_28px_rgba(124,58,237,0.15)]"
+            >
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-[#1e1a3a]/80 text-[#a855f7] transition-colors group-hover:bg-[#7c3aed]/20">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.1 2.8 12 2.8 12 2.8s-4.1 0-6.8.1c-.6.1-1.9.1-3 1.3C1.3 5 1 7 1 7S.7 9.1.7 11.3v2c0 2.1.3 4.3.3 4.3s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.5 21.7 12 21.8 12 21.8s4.1 0 6.8-.2c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.3-2.1.3-4.3v-2C23.3 9.1 23 7 23 7zM9.7 15.5V8.4l8.1 3.6-8.1 3.5z" />
+                  </svg>
+                </span>
+                <div className="min-w-0">
+                  <p className="text-base font-semibold text-[#e2e8f0]">Comment on the devlog</p>
+                  <p className="text-xs text-[#475569]">Community · feature ideas welcome</p>
+                </div>
+              </div>
+              <p className="text-sm leading-relaxed text-[#94a3b8]">
+                Smaller stuff and feature wishlists — drop them under the latest
+                video. Anything bigger, file it on GitHub.
+              </p>
+              <span className="mt-auto inline-flex items-center gap-2 text-sm font-medium text-[#a855f7]">
+                Open YouTube ↗
+              </span>
+            </a>
+          </div>
         </div>
       </section>
 
