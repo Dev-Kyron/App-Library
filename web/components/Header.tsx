@@ -29,20 +29,21 @@ export default function Header() {
             className="flex items-center gap-3 group"
             onClick={() => setMenuOpen(false)}
           >
-              {/* Transparent PNG — show directly on the dark nav, no white tile. */}
+              {/* Transparent PNG + purple drop-shadow so the linework reads
+                against the dark nav — no white tile needed. */}
             <Image
               src="/Logo.png"
               alt="Void Soul Studio"
-              width={44}
-              height={44}
-              className="h-11 w-11 flex-none transition-opacity duration-300 group-hover:opacity-80"
+              width={52}
+              height={52}
+              className="brand-glow h-12 w-12 flex-none transition-all duration-300 group-hover:scale-105"
               priority
             />
             <div className="flex flex-col leading-none">
-              <span className="text-[13px] font-bold tracking-widest text-[#e2e8f0] uppercase transition-colors group-hover:text-[#c084fc]">
+              <span className="brand-text-glow text-[13px] font-bold tracking-widest text-[#e2e8f0] uppercase transition-colors group-hover:text-[#c084fc]">
                 Void Soul
               </span>
-              <span className="text-[10px] tracking-[0.22em] text-[#7c3aed] uppercase mt-0.5">
+              <span className="text-[10px] tracking-[0.22em] text-[#a855f7] uppercase mt-0.5">
                 Studio
               </span>
             </div>

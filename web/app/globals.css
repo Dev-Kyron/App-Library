@@ -51,3 +51,50 @@ button, a {
 ::-webkit-scrollbar-thumb:hover {
   background: #7c3aed;
 }
+
+/* ------------------------------------------------------------------
+   Brand emphasis utilities
+
+   `.brand-glow` wraps the transparent logo PNG in a soft purple halo —
+   two stacked drop-shadows give a tight inner rim plus a wider bloom,
+   so the linework reads against the dark navy without a hard tile.
+
+   `.brand-text-glow` matches the same energy on the wordmark beside
+   the logo: subtle enough to keep the type crisp at small sizes.
+
+   `.brand-glow-pulse` gently breathes the halo at 6s cadence for
+   feature placements (hero / about). Honors reduced-motion.
+   ------------------------------------------------------------------ */
+.brand-glow {
+  filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.55))
+          drop-shadow(0 0 18px rgba(124, 58, 237, 0.3));
+}
+.brand-glow-strong {
+  filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.7))
+          drop-shadow(0 0 32px rgba(124, 58, 237, 0.4));
+}
+.brand-text-glow {
+  text-shadow:
+    0 0 12px rgba(168, 85, 247, 0.35),
+    0 0 28px rgba(124, 58, 237, 0.2);
+}
+@keyframes brandPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.5))
+            drop-shadow(0 0 18px rgba(124, 58, 237, 0.25));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.7))
+            drop-shadow(0 0 30px rgba(124, 58, 237, 0.4));
+  }
+}
+.brand-glow-pulse {
+  animation: brandPulse 6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-glow-pulse {
+    animation: none;
+    filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.55))
+            drop-shadow(0 0 22px rgba(124, 58, 237, 0.3));
+  }
+}

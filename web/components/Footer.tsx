@@ -17,15 +17,15 @@ export default function Footer() {
                 <Image
                   src="/Logo.png"
                   alt="Void Soul Studio"
-                  width={40}
-                  height={40}
-                  className="h-10 w-10 flex-none transition-opacity duration-300 group-hover:opacity-80"
+                  width={44}
+                  height={44}
+                  className="brand-glow h-11 w-11 flex-none transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="leading-none">
-                  <p className="text-[13px] font-bold tracking-widest text-[#e2e8f0] uppercase group-hover:text-[#c084fc] transition-colors">
+                  <p className="brand-text-glow text-[13px] font-bold tracking-widest text-[#e2e8f0] uppercase group-hover:text-[#c084fc] transition-colors">
                     Void Soul
                   </p>
-                  <p className="text-[10px] tracking-[0.22em] text-[#7c3aed] uppercase mt-0.5">
+                  <p className="text-[10px] tracking-[0.22em] text-[#a855f7] uppercase mt-0.5">
                     Studio
                   </p>
                 </div>

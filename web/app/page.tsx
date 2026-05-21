@@ -219,7 +219,7 @@ export default function HomePage() {
                   alt="Void Soul Studio"
                   width={280}
                   height={280}
-                  className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72"
+                  className="brand-glow-pulse relative w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72"
                 />
               </div>
             </div>
@@ -230,7 +230,7 @@ export default function HomePage() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed] mb-3">
                   About
                 </p>
-                <h2 className="text-3xl font-bold text-[#e2e8f0] leading-tight sm:text-4xl">
+                <h2 className="brand-text-glow text-3xl font-bold text-[#e2e8f0] leading-tight sm:text-4xl">
                   Void Soul Studio
                 </h2>
               </div>
