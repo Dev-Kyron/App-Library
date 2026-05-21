@@ -10,6 +10,8 @@ import CostChartMock from '@/components/voidsoul/CostChartMock';
 import Stage3D from '@/components/voidsoul/Stage3D';
 import SetupJourney from '@/components/voidsoul/SetupJourney';
 import Tilt3D from '@/components/voidsoul/Tilt3D';
+import SmartDownloadButton from '@/components/voidsoul/SmartDownloadButton';
+import { DOWNLOAD_CONFIG, getDownloadUrl, type Platform } from '@/lib/downloads';
 
 const app = getApp('voidsoul-assistant')!;
 
@@ -190,7 +192,16 @@ export default function VoidSoulAssistantPage() {
               </div>
             </div>
             <p className="mt-3 text-xs leading-relaxed text-[#475569]">
-              Builds aren&apos;t live yet — Founder&apos;s Edition launches when downloads go public.
+              {DOWNLOAD_CONFIG.enabled ? (
+                <>
+                  Free tier · {DOWNLOAD_CONFIG.version}. License key unlocks the
+                  Founder&apos;s features.
+                </>
+              ) : (
+                <>
+                  Builds aren&apos;t live yet — Founder&apos;s Edition launches when downloads go public.
+                </>
+              )}
               <Link href="#pricing" className="ml-1 text-[#7c3aed] hover:underline">
                 See pricing →
               </Link>
@@ -687,12 +698,7 @@ export default function VoidSoulAssistantPage() {
                     ),
                   )}
                 </ul>
-                <button
-                  disabled
-                  className="mt-8 w-full rounded-lg border border-[#1e1a3a] bg-black/40 py-3 text-sm font-medium text-[#64748b] cursor-not-allowed"
-                >
-                  Free when downloads open
-                </button>
+                <SmartDownloadButton />
               </div>
             </Tilt3D>
 
@@ -1030,7 +1036,7 @@ function DownloadButton({
   platform,
   primary = false,
 }: {
-  platform: 'windows' | 'macos' | 'linux';
+  platform: Platform;
   primary?: boolean;
 }) {
   const config = {
@@ -1061,16 +1067,16 @@ function DownloadButton({
   } as const;
 
   const c = config[platform];
+  const live = DOWNLOAD_CONFIG.enabled;
 
-  return (
-    <button
-      disabled
-      className={`group/dl flex w-full items-center justify-center gap-2.5 rounded-xl px-4 py-3 text-sm font-medium transition-all disabled:cursor-not-allowed sm:w-auto sm:justify-start sm:px-5 ${
-        primary
-          ? 'bg-[#7c3aed] text-white shadow-[0_0_22px_rgba(124,58,237,0.35)] hover:bg-[#6d28d9] hover:shadow-[0_0_32px_rgba(124,58,237,0.55)]'
-          : 'border border-[#1e1a3a] bg-[#0f0f1e] text-[#cbd0e2] hover:border-[#7c3aed] hover:text-[#c084fc]'
-      }`}
-    >
+  const className = `group/dl flex w-full items-center justify-center gap-2.5 rounded-xl px-4 py-3 text-sm font-medium transition-all sm:w-auto sm:justify-start sm:px-5 ${
+    primary
+      ? 'bg-[#7c3aed] text-white shadow-[0_0_22px_rgba(124,58,237,0.35)] hover:bg-[#6d28d9] hover:shadow-[0_0_32px_rgba(124,58,237,0.55)]'
+      : 'border border-[#1e1a3a] bg-[#0f0f1e] text-[#cbd0e2] hover:border-[#7c3aed] hover:text-[#c084fc]'
+  } ${live ? '' : 'cursor-not-allowed'}`;
+
+  const inner = (
+    <>
       {c.icon}
       <span className="whitespace-nowrap">
         <span className="sm:hidden">{c.label}</span>
@@ -1081,8 +1087,21 @@ function DownloadButton({
           primary ? 'text-white/70' : 'text-[#7c3aed]/70'
         }`}
       >
-        Soon
+        {live ? 'Free' : 'Soon'}
       </span>
+    </>
+  );
+
+  if (live) {
+    return (
+      <a href={getDownloadUrl(platform)} download className={className}>
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <button disabled className={className}>
+      {inner}
     </button>
   );
 }
