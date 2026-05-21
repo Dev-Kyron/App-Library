@@ -11,6 +11,7 @@ import Stage3D from '@/components/voidsoul/Stage3D';
 import SetupJourney from '@/components/voidsoul/SetupJourney';
 import Tilt3D from '@/components/voidsoul/Tilt3D';
 import SmartDownloadButton from '@/components/voidsoul/SmartDownloadButton';
+import EmailCaptureForm from '@/components/voidsoul/EmailCaptureForm';
 import { DOWNLOAD_CONFIG, getDownloadUrl, type Platform } from '@/lib/downloads';
 
 const app = getApp('voidsoul-assistant')!;
@@ -683,22 +684,41 @@ export default function VoidSoulAssistantPage() {
              through the door at launch get a lifetime pass at zero cost.
              Emerald accent sets it apart from the purple Founder's card. */}
           <div className="grid gap-5 sm:gap-6 lg:grid-cols-3">
+            {/* Free Forever — currently in BETA mode: all features unlocked
+                so testers get the real product to break. Beta downloaders
+                get a free lifetime Founder's licence at v1.0 launch. */}
             <Tilt3D strength={5} liftZ={10}>
-              <div className="relative h-full rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-6 transition-colors hover:border-[#2a1a4e] sm:rounded-3xl sm:p-8">
-                <p className="text-xs uppercase tracking-widest text-[#64748b] mb-3">Free Forever</p>
+              <div className="relative h-full rounded-2xl border border-emerald-500/30 bg-[#0f0f1e] p-6 transition-colors hover:border-emerald-500/60 sm:rounded-3xl sm:p-8">
+                <div className="mb-3 flex items-center justify-between gap-2">
+                  <p className="text-xs uppercase tracking-widest text-[#64748b]">Free Forever</p>
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-emerald-300">
+                    <span className="h-1 w-1 rounded-full bg-emerald-400 animate-pulse" />
+                    Beta · live
+                  </span>
+                </div>
                 <p className="text-4xl font-bold text-[#e2e8f0] mb-1">$0</p>
-                <p className="text-sm text-[#64748b] mb-6 sm:mb-7">Local-only. No commitment.</p>
+                <p className="text-sm text-[#64748b] mb-6 sm:mb-7">
+                  Public beta. Everything unlocked while we polish.
+                </p>
                 <ul className="space-y-2.5 text-sm text-[#94a3b8]">
-                  {['Ollama, LM Studio, llama.cpp', 'Five threads max', 'Local voice loop', 'Basic agent tools'].map(
-                    (l) => (
-                      <li key={l} className="flex items-start gap-2">
-                        <span className="text-emerald-400 mt-0.5">✓</span>
-                        <span>{l}</span>
-                      </li>
-                    ),
-                  )}
+                  {[
+                    'Every Founder’s feature, free',
+                    'All 12 providers · MCP · voice loop',
+                    'Unlimited threads (for now)',
+                    'Full agent + Quick AI',
+                  ].map((l) => (
+                    <li key={l} className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-0.5">✓</span>
+                      <span>{l}</span>
+                    </li>
+                  ))}
                 </ul>
                 <SmartDownloadButton />
+                <p className="mt-3 text-center text-[11px] leading-relaxed text-[#475569]">
+                  At v1.0 the Free tier locks to local providers + 5 threads.
+                  <br />
+                  Beta downloaders keep <span className="text-emerald-300">Founder&apos;s lifetime, free</span>.
+                </p>
               </div>
             </Tilt3D>
 
@@ -762,15 +782,10 @@ export default function VoidSoulAssistantPage() {
                       </li>
                     ))}
                   </ul>
-                  <button
-                    disabled
-                    className="mt-8 w-full cursor-not-allowed rounded-lg bg-emerald-500 py-3 text-sm font-semibold text-[#052e16] opacity-90 transition-all hover:opacity-100 hover:shadow-[0_0_28px_rgba(52,211,153,0.5)]"
-                  >
-                    Get on the list →
-                  </button>
+                  <EmailCaptureForm />
                   <p className="mt-3 text-center text-xs text-[#64748b]">
-                    First three downloads at launch. Then{' '}
-                    <span className="text-[#cbd0e2]">Founder&apos;s Edition</span> kicks in.
+                    First three at v1.0 launch. Then{' '}
+                    <span className="text-[#cbd0e2]">Founder&apos;s Edition</span> unlocks.
                   </p>
                   </div>
                 </div>
@@ -805,12 +820,17 @@ export default function VoidSoulAssistantPage() {
                 </ul>
                 <button
                   disabled
-                  className="mt-8 w-full rounded-lg bg-[#7c3aed] py-3 text-sm font-semibold text-white cursor-not-allowed opacity-90 transition-all hover:opacity-100 hover:shadow-[0_0_28px_rgba(124,58,237,0.5)]"
+                  className="mt-8 flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-lg border border-[#7c3aed]/40 bg-[#7c3aed]/15 py-3 text-sm font-semibold text-[#a855f7] opacity-90"
                 >
-                  Get notified when it launches →
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <rect x="4" y="11" width="16" height="10" rx="2" />
+                    <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                  </svg>
+                  Locked · First-3 still open
                 </button>
                 <p className="mt-3 text-center text-xs text-[#64748b]">
-                  Climbs to <span className="text-[#cbd0e2]">$249</span> after the first 100.
+                  Unlocks once the first three free spots fill ·{' '}
+                  <span className="text-[#cbd0e2]">$129 lifetime</span>
                 </p>
               </div>
             </Tilt3D>

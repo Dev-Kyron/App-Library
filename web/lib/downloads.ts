@@ -24,9 +24,9 @@ export type Platform = 'windows' | 'macos' | 'linux';
 
 export const DOWNLOAD_CONFIG = {
   /** Flip to true once the first release ships on GitHub. */
-  enabled: false,
+  enabled: true,
   /** Cosmetic — shown next to the download button. */
-  version: 'v0.1.0',
+  version: 'v0.1.0-beta',
   releasesPage: 'https://github.com/Dev-Kyron/SoulVoidAI/releases',
   baseUrl: 'https://github.com/Dev-Kyron/SoulVoidAI/releases/latest/download',
   assets: {
