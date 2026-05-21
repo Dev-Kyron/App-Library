@@ -650,7 +650,7 @@ export default function VoidSoulAssistantPage() {
               'radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.22) 0%, transparent 60%)',
           }}
         />
-        <div className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24 lg:py-32">
+        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:py-32">
           <div className="mb-10 text-center sm:mb-14">
             <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
               Pricing
@@ -664,12 +664,16 @@ export default function VoidSoulAssistantPage() {
             </p>
           </div>
 
-          <div className="grid gap-5 sm:gap-6 md:grid-cols-2">
+          {/* Three tiers: Free Forever / First-3 launch giveaway / Founder's.
+             The middle card is the featured one — the first three people
+             through the door at launch get a lifetime pass at zero cost.
+             Emerald accent sets it apart from the purple Founder's card. */}
+          <div className="grid gap-5 sm:gap-6 lg:grid-cols-3">
             <Tilt3D strength={5} liftZ={10}>
-              <div className="relative rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-6 transition-colors hover:border-[#2a1a4e] sm:rounded-3xl sm:p-8">
-                <p className="text-xs uppercase tracking-widest text-[#64748b] mb-3">Free</p>
+              <div className="relative h-full rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-6 transition-colors hover:border-[#2a1a4e] sm:rounded-3xl sm:p-8">
+                <p className="text-xs uppercase tracking-widest text-[#64748b] mb-3">Free Forever</p>
                 <p className="text-4xl font-bold text-[#e2e8f0] mb-1">$0</p>
-                <p className="text-sm text-[#64748b] mb-6 sm:mb-7">Local-only. Forever.</p>
+                <p className="text-sm text-[#64748b] mb-6 sm:mb-7">Local-only. No commitment.</p>
                 <ul className="space-y-2.5 text-sm text-[#94a3b8]">
                   {['Ollama, LM Studio, llama.cpp', 'Five threads max', 'Local voice loop', 'Basic agent tools'].map(
                     (l) => (
@@ -689,41 +693,111 @@ export default function VoidSoulAssistantPage() {
               </div>
             </Tilt3D>
 
-            <Tilt3D strength={6} liftZ={16}>
-              <div className="relative rounded-2xl border border-[#7c3aed] bg-gradient-to-b from-[#1a0a3a]/40 to-[#0f0f1e] p-6 shadow-2xl shadow-[#7c3aed]/30 sm:rounded-3xl sm:p-8">
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#7c3aed] px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-white">
-                Founder&apos;s Edition · First 100
-              </span>
-              <p className="text-xs uppercase tracking-widest text-[#a855f7] mb-3">Lifetime</p>
-              <div className="flex items-baseline gap-2 mb-1">
-                <p className="text-4xl font-bold text-[#e2e8f0] sm:text-5xl">$129</p>
-                <p className="text-sm text-[#64748b] line-through">$199</p>
+            {/* First 3 — launch giveaway. Emerald accent. Stronger Tilt3D. */}
+            <Tilt3D strength={7} liftZ={20}>
+              <div className="relative h-full overflow-hidden rounded-2xl border-2 border-emerald-400/60 bg-gradient-to-b from-emerald-500/[0.08] via-[#0f0f1e] to-[#0f0f1e] p-6 shadow-2xl shadow-emerald-500/20 sm:rounded-3xl sm:p-8">
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0"
+                  style={{
+                    background:
+                      'radial-gradient(ellipse at top, rgba(52,211,153,0.18) 0%, transparent 60%)',
+                  }}
+                />
+                <span className="absolute -top-3 left-1/2 z-10 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-emerald-500 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-[#052e16]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#052e16] animate-pulse" />
+                  Launch giveaway · First 3
+                </span>
+                <div className="relative">
+                  <p className="mb-3 text-xs uppercase tracking-widest text-emerald-300">
+                    Earliest adopters
+                  </p>
+                  <div className="mb-1 flex items-baseline gap-2">
+                    <p className="text-4xl font-bold text-[#e2e8f0] sm:text-5xl">FREE</p>
+                    <p className="text-sm text-[#64748b] line-through">$129</p>
+                  </div>
+                  <p className="mb-6 text-sm text-emerald-300 sm:mb-7">
+                    Full app · lifetime · zero cost
+                  </p>
+
+                  {/* Visual claim counter — three slots, none filled yet. */}
+                  <div className="mb-6 rounded-lg border border-emerald-400/30 bg-emerald-500/5 px-3 py-2.5 sm:mb-7">
+                    <div className="mb-1.5 flex items-center justify-between text-[10px] font-semibold uppercase tracking-widest">
+                      <span className="text-emerald-300">Claimed</span>
+                      <span className="text-emerald-200">0 / 3</span>
+                    </div>
+                    <div className="flex gap-1">
+                      {[0, 1, 2].map((i) => (
+                        <div
+                          key={i}
+                          className="h-1.5 flex-1 rounded-full bg-emerald-500/15 ring-1 ring-emerald-400/30"
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <ul className="space-y-2.5 text-sm text-[#cbd0e2]">
+                    {[
+                      "Everything in Founder's Edition",
+                      'All 12 providers · MCP · voice loop',
+                      'Direct line for feedback',
+                      'Forever, no strings',
+                    ].map((l) => (
+                      <li key={l} className="flex items-start gap-2">
+                        <span className="mt-0.5 text-emerald-400">✦</span>
+                        <span>{l}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <button
+                    disabled
+                    className="mt-8 w-full cursor-not-allowed rounded-lg bg-emerald-500 py-3 text-sm font-semibold text-[#052e16] opacity-90 transition-all hover:opacity-100 hover:shadow-[0_0_28px_rgba(52,211,153,0.5)]"
+                  >
+                    Get on the list →
+                  </button>
+                  <p className="mt-3 text-center text-xs text-[#64748b]">
+                    First three downloads at launch. Then{' '}
+                    <span className="text-[#cbd0e2]">Founder&apos;s Edition</span> kicks in.
+                  </p>
+                </div>
               </div>
-              <p className="mb-6 text-sm text-[#a855f7] sm:mb-7">AUD · one-time · yours forever</p>
-              <ul className="space-y-2.5 text-sm text-[#cbd0e2]">
-                {[
-                  'All 12 providers · MCP support',
-                  'Full voice loop · wake-word · barge-in',
-                  'Projects · Notebooks · Quick AI',
-                  'Scheduled tasks · cost dashboard',
-                  'All themes & languages',
-                  'Every future update, free',
-                ].map((l) => (
-                  <li key={l} className="flex items-start gap-2">
-                    <span className="text-[#a855f7] mt-0.5">✦</span>
-                    <span>{l}</span>
-                  </li>
-                ))}
-              </ul>
-              <button
-                disabled
-                className="mt-8 w-full rounded-lg bg-[#7c3aed] py-3 text-sm font-semibold text-white cursor-not-allowed opacity-90 transition-all hover:opacity-100 hover:shadow-[0_0_28px_rgba(124,58,237,0.5)]"
-              >
-                Get notified when it launches →
-              </button>
-              <p className="mt-3 text-center text-xs text-[#64748b]">
-                Climbs to <span className="text-[#cbd0e2]">$249</span> after the first 100.
-              </p>
+            </Tilt3D>
+
+            <Tilt3D strength={6} liftZ={16}>
+              <div className="relative h-full rounded-2xl border border-[#7c3aed] bg-gradient-to-b from-[#1a0a3a]/40 to-[#0f0f1e] p-6 shadow-2xl shadow-[#7c3aed]/30 sm:rounded-3xl sm:p-8">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#7c3aed] px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-white">
+                  Founder&apos;s · First 100
+                </span>
+                <p className="text-xs uppercase tracking-widest text-[#a855f7] mb-3">Lifetime</p>
+                <div className="flex items-baseline gap-2 mb-1">
+                  <p className="text-4xl font-bold text-[#e2e8f0] sm:text-5xl">$129</p>
+                  <p className="text-sm text-[#64748b] line-through">$199</p>
+                </div>
+                <p className="mb-6 text-sm text-[#a855f7] sm:mb-7">AUD · one-time · yours forever</p>
+                <ul className="space-y-2.5 text-sm text-[#cbd0e2]">
+                  {[
+                    'All 12 providers · MCP support',
+                    'Full voice loop · wake-word · barge-in',
+                    'Projects · Notebooks · Quick AI',
+                    'Scheduled tasks · cost dashboard',
+                    'All themes & languages',
+                    'Every future update, free',
+                  ].map((l) => (
+                    <li key={l} className="flex items-start gap-2">
+                      <span className="text-[#a855f7] mt-0.5">✦</span>
+                      <span>{l}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  disabled
+                  className="mt-8 w-full rounded-lg bg-[#7c3aed] py-3 text-sm font-semibold text-white cursor-not-allowed opacity-90 transition-all hover:opacity-100 hover:shadow-[0_0_28px_rgba(124,58,237,0.5)]"
+                >
+                  Get notified when it launches →
+                </button>
+                <p className="mt-3 text-center text-xs text-[#64748b]">
+                  Climbs to <span className="text-[#cbd0e2]">$249</span> after the first 100.
+                </p>
               </div>
             </Tilt3D>
           </div>
