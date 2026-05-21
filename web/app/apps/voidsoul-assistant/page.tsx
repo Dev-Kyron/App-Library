@@ -13,7 +13,6 @@ import Tilt3D from '@/components/voidsoul/Tilt3D';
 import SmartDownloadButton from '@/components/voidsoul/SmartDownloadButton';
 import EmailCaptureForm from '@/components/voidsoul/EmailCaptureForm';
 import { DOWNLOAD_CONFIG, getDownloadUrl, type Platform } from '@/lib/downloads';
-import { LAUNCH, isFirst3Open } from '@/lib/forms';
 
 const app = getApp('voidsoul-assistant')!;
 
@@ -680,11 +679,11 @@ export default function VoidSoulAssistantPage() {
             </p>
           </div>
 
-          {/* Three tiers: Free Forever / First-3 launch giveaway / Founder's.
-             The middle card is the featured one — the first three people
-             through the door at launch get a lifetime pass at zero cost.
-             Emerald accent sets it apart from the purple Founder's card. */}
-          <div className="grid gap-5 sm:gap-6 lg:grid-cols-3">
+          {/* Two tiers during the beta: Free Forever (everyone, fully
+             unlocked while we polish) and Founder's (waitlist for paid
+             launch). The First-3 launch giveaway was retired — beta
+             testers already get the same access it would have offered. */}
+          <div className="mx-auto grid max-w-4xl gap-5 sm:gap-6 lg:grid-cols-2">
             {/* Free Forever — currently in BETA mode: all features unlocked
                 so testers get the real product to break. Beta downloaders
                 get a free lifetime Founder's licence at v1.0 launch. */}
@@ -723,108 +722,6 @@ export default function VoidSoulAssistantPage() {
               </div>
             </Tilt3D>
 
-            {/* First 3 — launch giveaway. Emerald accent. Stronger Tilt3D.
-                Outer wrapper has no overflow clipping so the floating badge
-                sits half-above the card; only the inner card hides the
-                radial gradient.
-
-                Two states driven by LAUNCH.claimed:
-                  - open  (claimed < total): live email capture + counter
-                  - sealed (claimed >= total): celebration + ↓ Founder's CTA */}
-            <Tilt3D strength={7} liftZ={20}>
-              <div className="relative h-full pt-3">
-                <span className="absolute top-0 left-1/2 z-20 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-emerald-500 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-[#052e16] shadow-lg shadow-emerald-500/30">
-                  <span className={`h-1.5 w-1.5 rounded-full bg-[#052e16] ${isFirst3Open() ? 'animate-pulse' : ''}`} />
-                  {isFirst3Open() ? 'Launch giveaway · First 3' : 'All 3 claimed · sealed'}
-                </span>
-                <div className="relative h-full overflow-hidden rounded-2xl border-2 border-emerald-400/60 bg-gradient-to-b from-emerald-500/[0.08] via-[#0f0f1e] to-[#0f0f1e] p-6 shadow-2xl shadow-emerald-500/20 sm:rounded-3xl sm:p-8">
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0"
-                    style={{
-                      background:
-                        'radial-gradient(ellipse at top, rgba(52,211,153,0.18) 0%, transparent 60%)',
-                    }}
-                  />
-                  <div className="relative">
-                  <p className="mb-3 text-xs uppercase tracking-widest text-emerald-300">
-                    Earliest adopters
-                  </p>
-                  <div className="mb-1 flex items-baseline gap-2">
-                    <p className="text-4xl font-bold text-[#e2e8f0] sm:text-5xl">
-                      {isFirst3Open() ? 'FREE' : 'CLAIMED'}
-                    </p>
-                    <p className="text-sm text-[#64748b] line-through">$129</p>
-                  </div>
-                  <p className="mb-6 text-sm text-emerald-300 sm:mb-7">
-                    {isFirst3Open()
-                      ? 'Full app · lifetime · zero cost'
-                      : 'Three lifetimes locked in. Founder’s tier just opened.'}
-                  </p>
-
-                  {/* Dynamic claim counter — fills emerald for each claim. */}
-                  <div className="mb-6 rounded-lg border border-emerald-400/30 bg-emerald-500/5 px-3 py-2.5 sm:mb-7">
-                    <div className="mb-1.5 flex items-center justify-between text-[10px] font-semibold uppercase tracking-widest">
-                      <span className="text-emerald-300">Claimed</span>
-                      <span className="text-emerald-200">
-                        {LAUNCH.claimed} / {LAUNCH.total}
-                      </span>
-                    </div>
-                    <div className="flex gap-1">
-                      {Array.from({ length: LAUNCH.total }).map((_, i) => (
-                        <div
-                          key={i}
-                          className={`h-1.5 flex-1 rounded-full ring-1 transition-colors ${
-                            i < LAUNCH.claimed
-                              ? 'bg-emerald-400 ring-emerald-300/60 shadow-[0_0_10px_rgba(52,211,153,0.55)]'
-                              : 'bg-emerald-500/15 ring-emerald-400/30'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  <ul className="space-y-2.5 text-sm text-[#cbd0e2]">
-                    {[
-                      "Everything in Founder's Edition",
-                      'All 12 providers · MCP · voice loop',
-                      'Direct line for feedback',
-                      'Forever, no strings',
-                    ].map((l) => (
-                      <li key={l} className="flex items-start gap-2">
-                        <span className="mt-0.5 text-emerald-400">✦</span>
-                        <span>{l}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  {isFirst3Open() ? (
-                    <>
-                      <EmailCaptureForm source="voidsoul-assistant/first-3" cta="Get on the list →" />
-                      <p className="mt-3 text-center text-xs text-[#64748b]">
-                        First three at v1.0 launch. Then{' '}
-                        <span className="text-[#cbd0e2]">Founder&apos;s Edition</span> unlocks.
-                      </p>
-                    </>
-                  ) : (
-                    <>
-                      <div className="mt-8 flex flex-col items-center gap-2 rounded-lg border border-emerald-400/40 bg-emerald-500/10 px-4 py-3 text-center">
-                        <p className="text-sm font-semibold text-emerald-300">
-                          ✓ All three spots claimed
-                        </p>
-                        <p className="text-[11px] leading-relaxed text-emerald-200/80">
-                          Thanks to the three earliest souls. Founder&apos;s tier is live.
-                        </p>
-                      </div>
-                      <p className="mt-3 text-center text-xs text-[#64748b]">
-                        Founder&apos;s lifetime is now open — see the next card.
-                      </p>
-                    </>
-                  )}
-                  </div>
-                </div>
-              </div>
-            </Tilt3D>
-
             <Tilt3D strength={6} liftZ={16}>
               <div className="relative h-full rounded-2xl border border-[#7c3aed] bg-gradient-to-b from-[#1a0a3a]/40 to-[#0f0f1e] p-6 shadow-2xl shadow-[#7c3aed]/30 sm:rounded-3xl sm:p-8">
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#7c3aed] px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-white">
@@ -851,36 +748,15 @@ export default function VoidSoulAssistantPage() {
                     </li>
                   ))}
                 </ul>
-                {isFirst3Open() ? (
-                  <>
-                    <button
-                      disabled
-                      className="mt-8 flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-lg border border-[#7c3aed]/40 bg-[#7c3aed]/15 py-3 text-sm font-semibold text-[#a855f7] opacity-90"
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                        <rect x="4" y="11" width="16" height="10" rx="2" />
-                        <path d="M8 11V7a4 4 0 0 1 8 0v4" />
-                      </svg>
-                      Locked · First-3 still open
-                    </button>
-                    <p className="mt-3 text-center text-xs text-[#64748b]">
-                      Unlocks once the first three free spots fill ·{' '}
-                      <span className="text-[#cbd0e2]">$129 lifetime</span>
-                    </p>
-                  </>
-                ) : (
-                  <>
-                    <EmailCaptureForm
-                      source="voidsoul-assistant/founders-notify"
-                      cta="Notify me when checkout opens →"
-                    />
-                    <p className="mt-3 text-center text-xs text-[#64748b]">
-                      Stripe checkout opens soon ·{' '}
-                      <span className="text-[#cbd0e2]">$129 lifetime</span>, climbs to $249
-                      after the first 100.
-                    </p>
-                  </>
-                )}
+                <EmailCaptureForm
+                  source="voidsoul-assistant/founders-notify"
+                  cta="Notify me when checkout opens →"
+                />
+                <p className="mt-3 text-center text-xs text-[#64748b]">
+                  Stripe checkout opens with v1.0 paid launch ·{' '}
+                  <span className="text-[#cbd0e2]">$129 lifetime</span>, climbs to $249
+                  after the first 100.
+                </p>
               </div>
             </Tilt3D>
           </div>
@@ -908,8 +784,8 @@ export default function VoidSoulAssistantPage() {
               </h2>
             </div>
             <p className="max-w-sm text-sm text-[#94a3b8]">
-              Build is still in the void. First three users get the app free —
-              their words seed the first three reviews.
+              Beta is live. The first installs are landing right now — reviews
+              start showing up here as testers ship their thoughts.
             </p>
           </div>
 
@@ -925,7 +801,7 @@ export default function VoidSoulAssistantPage() {
                   </div>
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold text-[#64748b]">
-                      First-3 spot · open
+                      Beta tester · open
                     </p>
                     <div className="mt-0.5 flex gap-0.5 text-[#1e1a3a]">
                       {[0, 1, 2, 3, 4].map((s) => (
@@ -937,7 +813,7 @@ export default function VoidSoulAssistantPage() {
                   </div>
                 </div>
                 <p className="text-sm leading-relaxed text-[#334155]">
-                  Reviews land here once the build ships. Until then — quiet.
+                  Reviews land here as beta testers ship their thoughts.
                 </p>
               </div>
             ))}
@@ -948,7 +824,7 @@ export default function VoidSoulAssistantPage() {
               href="#pricing"
               className="rounded-lg bg-[#7c3aed] px-6 py-3 text-sm font-medium text-white transition-all hover:bg-[#6d28d9] hover:shadow-[0_0_28px_rgba(124,58,237,0.5)]"
             >
-              Claim a First-3 spot →
+              Download the beta →
             </Link>
             <a
               href="https://www.youtube.com/@voidsoul_studio"
