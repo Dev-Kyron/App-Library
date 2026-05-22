@@ -13,6 +13,7 @@ import Tilt3D from '@/components/voidsoul/Tilt3D';
 import SmartDownloadButton from '@/components/voidsoul/SmartDownloadButton';
 import EmailCaptureForm from '@/components/voidsoul/EmailCaptureForm';
 import { DOWNLOAD_CONFIG, getDownloadUrl, type Platform } from '@/lib/downloads';
+import { hasReviews, recentReviews } from '@/lib/reviews';
 
 const app = getApp('voidsoul-assistant')!;
 
@@ -164,7 +165,7 @@ export default function VoidSoulAssistantPage() {
                 Apps &amp; Tools · Beta
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest text-emerald-300">
-                New in {DOWNLOAD_CONFIG.version} · auto-routing · 1h tasks
+                New in {DOWNLOAD_CONFIG.version} · streaming voice · in-app reviews
               </span>
             </div>
             <h1 className="text-[2.5rem] font-bold leading-[1.05] tracking-tight text-[#e2e8f0] sm:text-6xl lg:text-7xl">
@@ -774,55 +775,15 @@ export default function VoidSoulAssistantPage() {
       </section>
 
       {/* ============================ REVIEWS ============================
-          Pre-launch placeholder treatment — three dashed-border "spots"
-          show what a review will look like once shipped. Flip the
-          REVIEWS array to real entries when the first builds go out. */}
+          Renders real reviews from `web/lib/reviews.ts` when that file's
+          REVIEWS array is non-empty, falls back to the dashed-border
+          placeholder cards otherwise. Reviews land here by hand-picking
+          from Formspree submissions — see lib/reviews.ts for the flow.
+          One branch at section level keeps the markup readable; each
+          state has its own focused component below. */}
       <section id="reviews" className="relative">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:py-28">
-          <div className="mb-10 flex flex-col gap-3 sm:mb-12 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-            <div>
-              <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
-                Reactions
-              </p>
-              <h2 className="text-[1.75rem] font-bold leading-tight text-[#e2e8f0] sm:text-4xl lg:text-5xl">
-                Reviews <span className="text-[#a855f7]">open at launch.</span>
-              </h2>
-            </div>
-            <p className="max-w-sm text-sm text-[#94a3b8]">
-              Beta is live. The first installs are landing right now — reviews
-              start showing up here as testers ship their thoughts.
-            </p>
-          </div>
-
-          <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
-            {[1, 2, 3].map((n) => (
-              <div
-                key={n}
-                className="flex flex-col gap-4 rounded-2xl border border-dashed border-[#1e1a3a] bg-[#0a0a18]/60 p-6"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#1e1a3a]/80 font-mono text-sm text-[#475569]">
-                    0{n}
-                  </div>
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-[#64748b]">
-                      Beta tester · open
-                    </p>
-                    <div className="mt-0.5 flex gap-0.5 text-[#1e1a3a]">
-                      {[0, 1, 2, 3, 4].map((s) => (
-                        <svg key={s} width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M12 2l3 7h7l-5.5 4.5L18.5 22 12 17.5 5.5 22l2-8.5L2 9h7z" />
-                        </svg>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <p className="text-sm leading-relaxed text-[#334155]">
-                  Reviews land here as beta testers ship their thoughts.
-                </p>
-              </div>
-            ))}
-          </div>
+          {hasReviews() ? <RealReviews /> : <PlaceholderReviews />}
 
           <div className="mt-10 flex flex-col items-center justify-center gap-3 text-center sm:mt-12 sm:flex-row sm:gap-5">
             <Link
@@ -1114,5 +1075,131 @@ function SecurityRow({
         <p className="mt-0.5 text-xs text-[#64748b] leading-relaxed">{body}</p>
       </div>
     </div>
+  );
+}
+
+/* ------------------------------ Reviews -------------------------------
+ * Two render paths for the Reactions section. `RealReviews` renders the
+ * curated `REVIEWS` array from lib/reviews.ts (populated by hand from
+ * Formspree submissions). `PlaceholderReviews` is the pre-launch dashed
+ * "open at launch" treatment. The page picks one based on `hasReviews()`.
+ * ------------------------------------------------------------------- */
+
+function ReviewsHeader({ heading, body }: { heading: React.ReactNode; body: React.ReactNode }) {
+  return (
+    <div className="mb-10 flex flex-col gap-3 sm:mb-12 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+      <div>
+        <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
+          Reactions
+        </p>
+        <h2 className="text-[1.75rem] font-bold leading-tight text-[#e2e8f0] sm:text-4xl lg:text-5xl">
+          {heading}
+        </h2>
+      </div>
+      <p className="max-w-sm text-sm text-[#94a3b8]">{body}</p>
+    </div>
+  );
+}
+
+function RealReviews() {
+  const reviews = recentReviews(6);
+  return (
+    <>
+      <ReviewsHeader
+        heading={
+          <>
+            What beta testers <span className="text-[#a855f7]">are saying.</span>
+          </>
+        }
+        body={
+          <>
+            Pulled straight from beta testers&apos; in-app reviews. Want to be next? Download the
+            beta and hit Settings → About → Leave a review.
+          </>
+        }
+      />
+      <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
+        {reviews.map((review, i) => (
+          <div
+            key={`${review.name}-${review.date}`}
+            className="flex flex-col gap-4 rounded-2xl border border-[#1e1a3a] bg-[#0a0a18]/80 p-6 transition-colors hover:border-[#312e62]"
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#1e1a3a] font-mono text-sm text-[#a855f7]">
+                {String(i + 1).padStart(2, '0')}
+              </div>
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-[#e2e8f0]">{review.name}</p>
+                <div className="mt-0.5 flex items-center gap-1.5">
+                  <div className="flex gap-0.5">
+                    {[0, 1, 2, 3, 4].map((s) => (
+                      <svg
+                        key={s}
+                        width="11"
+                        height="11"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className={s < review.rating ? 'text-[#f59e0b]' : 'text-[#1e1a3a]'}
+                      >
+                        <path d="M12 2l3 7h7l-5.5 4.5L18.5 22 12 17.5 5.5 22l2-8.5L2 9h7z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <span className="text-[10px] text-[#64748b]">v{review.version}</span>
+                </div>
+              </div>
+            </div>
+            <p className="text-sm leading-relaxed text-[#cbd5e1]">{review.comment}</p>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
+function PlaceholderReviews() {
+  return (
+    <>
+      <ReviewsHeader
+        heading={
+          <>
+            Reviews <span className="text-[#a855f7]">open at launch.</span>
+          </>
+        }
+        body={
+          <>
+            Beta is live. The first installs are landing right now — reviews start showing up here
+            as testers ship their thoughts.
+          </>
+        }
+      />
+      <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
+        {[1, 2, 3].map((n) => (
+          <div
+            key={n}
+            className="flex flex-col gap-4 rounded-2xl border border-dashed border-[#1e1a3a] bg-[#0a0a18]/60 p-6"
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#1e1a3a]/80 font-mono text-sm text-[#475569]">
+                0{n}
+              </div>
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-[#64748b]">Beta tester · open</p>
+                <div className="mt-0.5 flex gap-0.5 text-[#1e1a3a]">
+                  {[0, 1, 2, 3, 4].map((s) => (
+                    <svg key={s} width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2l3 7h7l-5.5 4.5L18.5 22 12 17.5 5.5 22l2-8.5L2 9h7z" />
+                    </svg>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <p className="text-sm leading-relaxed text-[#334155]">
+              Reviews land here as beta testers ship their thoughts.
+            </p>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }

@@ -28,6 +28,14 @@
 export const FORMS = {
   /** Founder's-tier waitlist for paid-launch notification. */
   earliestAdoptersEndpoint: 'https://formspree.io/f/xjgzwypy',
+  /**
+   * In-app review submissions. The endpoint itself is configured in the
+   * Electron app at `src/renderer/src/lib/reviews.ts` — the site doesn't
+   * POST here, it only reads from `web/lib/reviews.ts` (the curated array).
+   * Listed for discoverability so anyone auditing the form config sees the
+   * full picture.
+   */
+  reviewsEndpoint: 'https://formspree.io/f/xlgvnlaa',
 } as const;
 
 /** True once a real Formspree URL has been pasted in. */
