@@ -165,7 +165,7 @@ export default function VoidSoulAssistantPage() {
                 Apps &amp; Tools · Beta
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest text-emerald-300">
-                New in {DOWNLOAD_CONFIG.version} · streaming voice · in-app reviews
+                New in {DOWNLOAD_CONFIG.version} · Piper voices · setup auto-import
               </span>
             </div>
             <h1 className="text-[2.5rem] font-bold leading-[1.05] tracking-tight text-[#e2e8f0] sm:text-6xl lg:text-7xl">
