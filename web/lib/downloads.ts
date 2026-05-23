@@ -1,23 +1,24 @@
 /**
- * Download config for VoidSoul Assistant — the Electron app lives in the
- * sibling SoulVoidAI repo and ships builds via GitHub Releases.
+ * Download config for VoidSoul AI Companion — the Electron app lives in
+ * the sibling SoulVoidAI repo and ships builds via GitHub Releases.
  *
  * URLs use GitHub's `/releases/latest/download/<filename>` redirect, which
  * always points at the latest published release's asset with that exact
  * filename. As long as electron-builder is configured to emit stable
  * artifact names on every release, the site never needs an update.
  *
- * To flip the site from "Soon" to live downloads:
- *   1. Publish the first GitHub Release on Dev-Kyron/SoulVoidAI with the
- *      three asset filenames below attached.
- *   2. Set `enabled: true` here.
- *   3. Bump `version` for display ("v1.0.0 · 78MB" etc.) — purely cosmetic.
+ * v1.6.0 rename note: the artifact filenames changed in lockstep with
+ * electron-builder's `artifactName` (VoidSoul-Assistant-* →
+ * VoidSoul-AI-Companion-*). Existing-install auto-update is unaffected —
+ * electron-updater reads the new filename out of latest.yml. Anyone who
+ * bookmarked the old direct-download URL gets a 404 (acceptable for a
+ * major rename).
  *
  * The artifact filenames must match `artifactName` in electron-builder's
  * `build` config, e.g.:
- *   "win":   { "artifactName": "VoidSoul-Assistant-Setup.exe" }
- *   "mac":   { "artifactName": "VoidSoul-Assistant.dmg" }
- *   "linux": { "artifactName": "VoidSoul-Assistant.AppImage" }
+ *   "win":   { "artifactName": "VoidSoul-AI-Companion-Setup.exe" }
+ *   "mac":   { "artifactName": "VoidSoul-AI-Companion.dmg" }
+ *   "linux": { "artifactName": "VoidSoul-AI-Companion.AppImage" }
  */
 
 export type Platform = 'windows' | 'macos' | 'linux';
@@ -26,13 +27,13 @@ export const DOWNLOAD_CONFIG = {
   /** Flip to true once the first release ships on GitHub. */
   enabled: true,
   /** Cosmetic — shown next to the download button. */
-  version: 'v1.5.0',
+  version: 'v1.5.1',
   releasesPage: 'https://github.com/Dev-Kyron/SoulVoidAI/releases',
   baseUrl: 'https://github.com/Dev-Kyron/SoulVoidAI/releases/latest/download',
   assets: {
-    windows: 'VoidSoul-Assistant-Setup.exe',
-    macos: 'VoidSoul-Assistant.dmg',
-    linux: 'VoidSoul-Assistant.AppImage',
+    windows: 'VoidSoul-AI-Companion-Setup.exe',
+    macos: 'VoidSoul-AI-Companion.dmg',
+    linux: 'VoidSoul-AI-Companion.AppImage',
   } satisfies Record<Platform, string>,
 } as const;
 

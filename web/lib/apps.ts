@@ -19,12 +19,15 @@ export interface AppItem {
 
 export const apps: AppItem[] = [
   {
-    slug: 'voidsoul-assistant',
-    title: 'VoidSoul Assistant',
+    // Slug rebranded for v1.6 — the legacy /apps/voidsoul-assistant URL is
+    // kept alive via a permanent redirect in next.config.js so existing
+    // bookmarks + SEO equity carry over.
+    slug: 'voidsoul-ai-companion',
+    title: 'VoidSoul AI Companion',
     tagline: 'The Jarvis loop, finally local.',
     description:
-      'A floating desktop AI that talks, listens, sees your screen, drives your mouse, opens your apps, edits your files, and remembers every conversation. Bring whichever AI you already love — 12 providers, one body.',
-    href: '/apps/voidsoul-assistant',
+      'A floating desktop AI companion that talks, listens, sees your screen, drives your mouse, opens your apps, edits your files, and remembers every conversation. Bring whichever AI you already love — 12 providers, one body.',
+    href: '/apps/voidsoul-ai-companion',
     status: 'coming-soon',
     platforms: ['windows', 'macos', 'linux'],
     badge: 'Founder\'s Edition soon',

@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Replica of VoidSoul Assistant's signature floating orb — outer glow,
+ * Replica of VoidSoul AI Companion's signature floating orb — outer glow,
  * counter-rotating energy ring, core sphere, specular highlight. Pure
  * CSS / no canvas, so it stays buttery on a marketing page.
  *

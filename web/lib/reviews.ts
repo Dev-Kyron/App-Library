@@ -1,5 +1,5 @@
 /**
- * Curated reviews for the VoidSoul Assistant landing page Reactions wall.
+ * Curated reviews for the VoidSoul AI Companion landing page Reactions wall.
  *
  * Reviews don't auto-publish — beta testers submit them in-app via
  * Settings → About → "Leave a review", which emails the studio through

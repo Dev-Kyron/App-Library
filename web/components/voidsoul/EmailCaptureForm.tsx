@@ -27,7 +27,7 @@ interface Props {
 }
 
 export default function EmailCaptureForm({
-  source = 'voidsoul-assistant/first-3',
+  source = 'voidsoul-ai-companion/first-3',
   cta = 'Get on the list →',
 }: Props = {}) {
   const [status, setStatus] = useState<Status>('idle');

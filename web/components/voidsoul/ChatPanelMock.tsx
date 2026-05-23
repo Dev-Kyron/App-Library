@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Display-only replica of VoidSoul Assistant's expanded chat panel —
+ * Display-only replica of VoidSoul AI Companion's expanded chat panel —
  * header bar, message bubbles, agent live-progress strip, composer.
  *
  * Animations cycle through a scripted "conversation" so a passing visitor

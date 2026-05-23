@@ -15,7 +15,7 @@ import EmailCaptureForm from '@/components/voidsoul/EmailCaptureForm';
 import { DOWNLOAD_CONFIG, getDownloadUrl, type Platform } from '@/lib/downloads';
 import { hasReviews, recentReviews } from '@/lib/reviews';
 
-const app = getApp('voidsoul-assistant')!;
+const app = getApp('voidsoul-ai-companion')!;
 
 export const metadata: Metadata = {
   title: `${app.title} — Void Soul Studio`,
@@ -178,15 +178,15 @@ export default function VoidSoulAssistantPage() {
                   textShadow: '0 0 30px rgba(124,58,237,0.6)',
                 }}
               >
-                Assistant
+                AI Companion
               </span>
             </h1>
             <p className="mt-4 max-w-xl text-base italic leading-snug text-[#a855f7] sm:mt-5 sm:text-lg">
               The Jarvis loop, finally local.
             </p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-[#94a3b8] sm:text-[15px] sm:mt-6">
-              A floating desktop AI that talks, listens, sees your screen, drives your mouse,
-              opens your apps, edits your files, and remembers every conversation. Bring
+              A floating desktop AI companion that talks, listens, sees your screen, drives your
+              mouse, opens your apps, edits your files, and remembers every conversation. Bring
               whichever AI you already love — 12 providers, one body.
             </p>
 
@@ -321,7 +321,7 @@ export default function VoidSoulAssistantPage() {
                 vendor and one model. None of them remember you next month.
               </p>
               <p>
-                VoidSoul Assistant is the third path. A single persistent assistant that&apos;s
+                VoidSoul AI Companion is the third path. A single persistent companion that&apos;s
                 always there, can do real work on your machine, speaks every major model,
                 never sends your data anywhere you didn&apos;t tell it to, and grows with you
                 through plugins, MCP servers, and per-mode memory.
@@ -755,7 +755,7 @@ export default function VoidSoulAssistantPage() {
                   ))}
                 </ul>
                 <EmailCaptureForm
-                  source="voidsoul-assistant/founders-notify"
+                  source="voidsoul-ai-companion/founders-notify"
                   cta="Notify me when checkout opens →"
                 />
                 <p className="mt-3 text-center text-xs text-[#64748b]">
