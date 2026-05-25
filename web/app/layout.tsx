@@ -90,6 +90,33 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
+  /**
+   * Search engine ownership verification. Uncomment and paste the codes
+   * once you've added the property in each console:
+   *
+   * Google Search Console
+   *   https://search.google.com/search-console
+   *   Add property → voidsoulstudio.com → HTML tag method
+   *   Copy the `content="..."` value into `google` below.
+   *   Then submit /sitemap.xml from the Sitemaps section.
+   *
+   * Bing Webmaster Tools (also surfaces in DuckDuckGo + Yahoo)
+   *   https://www.bing.com/webmasters
+   *   Add site → HTML meta tag verification
+   *   Copy the `content="..."` value into `other['msvalidate.01']`.
+   *
+   * Yandex Webmaster (optional, useful if you target Eastern Europe)
+   *   https://webmaster.yandex.com
+   *   Add site → Meta tag method → paste into `yandex` below.
+   *
+   * Once any one of these is non-empty, the corresponding meta tag
+   * lands in <head> on every page automatically.
+   */
+  // verification: {
+  //   google: 'PASTE-GOOGLE-CODE-HERE',
+  //   yandex: 'PASTE-YANDEX-CODE-HERE',
+  //   other: { 'msvalidate.01': 'PASTE-BING-CODE-HERE' },
+  // },
 };
 
 export const viewport = {
