@@ -131,11 +131,33 @@ const FLOW_STEPS = [
   },
 ];
 
-const PRICING_TIERS = [
-  { name: 'Starter', agents: 'Up to 10 agents', price: '$50–100', subtle: '/mo' },
-  { name: 'Growth', agents: 'Up to 25 agents', price: '$125–200', subtle: '/mo' },
-  { name: 'Business', agents: 'Up to 50 agents', price: '$250–400', subtle: '/mo' },
-  { name: 'Enterprise', agents: 'Up to 100 agents', price: '$500–1,000', subtle: '/mo' },
+/**
+ * Checkout URLs for each tier. Create one Square Checkout Link per tier in
+ * the Square Dashboard (Online → Checkout Links / Payment Links), paste the
+ * resulting `square.link/u/XXXXX` URL into the matching slot below, and the
+ * tier's Subscribe button switches from "Set up in Square" to a live link.
+ *
+ * Leaving an entry as '' renders the button in a disabled state so a
+ * half-configured tier can't accidentally ship to production.
+ */
+const SQUARE_CHECKOUT_URLS = {
+  starter: '',
+  growth: '',
+  business: '',
+  enterprise: '',
+} as const;
+
+const PRICING_TIERS: {
+  id: keyof typeof SQUARE_CHECKOUT_URLS;
+  name: string;
+  users: string;
+  price: string;
+  subtle: string;
+}[] = [
+  { id: 'starter',    name: 'Starter',    users: 'Up to 10 users',  price: '$50–100',     subtle: '/mo' },
+  { id: 'growth',     name: 'Growth',     users: 'Up to 25 users',  price: '$125–200',    subtle: '/mo' },
+  { id: 'business',   name: 'Business',   users: 'Up to 50 users',  price: '$250–400',    subtle: '/mo' },
+  { id: 'enterprise', name: 'Enterprise', users: 'Up to 100 users', price: '$500–1,000',  subtle: '/mo' },
 ];
 
 const SCREENSHOTS = [
@@ -764,7 +786,7 @@ export default function AgentHubPage() {
             </h2>
             <p className="mt-4 mx-auto max-w-xl text-sm text-[#94a3b8] leading-relaxed sm:text-base">
               Full productivity suite is free forever. AI Agent is billed monthly per
-              deployment based on how many agents you&apos;re unlocking.
+              deployment based on how many users you&apos;re unlocking.
             </p>
           </div>
 
@@ -821,7 +843,7 @@ export default function AgentHubPage() {
                 AI Agent · paid
               </p>
               <p className="text-lg font-semibold text-[#e2e8f0] sm:text-xl">
-                Per deployment, per month — pick by seat count.
+                Per deployment, per month — pick by user count.
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -846,7 +868,7 @@ export default function AgentHubPage() {
                       {tier.price}
                       <span className="ml-1 text-sm font-normal text-[#64748b]">{tier.subtle}</span>
                     </p>
-                    <p className="mt-1 text-sm text-[#94a3b8]">{tier.agents}</p>
+                    <p className="mt-1 text-sm text-[#94a3b8]">{tier.users}</p>
                     <ul className="mt-4 space-y-1.5 text-[12px] text-[#cbd0e2]">
                       {[
                         'AI Agent panel · Claude',
@@ -860,6 +882,10 @@ export default function AgentHubPage() {
                         </li>
                       ))}
                     </ul>
+                    <SubscribeButton
+                      url={SQUARE_CHECKOUT_URLS[tier.id]}
+                      featured={i === 1}
+                    />
                   </div>
                 </Tilt3D>
               ))}
@@ -948,6 +974,57 @@ export default function AgentHubPage() {
 }
 
 /* ----------------------------- subcomponents ----------------------------- */
+
+/**
+ * Pricing-tier CTA. When `url` is a non-empty string the button is a live
+ * link to the Square Checkout Link (opens in a new tab, noreferrer). When
+ * `url` is empty the button renders as a non-interactive "Set up in Square"
+ * placeholder — that way a half-configured tier can't accidentally ship a
+ * dead button to production. The featured (highlighted) tier gets a solid
+ * purple fill; the rest get an outlined treatment that matches the card.
+ */
+function SubscribeButton({
+  url,
+  featured,
+}: {
+  url: string;
+  featured: boolean;
+}) {
+  const live = url.length > 0;
+  const base =
+    'mt-5 flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all';
+
+  if (!live) {
+    return (
+      <button
+        type="button"
+        disabled
+        title="Add the Square Checkout Link URL in SQUARE_CHECKOUT_URLS to activate this button."
+        className={`${base} cursor-not-allowed border border-dashed border-[#1e1a3a] bg-black/30 text-[#475569]`}
+      >
+        Set up in Square
+      </button>
+    );
+  }
+
+  const styled = featured
+    ? 'bg-[#7c3aed] text-white shadow-[0_0_22px_rgba(124,58,237,0.4)] hover:bg-[#6d28d9] hover:shadow-[0_0_32px_rgba(124,58,237,0.6)]'
+    : 'border border-[#7c3aed]/40 bg-[#7c3aed]/10 text-[#c084fc] hover:border-[#7c3aed] hover:bg-[#7c3aed]/20 hover:text-white';
+
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`${base} ${styled}`}
+    >
+      Subscribe
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </a>
+  );
+}
 
 function CloseUpPanel({
   className = '',
