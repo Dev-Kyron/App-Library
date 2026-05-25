@@ -182,7 +182,7 @@ const FLOW_STEPS = [
  * half-configured tier can't accidentally ship to production.
  */
 const SQUARE_CHECKOUT_URLS = {
-  solo:       'https://square.link/u/jJU4tgzc',
+  solo:       'https://square.link/u/UJvifXp1',
   starter:    'https://square.link/u/f6qxOiYB',
   growth:     'https://square.link/u/3Q8En7gb',
   business:   'https://square.link/u/tuHYnIwM',
