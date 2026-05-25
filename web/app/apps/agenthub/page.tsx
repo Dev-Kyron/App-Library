@@ -141,6 +141,7 @@ const FLOW_STEPS = [
  * half-configured tier can't accidentally ship to production.
  */
 const SQUARE_CHECKOUT_URLS = {
+  solo:       'https://square.link/u/jJU4tgzc',
   starter:    'https://square.link/u/f6qxOiYB',
   growth:     'https://square.link/u/3Q8En7gb',
   business:   'https://square.link/u/tuHYnIwM',
@@ -848,9 +849,51 @@ export default function AgentHubPage() {
                 AI Agent · paid
               </p>
               <p className="text-lg font-semibold text-[#e2e8f0] sm:text-xl">
-                Per deployment, per month — pick by user count.
+                Start solo, scale to call-centre teams.
               </p>
             </div>
+
+            {/* Solo tier — slim banner above the team grid. Positioned as
+                the "evaluate it" path so individual users have a way in
+                without diluting the team-tier framing below. */}
+            <div className="mb-6 sm:mb-7">
+              <Tilt3D strength={4} liftZ={8}>
+                <div className="group relative flex flex-col items-stretch gap-4 overflow-hidden rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-5 transition-colors hover:border-[#7c3aed]/60 sm:flex-row sm:items-center sm:p-6">
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100"
+                    style={{
+                      background:
+                        'radial-gradient(ellipse at left, rgba(124,58,237,0.12), transparent 60%)',
+                    }}
+                  />
+                  <div className="relative flex flex-1 flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <span className="text-[11px] font-semibold uppercase tracking-widest text-[#a855f7]">
+                      Solo Evaluators
+                    </span>
+                    <span className="text-2xl font-bold text-[#e2e8f0] sm:text-3xl">
+                      $10
+                      <span className="ml-1 text-sm font-normal text-[#64748b]">/mo</span>
+                    </span>
+                    <span className="rounded-full border border-[#7c3aed]/30 bg-[#7c3aed]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-[#a855f7]">
+                      1 user
+                    </span>
+                  </div>
+                  <p className="relative max-w-md text-sm leading-relaxed text-[#94a3b8] sm:text-[13px]">
+                    Trying it out before pitching to your team? Single seat with the full AI Agent —
+                    upgrade to a team tier any time.
+                  </p>
+                  <div className="relative flex-none">
+                    <SubscribeButton
+                      url={SQUARE_CHECKOUT_URLS.solo}
+                      featured={false}
+                      compact
+                    />
+                  </div>
+                </div>
+              </Tilt3D>
+            </div>
+
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {PRICING_TIERS.map((tier, i) => (
                 <Tilt3D key={tier.name} strength={6} liftZ={14}>
@@ -987,17 +1030,25 @@ export default function AgentHubPage() {
  * placeholder — that way a half-configured tier can't accidentally ship a
  * dead button to production. The featured (highlighted) tier gets a solid
  * purple fill; the rest get an outlined treatment that matches the card.
+ *
+ * `compact` switches the default full-width / top-margined layout (sized
+ * for a vertical tier card) to an inline auto-width button — used by the
+ * Solo banner where the button sits in a horizontal row alongside copy.
  */
 function SubscribeButton({
   url,
   featured,
+  compact = false,
 }: {
   url: string;
   featured: boolean;
+  compact?: boolean;
 }) {
   const live = url.length > 0;
-  const base =
-    'mt-5 flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all';
+  const layout = compact
+    ? 'flex w-full items-center justify-center gap-2 sm:w-auto sm:min-w-[160px]'
+    : 'mt-5 flex w-full items-center justify-center gap-2';
+  const base = `${layout} rounded-lg px-4 py-2.5 text-sm font-medium transition-all`;
 
   if (!live) {
     return (
