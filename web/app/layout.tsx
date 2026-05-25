@@ -3,6 +3,17 @@ import { Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import {
+  JsonLd,
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_LOCALE,
+  SITE_LOGO,
+  SITE_NAME,
+  SITE_URL,
+  organizationJsonLd,
+  websiteJsonLd,
+} from '@/lib/seo';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -10,24 +21,74 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap',
 });
 
+/**
+ * Root metadata — the SEO floor. Every page below inherits these
+ * defaults and overrides as needed via its own `metadata` / `generateMetadata`.
+ *
+ * `title.template` means subpages can ship just the bare page name
+ * (e.g. `title: 'Project Spiritless'`) and the browser tab + SERP
+ * listing read "Project Spiritless — Void Soul Studio" without us
+ * concatenating manually everywhere.
+ */
 export const metadata: Metadata = {
-  metadataBase: new URL('https://voidsoulstudio.com'),
-  title: 'Void Soul Studio — Game Library',
-  description:
-    'Play games crafted by Void Soul Studio. Atmospheric platformers, ambient puzzles, and more — all in one place.',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'Void Soul Studio — Indie Game Studio, Atmospheric Games & AI Tools',
+    template: '%s — Void Soul Studio',
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  generator: 'Next.js',
+  keywords: SITE_KEYWORDS,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: 'games',
+  alternates: {
+    canonical: '/',
+  },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/SqaureLogo.png',
+  },
   openGraph: {
-    title: 'Void Soul Studio — Game Library',
-    description: 'Crafting worlds beyond the void.',
-    images: ['/Logo.png'],
-    url: 'https://voidsoulstudio.com',
-    siteName: 'Void Soul Studio',
+    title: 'Void Soul Studio — Indie Game Studio & AI Tools',
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: SITE_LOGO,
+        width: 1200,
+        height: 630,
+        alt: 'Void Soul Studio',
+      },
+    ],
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    locale: SITE_LOCALE,
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Void Soul Studio — Game Library',
-    description: 'Crafting worlds beyond the void.',
-    images: ['/Logo.png'],
+    title: 'Void Soul Studio — Indie Game Studio & AI Tools',
+    description: SITE_DESCRIPTION,
+    images: [SITE_LOGO],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
 };
 
@@ -43,8 +104,15 @@ export const viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} h-full antialiased`}>
+    <html lang="en-AU" className={`${spaceGrotesk.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-[#0a0a12]">
+        {/* Site-wide structured data — Organization + WebSite. Lives in the
+            body so Next.js streams it on first paint and crawlers index it
+            without waiting for client JS. Per-page schemas (VideoGame,
+            SoftwareApplication, BreadcrumbList) ride alongside this from
+            their own pages. */}
+        <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
+
         <Header />
         {/* Header is fixed (69px) plus the iOS safe-area top inset so notched
             iPhones don't slide content under the Dynamic Island. */}

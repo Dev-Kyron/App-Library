@@ -1,25 +1,63 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { games, getGame } from '@/lib/games';
 import GamePlayer from '@/components/GamePlayer';
 import ScreenshotGallery from '@/components/ScreenshotGallery';
+import {
+  JsonLd,
+  SITE_NAME,
+  SITE_URL,
+  breadcrumbJsonLd,
+  videoGameJsonLd,
+} from '@/lib/seo';
 
 export function generateStaticParams() {
   return games.map((g) => ({ slug: g.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
   const game = getGame(slug);
   if (!game) return {};
+  const url = `${SITE_URL}/games/${game.slug}`;
+  // Use the game thumbnail as OG when available — already a 16:9-ish
+  // asset, so it lays out nicely as a Twitter summary_large_image card.
+  const ogImage = game.thumbnail ?? '/Logo.png';
+  // Build a description that emphasises the genre tags + status. Helps
+  // Google show the right snippet when a query matches "free idle
+  // clicker" rather than just the game name.
+  const genreLine = game.genre.join(' · ');
+  const statusLine = game.status === 'available' ? 'Free in your browser' : 'Coming soon';
+  const description = `${game.description} ${statusLine} · ${genreLine} · by ${SITE_NAME}.`;
   return {
-    title: `${game.title} — Void Soul Studio`,
-    description: game.description,
+    title: game.title,
+    description,
+    alternates: { canonical: `/games/${game.slug}` },
     openGraph: {
-      title: `${game.title} — Void Soul Studio`,
-      description: game.description,
-      images: [game.thumbnail ?? '/Logo.png'],
+      title: `${game.title} — ${SITE_NAME}`,
+      description,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: `${game.title} — ${SITE_NAME}`,
+        },
+      ],
+      url,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${game.title} — ${SITE_NAME}`,
+      description,
+      images: [ogImage],
     },
   };
 }
@@ -40,6 +78,21 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-16">
+      {/* Per-page structured data — VideoGame + Breadcrumb. The browser
+          ignores these <script type="application/ld+json"> tags; Googlebot
+          uses them to render rich results and connect this game to the
+          parent Organization defined in the root layout. */}
+      <JsonLd
+        data={[
+          videoGameJsonLd(game),
+          breadcrumbJsonLd([
+            { name: 'Home', url: SITE_URL },
+            { name: 'Games', url: `${SITE_URL}/#games` },
+            { name: game.title, url: `${SITE_URL}/games/${game.slug}` },
+          ]),
+        ]}
+      />
+
       {/* Back */}
       <Link
         href="/"

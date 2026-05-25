@@ -9,18 +9,59 @@ import ThemeRotator from '@/components/agenthub/ThemeRotator';
 import BootUpMock from '@/components/agenthub/BootUpMock';
 import Stage3D from '@/components/voidsoul/Stage3D';
 import Tilt3D from '@/components/voidsoul/Tilt3D';
+import {
+  JsonLd,
+  SITE_NAME,
+  SITE_URL,
+  breadcrumbJsonLd,
+  webApplicationJsonLd,
+} from '@/lib/seo';
 
 const app = getApp('agenthub')!;
 const LIVE_URL = 'https://agenthub.solutions';
 const REPO_URL = 'https://github.com/Dev-Kyron/AgentHub';
+const PAGE_URL = `${SITE_URL}/apps/agenthub`;
+const OG_IMAGE = `${SITE_URL}/agenthub/Features_Highlighted.png`;
+
+/**
+ * Tuned for the SERP snippet: leads with "call-centre productivity",
+ * mentions the key features Google's seen me typing into the page, and
+ * fits inside Google's snippet length cap.
+ */
+const SEO_DESCRIPTION =
+  'AgentHub is a call-centre productivity dashboard that collapses every shift tool into one tab — three workflow columns, one-click Boot Up, and an AI Agent that answers from company-approved sources only.';
 
 export const metadata: Metadata = {
-  title: `${app.title} — Void Soul Studio`,
-  description: app.description,
+  title: app.title,
+  description: SEO_DESCRIPTION,
+  applicationName: app.title,
+  keywords: [
+    'call centre productivity',
+    'agent dashboard',
+    'shift tools',
+    'AI source-cited answers',
+    'knowledge base assistant',
+    'tab management dashboard',
+    'browser productivity app',
+    'BPO tools',
+    'customer support AI',
+    'AgentHub',
+    SITE_NAME,
+  ],
+  alternates: { canonical: '/apps/agenthub' },
   openGraph: {
     title: `${app.title} — ${app.tagline}`,
-    description: app.description,
-    images: ['/agenthub/Features_Highlighted.png'],
+    description: SEO_DESCRIPTION,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: app.title }],
+    url: PAGE_URL,
+    siteName: SITE_NAME,
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${app.title} — ${app.tagline}`,
+    description: SEO_DESCRIPTION,
+    images: [OG_IMAGE],
   },
 };
 
@@ -191,6 +232,35 @@ const SCREENSHOTS = [
 export default function AgentHubPage() {
   return (
     <div className="relative">
+      {/* Per-page structured data — WebApplication + Breadcrumb. The
+          offers array maps to the five paid tiers (Solo + four team
+          plans) so Google can show pricing snippets in app-comparison
+          queries. */}
+      <JsonLd
+        data={[
+          webApplicationJsonLd({
+            name: app.title,
+            description: app.description,
+            url: LIVE_URL,
+            image: OG_IMAGE,
+            category: 'BusinessApplication',
+            offers: [
+              { name: 'Free Forever — productivity suite', price: '0' },
+              { name: 'Solo Evaluators — 1 user', price: '10' },
+              { name: 'Starter — up to 10 users', price: '50' },
+              { name: 'Growth — up to 25 users', price: '125' },
+              { name: 'Business — up to 50 users', price: '250' },
+              { name: 'Enterprise — up to 100 users', price: '500' },
+            ],
+          }),
+          breadcrumbJsonLd([
+            { name: 'Home', url: SITE_URL },
+            { name: 'Apps & Tools', url: `${SITE_URL}/#apps` },
+            { name: app.title, url: PAGE_URL },
+          ]),
+        ]}
+      />
+
       {/* Page-wide ambient backdrop */}
       <div
         aria-hidden

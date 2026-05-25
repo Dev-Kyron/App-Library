@@ -14,16 +14,60 @@ import SmartDownloadButton from '@/components/voidsoul/SmartDownloadButton';
 import EmailCaptureForm from '@/components/voidsoul/EmailCaptureForm';
 import { DOWNLOAD_CONFIG, getDownloadUrl, type Platform } from '@/lib/downloads';
 import { hasReviews, recentReviews } from '@/lib/reviews';
+import {
+  JsonLd,
+  SITE_LOGO,
+  SITE_NAME,
+  SITE_URL,
+  breadcrumbJsonLd,
+  softwareApplicationJsonLd,
+} from '@/lib/seo';
 
 const app = getApp('voidsoul-ai-companion')!;
+const APP_URL = `${SITE_URL}/apps/voidsoul-ai-companion`;
+
+/**
+ * Long-form metadata copy. The OG variant is keyword-rich for social
+ * card previews; the canonical description is tuned to fit Google's
+ * snippet length (~155 chars after the tagline).
+ */
+const SEO_DESCRIPTION =
+  "The Jarvis loop, finally local. A floating desktop AI companion that talks, listens, sees your screen, drives your mouse, and remembers — 12 providers, one body.";
 
 export const metadata: Metadata = {
-  title: `${app.title} — Void Soul Studio`,
-  description: app.description,
+  title: app.title,
+  description: SEO_DESCRIPTION,
+  applicationName: app.title,
+  keywords: [
+    'AI desktop assistant',
+    'local AI companion',
+    'multi-provider AI',
+    'Jarvis-like AI',
+    'voice AI assistant',
+    'screen-aware AI',
+    'AI agent with tools',
+    'Claude desktop app',
+    'OpenAI desktop',
+    'Ollama GUI',
+    'MCP client',
+    'AI productivity',
+    'VoidSoul AI Companion',
+    SITE_NAME,
+  ],
+  alternates: { canonical: '/apps/voidsoul-ai-companion' },
   openGraph: {
     title: `${app.title} — ${app.tagline}`,
-    description: app.description,
-    images: ['/Logo.png'],
+    description: SEO_DESCRIPTION,
+    images: [{ url: SITE_LOGO, width: 1200, height: 630, alt: app.title }],
+    url: APP_URL,
+    siteName: SITE_NAME,
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${app.title} — ${app.tagline}`,
+    description: SEO_DESCRIPTION,
+    images: [SITE_LOGO],
   },
 };
 
@@ -105,6 +149,33 @@ const riskColor = {
 export default function VoidSoulAssistantPage() {
   return (
     <div className="relative">
+      {/* Per-page structured data — SoftwareApplication + Breadcrumb. The
+          SoftwareApplication schema is what surfaces app rich-results
+          (rating, install, offers) in Google. Offers cover the free beta
+          and the Founder's lifetime upgrade. */}
+      <JsonLd
+        data={[
+          softwareApplicationJsonLd({
+            name: app.title,
+            description: app.description,
+            url: APP_URL,
+            image: SITE_LOGO,
+            version: DOWNLOAD_CONFIG.version.replace(/^v/, ''),
+            category: 'DesktopApplication',
+            operatingSystems: ['Windows', 'macOS', 'Linux'],
+            offers: [
+              { name: 'Free Forever — public beta', price: '0' },
+              { name: "Founder's Edition — lifetime", price: '129' },
+            ],
+          }),
+          breadcrumbJsonLd([
+            { name: 'Home', url: SITE_URL },
+            { name: 'Apps & Tools', url: `${SITE_URL}/#apps` },
+            { name: app.title, url: APP_URL },
+          ]),
+        ]}
+      />
+
       {/* Page-wide ambient backdrop */}
       <div
         aria-hidden
