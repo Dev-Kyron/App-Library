@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import VoidSoulOrb from './voidsoul/VoidSoulOrb';
+import AgentHubMark from './agenthub/AgentHubMark';
 import { AppItem } from '@/lib/apps';
 
 const statusStyle = {
@@ -12,6 +13,7 @@ const PLATFORM_LABEL = {
   windows: 'Win',
   macos: 'macOS',
   linux: 'Linux',
+  web: 'Web',
 } as const;
 
 /**
@@ -37,7 +39,11 @@ export default function AppCard({ app }: { app: AppItem }) {
           }}
         />
         <div className="absolute inset-0 flex items-center justify-center transition-transform duration-700 group-hover:scale-110">
-          <VoidSoulOrb size={120} />
+          {app.thumbnailKind === 'agenthub-mark' ? (
+            <AgentHubMark size={140} />
+          ) : (
+            <VoidSoulOrb size={120} />
+          )}
         </div>
         <span
           className="absolute top-3 right-3 rounded-full px-2.5 py-0.5 text-xs font-medium z-10"

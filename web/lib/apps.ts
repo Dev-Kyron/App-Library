@@ -12,9 +12,19 @@ export interface AppItem {
   /** Detail-route pathname. */
   href: string;
   status: 'available' | 'beta' | 'coming-soon';
-  platforms: ('windows' | 'macos' | 'linux')[];
+  /**
+   * Distribution surface — desktop OSes ship installers, `web` is a hosted
+   * SaaS, `extension` is a browser add-on. Drives the meta chips on the
+   * card and lets the detail page swap install vs. launch CTAs.
+   */
+  platforms: ('windows' | 'macos' | 'linux' | 'web')[];
   thumbnail?: string;
   badge?: string;
+  /**
+   * Which built-in artwork to render in the AppCard thumbnail slot. Defaults
+   * to the VoidSoul orb; new apps can opt into their own brand mark.
+   */
+  thumbnailKind?: 'orb' | 'agenthub-mark';
 }
 
 export const apps: AppItem[] = [
@@ -31,6 +41,19 @@ export const apps: AppItem[] = [
     status: 'coming-soon',
     platforms: ['windows', 'macos', 'linux'],
     badge: 'Founder\'s Edition soon',
+    thumbnailKind: 'orb',
+  },
+  {
+    slug: 'agenthub',
+    title: 'AgentHub',
+    tagline: 'One tab. Every tool. Powered by AI.',
+    description:
+      'A browser dashboard that collapses every shift tool into one tab — three workflow columns, one-click "Boot Up My Day", and an AI Agent that answers from company-approved sources only. Built for call centres.',
+    href: '/apps/agenthub',
+    status: 'available',
+    platforms: ['web'],
+    badge: 'Live · agenthub.solutions',
+    thumbnailKind: 'agenthub-mark',
   },
 ];
 
