@@ -112,11 +112,14 @@ export const metadata: Metadata = {
    * Once any one of these is non-empty, the corresponding meta tag
    * lands in <head> on every page automatically.
    */
-  // verification: {
-  //   google: 'PASTE-GOOGLE-CODE-HERE',
-  //   yandex: 'PASTE-YANDEX-CODE-HERE',
-  //   other: { 'msvalidate.01': 'PASTE-BING-CODE-HERE' },
-  // },
+  verification: {
+    google: 'NImN8sZ9vIDGyjb-RHs5IpvqJQue58lcvW39ZbW4IP8',
+    // Paste a Bing Webmaster Tools code into the next line and uncomment
+    // to also verify Bing / DuckDuckGo / Yahoo:
+    // other: { 'msvalidate.01': 'PASTE-BING-CODE-HERE' },
+    // Yandex (only matters for Russian / Eastern European search):
+    // yandex: 'PASTE-YANDEX-CODE-HERE',
+  },
 };
 
 export const viewport = {
