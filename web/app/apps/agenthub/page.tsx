@@ -337,13 +337,18 @@ export default function AgentHubPage() {
         </div>
 
         <div className="relative mx-auto max-w-[1400px] px-2 sm:px-6">
+          {/* Stage layout note: y values are tuned so every panel's caption
+              has clearance from the panel below it. The AI Agent panel is
+              taller than the original VoidSoul ProviderRotator it took the
+              top-right slot from, so the right column gets a wider y gap
+              (24 → 76) than the VoidSoul page did. */}
           <Stage3D
-            height={880}
+            height={940}
             panels={[
               {
                 id: 'hub',
                 x: 32,
-                y: 38,
+                y: 36,
                 width: 520,
                 rotY: 10,
                 rotX: -2,
@@ -355,7 +360,7 @@ export default function AgentHubPage() {
               {
                 id: 'ai',
                 x: 76,
-                y: 30,
+                y: 24,
                 width: 360,
                 rotY: -12,
                 rotX: 3,
@@ -367,7 +372,7 @@ export default function AgentHubPage() {
               {
                 id: 'theme',
                 x: 78,
-                y: 68,
+                y: 76,
                 width: 320,
                 rotY: -8,
                 rotX: -4,
@@ -379,7 +384,7 @@ export default function AgentHubPage() {
               {
                 id: 'boot',
                 x: 28,
-                y: 86,
+                y: 88,
                 width: 420,
                 rotY: 8,
                 rotX: 4,
