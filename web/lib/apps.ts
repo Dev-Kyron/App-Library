@@ -38,9 +38,12 @@ export const apps: AppItem[] = [
     description:
       'A floating desktop AI companion that talks, listens, sees your screen, drives your mouse, opens your apps, edits your files, and remembers every conversation. Bring whichever AI you already love — 12 providers, one body.',
     href: '/apps/voidsoul-ai-companion',
-    status: 'coming-soon',
+    // Beta tier is live — keeps the home card in sync with the product
+    // page hero ("Apps & Tools · Beta"). When v1.0 ships, flip this to
+    // 'available' and update the badge below.
+    status: 'beta',
     platforms: ['windows', 'macos', 'linux'],
-    badge: 'Founder\'s Edition soon',
+    badge: 'Open for Beta Testing',
     thumbnailKind: 'orb',
   },
   {
