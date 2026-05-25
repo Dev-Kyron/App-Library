@@ -141,10 +141,10 @@ const FLOW_STEPS = [
  * half-configured tier can't accidentally ship to production.
  */
 const SQUARE_CHECKOUT_URLS = {
-  starter: '',
-  growth: '',
-  business: '',
-  enterprise: '',
+  starter:    'https://square.link/u/f6qxOiYB',
+  growth:     'https://square.link/u/3Q8En7gb',
+  business:   'https://square.link/u/tuHYnIwM',
+  enterprise: 'https://square.link/u/9rtixk42',
 } as const;
 
 const PRICING_TIERS: {
