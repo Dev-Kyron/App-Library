@@ -7,7 +7,7 @@ export default function Footer() {
       {/* Top glow line — mirrors header bottom line */}
       <div className="h-px bg-gradient-to-r from-transparent via-[#7c3aed]/40 to-transparent" />
 
-      <div className="bg-[#06060f]">
+      <div className="bg-[#0b0b16]">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6">
 
@@ -17,15 +17,15 @@ export default function Footer() {
                 <Image
                   src="/Logo.png"
                   alt="Void Soul Studio"
-                  width={44}
-                  height={44}
-                  className="brand-glow h-11 w-11 flex-none transition-transform duration-300 group-hover:scale-105"
+                  width={64}
+                  height={64}
+                  className="brand-glow-strong h-12 w-12 flex-none transition-transform duration-300 group-hover:scale-110 sm:h-14 sm:w-14"
                 />
                 <div className="leading-none">
-                  <p className="brand-text-glow text-[13px] font-bold tracking-widest text-[#e2e8f0] uppercase group-hover:text-[#c084fc] transition-colors">
+                  <p className="brand-text-glow text-[15px] font-bold tracking-widest text-[#e2e8f0] uppercase group-hover:text-[#c084fc] transition-colors">
                     Void Soul
                   </p>
-                  <p className="text-[10px] tracking-[0.22em] text-[#a855f7] uppercase mt-0.5">
+                  <p className="text-[10px] tracking-[0.28em] text-[#a855f7] uppercase mt-1">
                     Studio
                   </p>
                 </div>
@@ -95,7 +95,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-[#0f0f1e] mx-4 sm:mx-6">
+        <div className="border-t border-[#15152a] mx-4 sm:mx-6">
           <div className="mx-auto max-w-7xl py-5 flex flex-col items-center justify-between gap-3 text-xs text-[#334155] md:flex-row">
             <p>© {new Date().getFullYear()} Void Soul Studio. All rights reserved.</p>
             <p>Built in Australia.</p>

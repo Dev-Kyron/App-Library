@@ -35,7 +35,7 @@ export default function BootUpMock({ className = '' }: { className?: string }) {
   return (
     <div
       aria-hidden
-      className={`relative w-full max-w-[460px] rounded-2xl border border-[#1e1a3a] p-5 shadow-2xl shadow-[#7c3aed]/15 ${className}`}
+      className={`relative w-full max-w-[460px] rounded-2xl border border-[#2a2550] p-5 shadow-2xl shadow-[#7c3aed]/15 ${className}`}
       style={{
         background: 'linear-gradient(155deg, rgba(26,29,61,0.92) 0%, rgba(8,10,22,0.96) 100%)',
       }}
@@ -73,7 +73,7 @@ export default function BootUpMock({ className = '' }: { className?: string }) {
               className={`flex items-center gap-1.5 rounded-md border px-2 py-1 text-[10px] transition-all duration-300 ${
                 visible
                   ? 'border-[#7c3aed]/40 bg-[#7c3aed]/10 text-[#e2e8f0] opacity-100 translate-y-0'
-                  : 'border-[#1e1a3a] bg-black/30 text-[#475569] opacity-40 translate-y-1'
+                  : 'border-[#2a2550] bg-black/30 text-[#475569] opacity-40 translate-y-1'
               }`}
             >
               <span

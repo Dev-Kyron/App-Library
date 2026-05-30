@@ -5,11 +5,12 @@ import VoidSoulOrb from '@/components/voidsoul/VoidSoulOrb';
 import ChatPanelMock from '@/components/voidsoul/ChatPanelMock';
 import ProviderRotator from '@/components/voidsoul/ProviderRotator';
 import AgentToolStream from '@/components/voidsoul/AgentToolStream';
-import QuickAIMock from '@/components/voidsoul/QuickAIMock';
 import CostChartMock from '@/components/voidsoul/CostChartMock';
+import McpMarketplaceMock from '@/components/voidsoul/McpMarketplaceMock';
 import Stage3D from '@/components/voidsoul/Stage3D';
 import SetupJourney from '@/components/voidsoul/SetupJourney';
 import Tilt3D from '@/components/voidsoul/Tilt3D';
+import DeepDive from '@/components/voidsoul/DeepDive';
 import SmartDownloadButton from '@/components/voidsoul/SmartDownloadButton';
 import EmailCaptureForm from '@/components/voidsoul/EmailCaptureForm';
 import { DOWNLOAD_CONFIG, getDownloadUrl, type Platform } from '@/lib/downloads';
@@ -25,6 +26,7 @@ import {
 
 const app = getApp('voidsoul-ai-companion')!;
 const APP_URL = `${SITE_URL}/apps/voidsoul-ai-companion`;
+const YOUTUBE_URL = 'https://www.youtube.com/@voidsoul_studio';
 
 /**
  * Long-form metadata copy. The OG variant is keyword-rich for social
@@ -32,7 +34,7 @@ const APP_URL = `${SITE_URL}/apps/voidsoul-ai-companion`;
  * snippet length (~155 chars after the tagline).
  */
 const SEO_DESCRIPTION =
-  "The Jarvis loop, finally local. A floating desktop AI companion that talks, listens, sees your screen, drives your mouse, and remembers — 12 providers, one body.";
+  'The Jarvis loop, finally local. A floating desktop AI companion that talks, sees your screen, drives your mouse, controls your smart home, and remembers — 12 providers, MCP, local neural voices.';
 
 export const metadata: Metadata = {
   title: app.title,
@@ -46,10 +48,11 @@ export const metadata: Metadata = {
     'voice AI assistant',
     'screen-aware AI',
     'AI agent with tools',
-    'Claude desktop app',
-    'OpenAI desktop',
-    'Ollama GUI',
     'MCP client',
+    'Home Assistant AI',
+    'local neural TTS',
+    'Claude desktop app',
+    'Ollama GUI',
     'AI productivity',
     'VoidSoul AI Companion',
     SITE_NAME,
@@ -71,80 +74,48 @@ export const metadata: Metadata = {
   },
 };
 
+/* Six headline benefits — the encyclopedic detail lives in the deep-dive
+   accordion near the bottom of the page, so this grid stays scannable. */
 const PILLARS = [
   {
     icon: '🧠',
-    title: 'Four-layer memory',
-    body: 'Threads, story-so-far summaries, durable facts, RAG over chat + indexed files. The model never forgets — and follows you across providers.',
+    title: 'Five-layer memory',
+    body: 'Threads, projects, story-so-far recaps, durable facts, and RAG over your chats + indexed files. It never forgets — and follows you across providers.',
   },
   {
-    icon: '🤖',
-    title: '18 agent tools + MCP',
-    body: 'Open apps. Run shell. Read & write files. Drive mouse and keyboard. OCR your screen. Search the web. Run Python. Plus any MCP server.',
+    icon: '🛠️',
+    title: '24 tools + MCP',
+    body: 'Open apps. Run shell. Read & write files. Drive mouse and keyboard. OCR your screen. Search, research, generate images, run Python. Plus any MCP server.',
   },
   {
     icon: '👁️',
     title: 'Vision + screen control',
-    body: 'see_screen captures your screen as an image the model literally looks at. Combine with mouse control and the assistant uses your GUI.',
+    body: 'see_screen hands the model an image it literally looks at. Pair it with click_on_screen and the assistant drives your actual GUI — accessibility-tree first, vision as backup.',
   },
   {
     icon: '🎙️',
     title: 'Local voice loop',
-    body: 'Whisper STT and the wake word run locally — no API key, no audio leaving your machine. Speak mid-reply to interrupt.',
+    body: 'Whisper listens and Piper neural voices — Void and Soul — speak, all on-device. Set a wake word for hands-free. Speak mid-reply to interrupt.',
   },
   {
     icon: '🌐',
-    title: '12 providers',
-    body: 'Anthropic · OpenAI · Gemini · Ollama · LM Studio · llama.cpp · Groq · xAI · OpenRouter · DeepSeek · Mistral · Custom. Switch per-thread.',
-  },
-  {
-    icon: '🪟',
-    title: 'Raycast-style Quick AI',
-    body: 'Cmd+Shift+J from anywhere. One-shot answers, reads your clipboard, no thread, no config. The fastest path from question to answer.',
-  },
-  {
-    icon: '📁',
-    title: 'Projects & Notebooks',
-    body: 'Pinned mode + custom instructions. Notebook cells for prompt, python, search, markdown. Schedule prompts on a cron.',
-  },
-  {
-    icon: '💰',
-    title: 'Per-token cost only',
-    body: 'No subscription floor. Bring your own keys, pay for what you use. Dashboard with daily-spend chart and budget alerts.',
+    title: '12 providers, auto-routed',
+    body: 'Anthropic · OpenAI · Gemini · Ollama · LM Studio · llama.cpp · Groq · xAI · OpenRouter · DeepSeek · Mistral · Custom. Leave it on ✨ Auto and it picks per prompt.',
   },
   {
     icon: '🔒',
     title: 'Local-first by default',
-    body: 'Keys encrypted in your OS keychain. History in local SQLite. No telemetry. Pollinations, DuckDuckGo, and local Whisper as keyless defaults.',
+    body: 'Keys encrypted in your OS keychain. History in local SQLite. No telemetry, no server. Eight explicit, revocable permissions — it never acts silently.',
   },
 ];
 
 const POSSIBILITIES = [
   'Tell it to read your error log, fix the bug, run the test suite, and commit.',
-  'Speak a thought aloud — it transcribes, refines, and pastes into your editor.',
   'Paste a screenshot — it identifies the failing widget and writes the patch.',
-  'Schedule it to grep your codebase for unused exports every morning.',
-  'Drop a PDF into the chat — talk to it without any "Pro plan" upsell.',
-  'Use Claude for reasoning, GPT-4o for vision, Ollama for cheap follow-ups, all in one thread.',
+  '“Turn off the living-room lights” — it drives Home Assistant for you.',
+  'Use Claude for reasoning, GPT-4o for vision, Ollama for cheap follow-ups — one thread.',
   'Wake the orb with a phrase. Ask a question while doing something else. Hear it answered.',
-  'Chain MCP servers — read a Notion page, query GitHub, write a file, all in one prompt.',
 ];
-
-const PERMISSIONS = [
-  { name: 'Terminal', unlocks: 'Shell commands · sandboxed Python', risk: 'High' },
-  { name: 'Filesystem', unlocks: 'Read, write, organise files (writes are undoable)', risk: 'High' },
-  { name: 'App control', unlocks: 'Launch apps, foreground windows', risk: 'Medium' },
-  { name: 'Input access', unlocks: 'Keyboard + mouse control', risk: 'High' },
-  { name: 'Screen capture', unlocks: 'Screenshots, OCR, vision', risk: 'Medium' },
-  { name: 'Microphone', unlocks: 'Voice input + wake word', risk: 'Medium' },
-  { name: 'Browser', unlocks: 'Opening URLs', risk: 'Low' },
-];
-
-const riskColor = {
-  Low: 'text-emerald-300 bg-emerald-500/10 border-emerald-500/20',
-  Medium: 'text-amber-300 bg-amber-500/10 border-amber-500/20',
-  High: 'text-rose-300 bg-rose-500/10 border-rose-500/20',
-} as const;
 
 export default function VoidSoulAssistantPage() {
   return (
@@ -182,7 +153,7 @@ export default function VoidSoulAssistantPage() {
         className="pointer-events-none fixed inset-0 -z-10"
         style={{
           backgroundImage:
-            'radial-gradient(ellipse 60% 40% at 50% 0%, rgba(124,58,237,0.18) 0%, transparent 70%), radial-gradient(ellipse 30% 25% at 90% 40%, rgba(168,85,247,0.10) 0%, transparent 70%), radial-gradient(ellipse 30% 25% at 10% 70%, rgba(168,85,247,0.08) 0%, transparent 70%)',
+            'radial-gradient(ellipse 60% 40% at 50% 0%, rgba(124,58,237,0.16) 0%, transparent 70%), radial-gradient(ellipse 30% 25% at 90% 40%, rgba(168,85,247,0.09) 0%, transparent 70%), radial-gradient(ellipse 30% 25% at 10% 70%, rgba(168,85,247,0.07) 0%, transparent 70%)',
         }}
       />
 
@@ -201,23 +172,20 @@ export default function VoidSoulAssistantPage() {
 
       {/* ============================== HERO ============================== */}
       <section className="relative">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 pt-8 pb-16 sm:px-6 sm:pt-14 sm:pb-24 lg:pb-32 lg:grid-cols-[1.15fr_1fr] lg:items-center">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 pt-8 pb-14 sm:px-6 sm:pt-14 sm:pb-20 lg:pb-28 lg:grid-cols-[1.15fr_1fr] lg:items-center">
           {/* Orb — sits ABOVE the copy on mobile so the visual lands first
               when scrolling. Order flips back on lg so the copy is left. */}
           <div className="relative order-first flex items-center justify-center reveal-fade lg:order-last">
             <Tilt3D strength={10} liftZ={24}>
               <div className="relative">
-                {/* Mobile orb: smaller so it fits in a single phone screen
-                    alongside the chip + headline. Desktop orb stays at the
-                    cinematic size. */}
                 <div className="sm:hidden">
                   <VoidSoulOrb size={200} />
                 </div>
                 <div className="hidden sm:block lg:hidden">
-                  <VoidSoulOrb size={280} />
+                  <VoidSoulOrb size={300} />
                 </div>
                 <div className="hidden lg:block">
-                  <VoidSoulOrb size={360} />
+                  <VoidSoulOrb size={380} />
                 </div>
                 {/* Tool-stream chip — narrower on mobile so it never
                     overflows the orb's bottom or the screen edge. */}
@@ -236,7 +204,7 @@ export default function VoidSoulAssistantPage() {
                 Apps &amp; Tools · Beta
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest text-emerald-300">
-                New in {DOWNLOAD_CONFIG.version} · Piper voices · setup auto-import
+                New in {DOWNLOAD_CONFIG.version} · MCP marketplace · Piper voices
               </span>
             </div>
             <h1 className="text-[2.5rem] font-bold leading-[1.05] tracking-tight text-[#e2e8f0] sm:text-6xl lg:text-7xl">
@@ -257,8 +225,8 @@ export default function VoidSoulAssistantPage() {
             </p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-[#94a3b8] sm:text-[15px] sm:mt-6">
               A floating desktop AI companion that talks, listens, sees your screen, drives your
-              mouse, opens your apps, edits your files, and remembers every conversation. Bring
-              whichever AI you already love — 12 providers, one body.
+              mouse, opens your apps, edits your files, controls your smart home, and remembers
+              every conversation. Bring whichever AI you already love — 12 providers, one body.
             </p>
 
             {/* Stacked on mobile (full-width buttons), inline on sm+. */}
@@ -269,28 +237,48 @@ export default function VoidSoulAssistantPage() {
                 <DownloadButton platform="linux" />
               </div>
             </div>
-            <p className="mt-3 text-xs leading-relaxed text-[#475569]">
-              {DOWNLOAD_CONFIG.enabled ? (
-                <>
-                  Free tier · {DOWNLOAD_CONFIG.version}. License key unlocks the
-                  Founder&apos;s features.
-                </>
-              ) : (
-                <>
-                  Builds aren&apos;t live yet — Founder&apos;s Edition launches when downloads go public.
-                </>
-              )}
-              <Link href="#pricing" className="ml-1 text-[#7c3aed] hover:underline">
-                See pricing →
+            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs leading-relaxed text-[#475569]">
+              <span>
+                {DOWNLOAD_CONFIG.enabled ? (
+                  <>Free tier · {DOWNLOAD_CONFIG.version} · bring your own keys</>
+                ) : (
+                  <>Builds aren&apos;t live yet — Founder&apos;s Edition launches when downloads go public.</>
+                )}
+              </span>
+              <Link href="#pricing" className="text-[#7c3aed] hover:underline">
+                See pricing ↓
               </Link>
-            </p>
+              <a
+                href={YOUTUBE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#94a3b8] hover:text-[#a855f7] transition-colors"
+              >
+                Watch the loop ↗
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Trust strip — one line of credibility right under the fold. */}
+        <div className="mx-auto max-w-7xl px-4 pb-2 sm:px-6">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-2xl border border-[#2a2550] bg-[#15152a]/50 px-5 py-3 text-center text-[12px] font-medium text-[#94a3b8] sm:text-[13px]">
+            <span>🌐 12 providers</span>
+            <span className="text-[#2a2550]">·</span>
+            <span>🔑 Your keys, your machine</span>
+            <span className="text-[#2a2550]">·</span>
+            <span>🛰️ Zero telemetry</span>
+            <span className="text-[#2a2550]">·</span>
+            <span>🏠 Local-first</span>
+            <span className="text-[#2a2550]">·</span>
+            <span>💸 No subscription floor</span>
           </div>
         </div>
       </section>
 
       {/* ====================== 3D SHOWCASE STAGE ====================== */}
       <section className="relative">
-        <div className="mx-auto max-w-7xl px-4 pb-4 sm:px-6 sm:pb-6">
+        <div className="mx-auto max-w-7xl px-4 pt-12 pb-4 sm:px-6 sm:pt-16 sm:pb-6">
           <p className="text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
             Live surface
           </p>
@@ -301,7 +289,7 @@ export default function VoidSoulAssistantPage() {
             </h2>
             <p className="max-w-md text-sm text-[#94a3b8]">
               Real panels from the running app — chat with live agent steps, the
-              multi-provider picker, the cost dashboard, the Raycast-style overlay.
+              multi-provider picker, the one-click MCP marketplace, the cost dashboard.
               <span className="hidden sm:inline">{' '}Hover the canvas; it tilts with you.</span>
             </p>
           </div>
@@ -326,11 +314,10 @@ export default function VoidSoulAssistantPage() {
                 children: <ChatPanelMock />,
               },
               {
-                // Top-right of the stage so the provider list reads alongside
-                // the chat without overlapping it.
+                // Top-right — provider picker reads alongside the chat.
                 id: 'providers',
                 x: 74,
-                y: 26,
+                y: 24,
                 width: 340,
                 rotY: -12,
                 rotX: 3,
@@ -340,32 +327,30 @@ export default function VoidSoulAssistantPage() {
                 children: <ProviderRotator />,
               },
               {
-                // Mid-right — sits below the providers card, far enough from
-                // the bottom edge that the caption never clips.
-                id: 'cost',
-                x: 76,
+                // Mid-right — the headline v2.0 feature, the MCP marketplace.
+                id: 'mcp',
+                x: 77,
                 y: 64,
                 width: 340,
                 rotY: -8,
                 rotX: -4,
                 z: 40,
                 delay: 0.7,
-                caption: 'Cost dashboard',
-                children: <CostChartMock />,
+                caption: 'MCP marketplace',
+                children: <McpMarketplaceMock />,
               },
               {
-                // Bottom-left — Quick AI is short so we can keep it lower
-                // without clipping. Pulled in from the left edge a touch.
-                id: 'quickai',
+                // Bottom-left — cost honesty. Pulled in from the edge a touch.
+                id: 'cost',
                 x: 26,
                 y: 82,
-                width: 380,
+                width: 360,
                 rotY: 8,
                 rotX: 4,
                 z: -20,
                 delay: 2.2,
-                caption: 'Quick AI',
-                children: <QuickAIMock />,
+                caption: 'Cost dashboard',
+                children: <CostChartMock />,
               },
             ]}
           />
@@ -374,7 +359,7 @@ export default function VoidSoulAssistantPage() {
 
       {/* ======================= WHY + POSSIBILITIES ======================= */}
       <section className="relative">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:gap-14 lg:py-32 lg:grid-cols-12">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:gap-14 lg:py-28 lg:grid-cols-12">
           {/* Why */}
           <div className="lg:col-span-7">
             <p className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
@@ -415,17 +400,13 @@ export default function VoidSoulAssistantPage() {
               {POSSIBILITIES.map((line, i) => (
                 <li
                   key={i}
-                  className="possibility-row flex items-start gap-3 rounded-xl border border-[#1e1a3a]/60 bg-gradient-to-br from-[#0f0f1e]/80 to-transparent px-4 py-3 transition-all hover:translate-x-1 hover:border-[#7c3aed]/60 hover:bg-[#7c3aed]/5 reveal-stagger"
+                  className="possibility-row flex items-start gap-3 rounded-xl border border-[#2a2550]/60 bg-gradient-to-br from-[#15152a]/80 to-transparent px-4 py-3 transition-all hover:translate-x-1 hover:border-[#7c3aed]/60 hover:bg-[#7c3aed]/5 reveal-stagger"
                   style={{
                     animationDelay: `${i * 50}ms`,
-                    // Asymmetric only on lg+ — alternating margin on a phone
-                    // looks broken because the rows already span the column.
                     ['--ml' as string]: i % 2 === 0 ? '0px' : '12px',
                   }}
                 >
-                  <span
-                    className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-md bg-[#7c3aed]/15 text-[#a855f7] text-[11px]"
-                  >
+                  <span className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-md bg-[#7c3aed]/15 text-[#a855f7] text-[11px]">
                     ✦
                   </span>
                   <span className="text-sm text-[#cbd0e2] leading-relaxed">{line}</span>
@@ -443,21 +424,21 @@ export default function VoidSoulAssistantPage() {
 
       {/* ============================ PILLARS ============================ */}
       <section className="relative">
-        <div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24 lg:pb-32">
+        <div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24 lg:pb-28">
           <div className="mb-8 max-w-2xl sm:mb-12">
             <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
               What&apos;s in the box
             </p>
             <h2 className="text-[1.75rem] font-bold text-[#e2e8f0] sm:text-4xl">
-              Nine pillars.
+              Six pillars. One companion.
             </h2>
           </div>
 
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-[#1e1a3a] bg-[#1e1a3a]/50 sm:rounded-3xl md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-[#2a2550] bg-[#2a2550]/50 sm:rounded-3xl md:grid-cols-2 lg:grid-cols-3">
             {PILLARS.map((p, i) => (
               <div
                 key={p.title}
-                className="group relative overflow-hidden bg-[#0a0a18] p-5 transition-all duration-300 hover:bg-[#0f0f1e] reveal-stagger sm:p-7"
+                className="group relative overflow-hidden bg-[#0f0f1a] p-5 transition-all duration-300 hover:bg-[#15152a] reveal-stagger sm:p-7"
                 style={{ animationDelay: `${i * 50}ms` }}
               >
                 <div
@@ -486,20 +467,20 @@ export default function VoidSoulAssistantPage() {
       {/* ========================= SETUP JOURNEY ========================= */}
       <section
         id="setup"
-        className="relative border-y border-[#1e1a3a]"
+        className="relative border-y border-[#2a2550]"
         style={{
           background:
-            'radial-gradient(ellipse 50% 50% at 50% 0%, rgba(124,58,237,0.10) 0%, transparent 60%), linear-gradient(to bottom, #06060f 0%, #0a0a12 100%)',
+            'radial-gradient(ellipse 50% 50% at 50% 0%, rgba(124,58,237,0.10) 0%, transparent 60%), linear-gradient(to bottom, #0b0b16 0%, #0f0f1a 100%)',
         }}
       >
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:py-28">
           <div className="mb-8 flex flex-col gap-3 sm:mb-12 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
             <div>
               <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
-                Full setup
+                How it works
               </p>
               <h2 className="text-[1.75rem] font-bold leading-tight text-[#e2e8f0] sm:text-4xl lg:text-5xl">
-                Seven steps to unlock everything.
+                Seven steps to your own Jarvis.
               </h2>
             </div>
             <p className="max-w-sm text-sm text-[#94a3b8]">
@@ -512,90 +493,10 @@ export default function VoidSoulAssistantPage() {
         </div>
       </section>
 
-      {/* ======================== UI CLOSE-UPS ======================== */}
-      <section className="relative">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:py-32">
-          <div className="mb-8 flex flex-col gap-3 sm:mb-14 sm:grid sm:grid-cols-[auto_1fr] sm:items-end sm:gap-4">
-            <div>
-              <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
-                Up close
-              </p>
-              <h2 className="text-[1.75rem] font-bold leading-tight text-[#e2e8f0] sm:text-4xl lg:text-5xl">
-                The details
-                <br />
-                <span className="text-[#a855f7]">you&apos;ll feel.</span>
-              </h2>
-            </div>
-            <p className="max-w-sm text-sm text-[#94a3b8] sm:justify-self-end">
-              Real UI surfaces from the running app — each one tilts as you scroll.
-            </p>
-          </div>
-
-          <div className="grid gap-8 sm:gap-10 lg:gap-12 lg:grid-cols-12">
-            <Tilt3D strength={8} className="h-full lg:col-span-5 lg:translate-y-4">
-              <CloseUpPanel
-                tag="Floating orb"
-                title="Always there, never in the way."
-                caption="Drag-to-move. Click-to-summon. Tray-resident on every OS."
-              >
-                <div className="flex items-center justify-center py-16 sm:py-20">
-                  <VoidSoulOrb size={200} />
-                </div>
-              </CloseUpPanel>
-            </Tilt3D>
-
-            <Tilt3D strength={8} className="h-full lg:col-span-7">
-              <CloseUpPanel
-                tag="Live agent"
-                title="See what it's doing, as it does it."
-                caption="A live strip while the agent works — searching, reading, running, clicking — never silent."
-              >
-                <div className="flex flex-col gap-2.5 px-6 py-6 sm:px-7 sm:py-7">
-                  <AgentToolStream startIndex={0} />
-                  <AgentToolStream startIndex={3} className="opacity-60" />
-                  <AgentToolStream startIndex={6} className="opacity-30" />
-                  <p className="pt-3 text-[11px] leading-relaxed text-[#475569]">
-                    Capped at six agent steps · partial output preserved on Stop · every step
-                    logged.
-                  </p>
-                </div>
-              </CloseUpPanel>
-            </Tilt3D>
-
-            <Tilt3D strength={8} className="h-full lg:col-span-7 lg:-translate-y-4">
-              <CloseUpPanel
-                tag="Quick AI"
-                title="One shortcut. Every answer."
-                caption="Press Cmd+Shift+J from anywhere — Word, Photoshop, your terminal. Ask. Done."
-              >
-                <div className="flex items-center justify-center px-6 py-12 sm:px-8 sm:py-14">
-                  <QuickAIMock />
-                </div>
-              </CloseUpPanel>
-            </Tilt3D>
-
-            <Tilt3D strength={8} className="h-full lg:col-span-5">
-              <CloseUpPanel
-                tag="Cost honesty"
-                title="Spend, daily. Budget, enforced."
-                caption="Pay for tokens, not for a chat UI. Alerts at 75 / 90 / 100% of monthly cap."
-              >
-                <div className="flex items-center justify-center px-6 py-10 sm:px-7 sm:py-12">
-                  <CostChartMock />
-                </div>
-              </CloseUpPanel>
-            </Tilt3D>
-          </div>
-        </div>
-      </section>
-
       {/* ======================= SECURITY / PRIVACY ======================= */}
-      <section
-        id="security"
-        className="relative border-y border-[#1e1a3a] bg-[#06060f]/60"
-      >
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:py-32">
-          <div className="grid gap-10 lg:gap-14 lg:grid-cols-[1fr_1.2fr]">
+      <section id="security" className="relative">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:py-28">
+          <div className="grid gap-10 lg:gap-14 lg:grid-cols-[1fr_1fr]">
             <div>
               <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
                 Privacy &amp; permissions
@@ -607,142 +508,58 @@ export default function VoidSoulAssistantPage() {
               </h2>
               <p className="mt-5 max-w-md text-sm text-[#94a3b8] leading-relaxed sm:mt-6 sm:text-base">
                 Every capability that touches your machine is gated behind a permission you
-                explicitly grant — and can revoke any time. File writes are reversible.
-                Every action is logged. Private mode strips the chat: no save, no facts,
-                no screen context.
+                explicitly grant — and can revoke any time. File writes are reversible. Every
+                action is logged. Private mode strips the chat: no save, no facts, no screen
+                context.
               </p>
-
-              <div className="mt-8 space-y-3">
-                <SecurityRow
-                  icon="🔐"
-                  title="Keys in your OS keychain"
-                  body="API keys never leave the main process. Encrypted by Windows DPAPI / macOS Keychain / Linux libsecret."
-                />
-                <SecurityRow
-                  icon="🛰️"
-                  title="No telemetry, no cloud"
-                  body="We don't run a server. No usage tracking, no crash phone-home, no analytics SDKs."
-                />
-                <SecurityRow
-                  icon="📝"
-                  title="Source-visible licence"
-                  body="The code lives on GitHub for transparency — anyone can audit what the app actually does. Resale is reserved."
-                />
-                <SecurityRow
-                  icon="⏯️"
-                  title="Per-request abort"
-                  body="Hit Stop and the model call, the tool subprocess, and any background fetch cancel in the same breath."
-                />
-              </div>
+              <p className="mt-5 text-sm text-[#94a3b8]">
+                Eight explicit, revocable permissions —{' '}
+                <a href="#breakdown" className="text-[#7c3aed] hover:underline">
+                  see the full table ↓
+                </a>
+              </p>
             </div>
 
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed] mb-3">
-                Permissions, explicit
-              </p>
-              <div className="space-y-2 rounded-2xl border border-[#1e1a3a] bg-gradient-to-br from-[#0f0f1e] to-[#0a0a18] p-3">
-                {PERMISSIONS.map((p) => (
-                  <div
-                    key={p.name}
-                    className="flex items-center gap-3 rounded-lg border border-[#1e1a3a] bg-black/30 px-3.5 py-3 transition-all hover:border-[#7c3aed]/40 hover:bg-[#7c3aed]/5 hover:translate-x-1"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold text-[#e2e8f0]">{p.name}</p>
-                      <p className="text-xs text-[#64748b] mt-0.5 leading-relaxed">
-                        {p.unlocks}
-                      </p>
-                    </div>
-                    <span
-                      className={`flex-none rounded-full border px-2 py-0.5 text-[10px] font-medium ${
-                        riskColor[p.risk as keyof typeof riskColor]
-                      }`}
-                    >
-                      {p.risk}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-4 text-xs text-[#64748b] leading-relaxed">
-                Every prompt that triggers a privileged action surfaces a dialog with the
-                exact tool name and arguments. You always know what&apos;s about to run.
-              </p>
+            <div className="space-y-3">
+              <SecurityRow
+                icon="🔐"
+                title="Keys in your OS keychain"
+                body="API keys never leave the main process. Encrypted by Windows DPAPI / macOS Keychain / Linux libsecret."
+              />
+              <SecurityRow
+                icon="🛰️"
+                title="No telemetry, no cloud"
+                body="We don't run a server. No usage tracking, no crash phone-home, no analytics SDKs."
+              />
+              <SecurityRow
+                icon="📝"
+                title="Source-visible licence"
+                body="The code lives on GitHub for transparency — anyone can audit what the app actually does."
+              />
+              <SecurityRow
+                icon="⏯️"
+                title="Per-request abort"
+                body="Hit Stop and the model call, the tool subprocess, and any background fetch cancel in the same breath."
+              />
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* =========================== VIDEO DEMO =========================== */}
-      <section className="relative">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:py-32">
-          <div className="mb-8 flex flex-col gap-3 sm:mb-10 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
-            <div>
-              <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
-                See the loop
-              </p>
-              <h2 className="text-[1.75rem] font-bold text-[#e2e8f0] sm:text-4xl">
-                90-second demo.
-              </h2>
-            </div>
-            <p className="max-w-md text-sm text-[#94a3b8]">
-              Wake word → question → multi-step agent run → spoken reply. The full Jarvis
-              loop, end-to-end.
-            </p>
-          </div>
-
-          <Tilt3D strength={6} liftZ={12}>
-            <div
-              className="group relative aspect-video w-full overflow-hidden rounded-3xl border border-[#1e1a3a] bg-[#0a0a20] shadow-2xl shadow-[#7c3aed]/20"
-              style={{
-                backgroundImage:
-                  'radial-gradient(ellipse at 30% 50%, rgba(124,58,237,0.25) 0%, transparent 60%), radial-gradient(ellipse at 70% 30%, rgba(168,85,247,0.15) 0%, transparent 50%)',
-              }}
-            >
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-5">
-                <VoidSoulOrb size={170} />
-                <button
-                  disabled
-                  aria-label="Demo video — coming soon"
-                  className="flex cursor-not-allowed items-center gap-3 rounded-full border border-[#7c3aed]/40 bg-black/60 px-5 py-3 text-sm font-medium text-[#e2e8f0] backdrop-blur transition-all hover:border-[#7c3aed] hover:bg-[#7c3aed]/20"
-                >
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#7c3aed] text-white">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </span>
-                  Demo video — coming soon
-                </button>
-                <p className="text-xs text-[#475569]">
-                  Devlog clips on{' '}
-                  <a
-                    href="https://www.youtube.com/@voidsoul_studio"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#7c3aed] hover:underline"
-                  >
-                    YouTube
-                  </a>{' '}
-                  meanwhile.
-                </p>
-              </div>
-            </div>
-          </Tilt3D>
         </div>
       </section>
 
       {/* ============================ PRICING ============================ */}
       <section
         id="pricing"
-        className="relative border-t border-[#1e1a3a] overflow-hidden"
+        className="relative border-t border-[#2a2550] overflow-hidden"
       >
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
           style={{
             backgroundImage:
-              'radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.22) 0%, transparent 60%)',
+              'radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.18) 0%, transparent 60%)',
           }}
         />
-        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:py-32">
+        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:py-28">
           <div className="mb-10 text-center sm:mb-14">
             <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
               Pricing
@@ -758,14 +575,13 @@ export default function VoidSoulAssistantPage() {
 
           {/* Two tiers during the beta: Free Forever (everyone, fully
              unlocked while we polish) and Founder's (waitlist for paid
-             launch). The First-3 launch giveaway was retired — beta
-             testers already get the same access it would have offered. */}
+             launch). */}
           <div className="mx-auto grid max-w-4xl gap-5 sm:gap-6 lg:grid-cols-2">
-            {/* Free Forever — currently in BETA mode: all features unlocked
-                so testers get the real product to break. Beta downloaders
-                get a free lifetime Founder's licence at v1.0 launch. */}
+            {/* Free Forever — BETA mode: all features unlocked so testers
+                get the real product to break. Beta downloaders keep a free
+                lifetime Founder's licence at v1.0 launch. */}
             <Tilt3D strength={5} liftZ={10}>
-              <div className="relative h-full rounded-2xl border border-emerald-500/30 bg-[#0f0f1e] p-6 transition-colors hover:border-emerald-500/60 sm:rounded-3xl sm:p-8">
+              <div className="relative h-full rounded-2xl border border-emerald-500/30 bg-[#15152a] p-6 transition-colors hover:border-emerald-500/60 sm:rounded-3xl sm:p-8">
                 <div className="mb-3 flex items-center justify-between gap-2">
                   <p className="text-xs uppercase tracking-widest text-[#64748b]">Free Forever</p>
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-emerald-300">
@@ -780,9 +596,9 @@ export default function VoidSoulAssistantPage() {
                 <ul className="space-y-2.5 text-sm text-[#94a3b8]">
                   {[
                     'Every Founder’s feature, free',
-                    'All 12 providers · MCP · voice loop',
+                    'All 12 providers · MCP marketplace · voice loop',
                     'Unlimited threads (for now)',
-                    'Full agent + Quick AI',
+                    'Full agent · Quick AI · Home Assistant',
                   ].map((l) => (
                     <li key={l} className="flex items-start gap-2">
                       <span className="text-emerald-400 mt-0.5">✓</span>
@@ -800,7 +616,7 @@ export default function VoidSoulAssistantPage() {
             </Tilt3D>
 
             <Tilt3D strength={6} liftZ={16}>
-              <div className="relative h-full rounded-2xl border border-[#7c3aed] bg-gradient-to-b from-[#1a0a3a]/40 to-[#0f0f1e] p-6 shadow-2xl shadow-[#7c3aed]/30 sm:rounded-3xl sm:p-8">
+              <div className="relative h-full rounded-2xl border border-[#7c3aed] bg-gradient-to-b from-[#1a0a3a]/40 to-[#15152a] p-6 shadow-2xl shadow-[#7c3aed]/30 sm:rounded-3xl sm:p-8">
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#7c3aed] px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-white">
                   Founder&apos;s · First 100
                 </span>
@@ -812,10 +628,10 @@ export default function VoidSoulAssistantPage() {
                 <p className="mb-6 text-sm text-[#a855f7] sm:mb-7">AUD · one-time · yours forever</p>
                 <ul className="space-y-2.5 text-sm text-[#cbd0e2]">
                   {[
-                    'All 12 providers · MCP support',
-                    'Full voice loop · wake word · barge-in',
+                    'All 12 providers · MCP marketplace · plugins',
+                    'Piper neural voices · wake word · barge-in',
                     'Projects · Notebooks · Quick AI',
-                    'Scheduled tasks · cost dashboard',
+                    'Home Assistant · scheduled tasks · cost dashboard',
                     'All themes & languages',
                     'Every future update, free',
                   ].map((l) => (
@@ -845,134 +661,101 @@ export default function VoidSoulAssistantPage() {
         </div>
       </section>
 
+      {/* ====================== DEEP-DIVE ACCORDION ======================
+          The "big drop-down breakdown" — every dense reference detail lives
+          here so the funnel above stays a clean pitch. */}
+      <section id="breakdown" className="relative border-t border-[#2a2550] bg-[#0b0b16]/40">
+        <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24 lg:py-28">
+          <div className="mb-8 text-center sm:mb-12">
+            <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
+              The full breakdown
+            </p>
+            <h2 className="text-[1.75rem] font-bold text-[#e2e8f0] sm:text-4xl">
+              Everything, in detail.
+            </h2>
+            <p className="mt-3 mx-auto max-w-lg text-sm text-[#94a3b8] leading-relaxed">
+              The exhaustive stuff — every tool, every provider, how memory works, the full
+              permission table, and the pricing FAQ. Open what you care about.
+            </p>
+          </div>
+
+          <DeepDive />
+
+          <div className="mt-10 text-center">
+            <Link
+              href="#pricing"
+              className="inline-flex rounded-lg bg-[#7c3aed] px-6 py-3 text-sm font-medium text-white transition-all hover:bg-[#6d28d9] hover:shadow-[0_0_28px_rgba(124,58,237,0.5)]"
+            >
+              Back to pricing ↑
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ============================ REVIEWS ============================
           Renders real reviews from `web/lib/reviews.ts` when that file's
           REVIEWS array is non-empty, falls back to the dashed-border
-          placeholder cards otherwise. Reviews land here by hand-picking
-          from Formspree submissions — see lib/reviews.ts for the flow.
-          One branch at section level keeps the markup readable; each
-          state has its own focused component below. */}
+          placeholder cards otherwise. */}
       <section id="reviews" className="relative">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:py-28">
           {hasReviews() ? <RealReviews /> : <PlaceholderReviews />}
-
-          <div className="mt-10 flex flex-col items-center justify-center gap-3 text-center sm:mt-12 sm:flex-row sm:gap-5">
-            <Link
-              href="#pricing"
-              className="rounded-lg bg-[#7c3aed] px-6 py-3 text-sm font-medium text-white transition-all hover:bg-[#6d28d9] hover:shadow-[0_0_28px_rgba(124,58,237,0.5)]"
-            >
-              Download the beta →
-            </Link>
-            <a
-              href="https://www.youtube.com/@voidsoul_studio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-[#94a3b8] transition-colors hover:text-[#a855f7]"
-            >
-              Or watch the build-in-public devlog ↗
-            </a>
-          </div>
         </div>
       </section>
 
-      {/* ============================ BUG REPORT ============================ */}
-      <section id="report" className="relative border-y border-[#1e1a3a] bg-[#06060f]/40">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:py-28">
-          <div className="mb-10 max-w-2xl sm:mb-12">
-            <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#7c3aed] sm:text-xs">
-              Spotted something off?
-            </p>
-            <h2 className="text-[1.75rem] font-bold leading-tight text-[#e2e8f0] sm:text-4xl">
-              Bugs welcome.
-            </h2>
-            <p className="mt-3 text-sm leading-relaxed text-[#94a3b8] sm:text-[15px]">
-              VoidSoul is built in public. Every bug report gets read by the
-              developer — no support queue, no scripted reply. Pick your channel.
-            </p>
-          </div>
-
-          <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
-            <a
-              href="https://github.com/Dev-Kyron/SoulVoidAI/issues/new"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col gap-3 rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-6 transition-all hover:border-[#7c3aed]/60 hover:bg-[#7c3aed]/5 hover:shadow-[0_0_28px_rgba(124,58,237,0.15)]"
-            >
-              <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-[#1e1a3a]/80 text-[#a855f7] transition-colors group-hover:bg-[#7c3aed]/20">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-                  </svg>
-                </span>
-                <div className="min-w-0">
-                  <p className="text-base font-semibold text-[#e2e8f0]">Open a GitHub issue</p>
-                  <p className="text-xs text-[#475569]">Public · tracked · fastest reply</p>
-                </div>
-              </div>
-              <p className="text-sm leading-relaxed text-[#94a3b8]">
-                Most bug reports land here. Search first to avoid dupes, then file
-                with repro steps. Every issue gets read.
-              </p>
-              <span className="mt-auto inline-flex items-center gap-2 text-sm font-medium text-[#a855f7]">
-                File an issue ↗
-              </span>
-            </a>
-
-            <a
-              href="https://discord.gg/Tn78RHqT4"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col gap-3 rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-6 transition-all hover:border-[#7c3aed]/60 hover:bg-[#7c3aed]/5 hover:shadow-[0_0_28px_rgba(124,58,237,0.15)]"
-            >
-              <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-[#1e1a3a]/80 text-[#a855f7] transition-colors group-hover:bg-[#7c3aed]/20">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
-                  </svg>
-                </span>
-                <div className="min-w-0">
-                  <p className="text-base font-semibold text-[#e2e8f0]">Hop into Discord</p>
-                  <p className="text-xs text-[#475569]">Live chat · the dev is in there</p>
-                </div>
-              </div>
-              <p className="text-sm leading-relaxed text-[#94a3b8]">
-                Quick questions, feature wishlists, real-time help. Other beta
-                testers hang out there too. Anything bigger, file it on GitHub.
-              </p>
-              <span className="mt-auto inline-flex items-center gap-2 text-sm font-medium text-[#a855f7]">
-                Join the server ↗
-              </span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================ FINAL CTA ============================ */}
-      <section className="relative">
+      {/* ====================== FINAL CTA / BUILT IN PUBLIC ======================
+          Merges the old "Bug Report" + "Final CTA" into one closer. Keeps the
+          #report anchor so existing links still resolve. */}
+      <section id="report" className="relative border-t border-[#2a2550] bg-[#0b0b16]/40">
         <div className="mx-auto max-w-5xl px-4 py-16 text-center sm:px-6 sm:py-24 lg:py-28">
           <VoidSoulOrb size={120} className="mx-auto mb-5 sm:mb-6" />
           <h2 className="text-3xl font-bold text-[#e2e8f0] sm:text-5xl">
             Talk to the orb.
           </h2>
           <p className="mt-4 mx-auto max-w-lg text-sm text-[#94a3b8] sm:text-base">
-            When the first build ships, you&apos;ll see it here. Until then, follow the
-            studio devlog for the build-in-public ride.
+            VoidSoul is built in public. Download the beta, then shape it — every bug report
+            and feature wish gets read by the developer, no support queue, no scripted reply.
           </p>
+
           <div className="mt-7 flex flex-col items-center justify-center gap-2.5 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-3">
-            <a
-              href="https://www.youtube.com/@voidsoul_studio"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="#pricing"
               className="w-full max-w-xs rounded-lg bg-[#7c3aed] px-6 py-3 text-sm font-medium text-white transition-all hover:bg-[#6d28d9] hover:shadow-[0_0_28px_rgba(124,58,237,0.5)] sm:w-auto"
             >
-              Follow the devlog ↗
-            </a>
-            <Link
-              href="/"
-              className="w-full max-w-xs rounded-lg border border-[#1e1a3a] px-6 py-3 text-sm font-medium text-[#94a3b8] transition-all hover:border-[#7c3aed] hover:text-[#e2e8f0] sm:w-auto"
-            >
-              Back to the Library
+              Download the beta →
             </Link>
+            <a
+              href={YOUTUBE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full max-w-xs rounded-lg border border-[#2a2550] px-6 py-3 text-sm font-medium text-[#94a3b8] transition-all hover:border-[#7c3aed] hover:text-[#e2e8f0] sm:w-auto"
+            >
+              Watch the devlog ↗
+            </a>
+          </div>
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">
+            <a
+              href="https://github.com/Dev-Kyron/SoulVoidAI/issues/new"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-[#94a3b8] transition-colors hover:text-[#a855f7]"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+              Open a GitHub issue ↗
+            </a>
+            <a
+              href="https://discord.gg/Tn78RHqT4"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-[#94a3b8] transition-colors hover:text-[#a855f7]"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
+              </svg>
+              Hop into Discord ↗
+            </a>
           </div>
         </div>
       </section>
@@ -1054,7 +837,7 @@ function DownloadButton({
   const className = `group/dl flex w-full items-center justify-center gap-2.5 rounded-xl px-4 py-3 text-sm font-medium transition-all sm:w-auto sm:justify-start sm:px-5 ${
     primary
       ? 'bg-[#7c3aed] text-white shadow-[0_0_22px_rgba(124,58,237,0.35)] hover:bg-[#6d28d9] hover:shadow-[0_0_32px_rgba(124,58,237,0.55)]'
-      : 'border border-[#1e1a3a] bg-[#0f0f1e] text-[#cbd0e2] hover:border-[#7c3aed] hover:text-[#c084fc]'
+      : 'border border-[#2a2550] bg-[#15152a] text-[#cbd0e2] hover:border-[#7c3aed] hover:text-[#c084fc]'
   } ${live ? '' : 'cursor-not-allowed'}`;
 
   const inner = (
@@ -1088,47 +871,6 @@ function DownloadButton({
   );
 }
 
-function CloseUpPanel({
-  className = '',
-  tag,
-  title,
-  caption,
-  children,
-}: {
-  className?: string;
-  tag: string;
-  title: string;
-  caption: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div
-      className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-[#1e1a3a] bg-[#0f0f1e] transition-all duration-500 hover:border-[#7c3aed]/60 hover:shadow-[0_0_32px_rgba(124,58,237,0.18)] ${className}`}
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage:
-            'radial-gradient(ellipse at top, rgba(124,58,237,0.12), transparent 60%)',
-        }}
-      />
-      <div className="relative flex flex-1 flex-col">
-        <div className="px-7 pb-2 pt-7 sm:px-8 sm:pb-3 sm:pt-8">
-          <p className="mb-2.5 text-[10px] font-semibold uppercase tracking-widest text-[#7c3aed]">
-            {tag}
-          </p>
-          <h3 className="text-xl font-semibold leading-snug text-[#e2e8f0]">{title}</h3>
-          <p className="mt-2.5 text-sm leading-relaxed text-[#64748b]">{caption}</p>
-        </div>
-        <div className="mt-6 flex-1 border-t border-[#1e1a3a] bg-[#0a0a18]/60 sm:mt-8">
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function SecurityRow({
   icon,
   title,
@@ -1139,7 +881,7 @@ function SecurityRow({
   body: string;
 }) {
   return (
-    <div className="flex items-start gap-3 rounded-xl border border-[#1e1a3a] bg-black/30 px-4 py-3.5 transition-all hover:border-[#7c3aed]/40 hover:translate-x-1">
+    <div className="flex items-start gap-3 rounded-xl border border-[#2a2550] bg-black/30 px-4 py-3.5 transition-all hover:border-[#7c3aed]/40 hover:translate-x-1">
       <span className="text-xl mt-0.5">{icon}</span>
       <div>
         <p className="text-sm font-semibold text-[#e2e8f0]">{title}</p>
@@ -1150,10 +892,9 @@ function SecurityRow({
 }
 
 /* ------------------------------ Reviews -------------------------------
- * Two render paths for the Reactions section. `RealReviews` renders the
- * curated `REVIEWS` array from lib/reviews.ts (populated by hand from
- * Formspree submissions). `PlaceholderReviews` is the pre-launch dashed
- * "open at launch" treatment. The page picks one based on `hasReviews()`.
+ * Two render paths. `RealReviews` renders the curated `REVIEWS` array from
+ * lib/reviews.ts (populated by hand from Formspree submissions).
+ * `PlaceholderReviews` is the pre-launch dashed "open at launch" treatment.
  * ------------------------------------------------------------------- */
 
 function ReviewsHeader({ heading, body }: { heading: React.ReactNode; body: React.ReactNode }) {
@@ -1193,10 +934,10 @@ function RealReviews() {
         {reviews.map((review, i) => (
           <div
             key={`${review.name}-${review.date}`}
-            className="flex flex-col gap-4 rounded-2xl border border-[#1e1a3a] bg-[#0a0a18]/80 p-6 transition-colors hover:border-[#312e62]"
+            className="flex flex-col gap-4 rounded-2xl border border-[#2a2550] bg-[#101022]/80 p-6 transition-colors hover:border-[#312e62]"
           >
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#1e1a3a] font-mono text-sm text-[#a855f7]">
+              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#2a2550] font-mono text-sm text-[#a855f7]">
                 {String(i + 1).padStart(2, '0')}
               </div>
               <div className="min-w-0">
@@ -1210,7 +951,7 @@ function RealReviews() {
                         height="11"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        className={s < review.rating ? 'text-[#f59e0b]' : 'text-[#1e1a3a]'}
+                        className={s < review.rating ? 'text-[#f59e0b]' : 'text-[#2a2550]'}
                       >
                         <path d="M12 2l3 7h7l-5.5 4.5L18.5 22 12 17.5 5.5 22l2-8.5L2 9h7z" />
                       </svg>
@@ -1248,15 +989,15 @@ function PlaceholderReviews() {
         {[1, 2, 3].map((n) => (
           <div
             key={n}
-            className="flex flex-col gap-4 rounded-2xl border border-dashed border-[#1e1a3a] bg-[#0a0a18]/60 p-6"
+            className="flex flex-col gap-4 rounded-2xl border border-dashed border-[#2a2550] bg-[#101022]/60 p-6"
           >
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#1e1a3a]/80 font-mono text-sm text-[#475569]">
+              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#2a2550]/80 font-mono text-sm text-[#475569]">
                 0{n}
               </div>
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold text-[#64748b]">Beta tester · open</p>
-                <div className="mt-0.5 flex gap-0.5 text-[#1e1a3a]">
+                <div className="mt-0.5 flex gap-0.5 text-[#2a2550]">
                   {[0, 1, 2, 3, 4].map((s) => (
                     <svg key={s} width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 2l3 7h7l-5.5 4.5L18.5 22 12 17.5 5.5 22l2-8.5L2 9h7z" />

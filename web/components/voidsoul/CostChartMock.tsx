@@ -22,7 +22,7 @@ export default function CostChartMock({ className = '' }: { className?: string }
 
   return (
     <div
-      className={`w-full max-w-[360px] rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-4 shadow-xl shadow-[#7c3aed]/10 ${className}`}
+      className={`w-full max-w-[360px] rounded-2xl border border-[#2a2550] bg-[#15152a] p-4 shadow-xl shadow-[#7c3aed]/10 ${className}`}
     >
       <div className="mb-3 flex items-end justify-between">
         <div>

@@ -20,8 +20,8 @@ export default function Header() {
       // this the logo sits underneath the system UI.
       style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
     >
-      <div className="bg-[#06060f]/92 backdrop-blur-lg">
-        <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 sm:px-6">
+      <div className="bg-[#0b0b16]/92 backdrop-blur-lg">
+        <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 sm:px-6">
 
           {/* Logo */}
           <Link
@@ -34,16 +34,16 @@ export default function Header() {
             <Image
               src="/Logo.png"
               alt="Void Soul Studio"
-              width={52}
-              height={52}
-              className="brand-glow h-12 w-12 flex-none transition-all duration-300 group-hover:scale-105"
+              width={72}
+              height={72}
+              className="brand-glow-strong brand-glow-pulse h-14 w-14 flex-none transition-all duration-300 group-hover:scale-110 sm:h-16 sm:w-16"
               priority
             />
             <div className="flex flex-col leading-none">
-              <span className="brand-text-glow text-[13px] font-bold tracking-widest text-[#e2e8f0] uppercase transition-colors group-hover:text-[#c084fc]">
+              <span className="brand-text-glow text-[15px] font-bold tracking-widest text-[#e2e8f0] uppercase transition-colors group-hover:text-[#c084fc] sm:text-[17px]">
                 Void Soul
               </span>
-              <span className="text-[10px] tracking-[0.22em] text-[#a855f7] uppercase mt-0.5">
+              <span className="text-[10px] tracking-[0.28em] text-[#a855f7] uppercase mt-1 sm:text-[11px]">
                 Studio
               </span>
             </div>
@@ -61,7 +61,7 @@ export default function Header() {
               </Link>
             ))}
 
-            <div className="mx-3 h-4 w-px bg-[#1e1a3a]" />
+            <div className="mx-3 h-4 w-px bg-[#2a2550]" />
 
             {/* Devlog button */}
             <a
@@ -104,7 +104,7 @@ export default function Header() {
 
       {/* Mobile dropdown */}
       {menuOpen && (
-        <div className="md:hidden bg-[#06060f]/98 backdrop-blur-lg border-b border-[#1e1a3a] px-6 py-3 flex flex-col gap-1">
+        <div className="md:hidden bg-[#0b0b16]/98 backdrop-blur-lg border-b border-[#2a2550] px-6 py-3 flex flex-col gap-1">
           {NAV.map(({ href, label }) => (
             <Link
               key={href}
@@ -115,7 +115,7 @@ export default function Header() {
               {label}
             </Link>
           ))}
-          <div className="mt-1 pt-2 border-t border-[#1e1a3a]">
+          <div className="mt-1 pt-2 border-t border-[#2a2550]">
             <a
               href="https://www.youtube.com/@voidsoul_studio"
               target="_blank"

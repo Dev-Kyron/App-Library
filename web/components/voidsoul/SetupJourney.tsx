@@ -104,7 +104,7 @@ export default function SetupJourney() {
                   className={`flex h-11 w-11 flex-none items-center justify-center rounded-full font-mono text-[11px] transition-all lg:h-9 lg:w-9 ${
                     isActive
                       ? 'bg-[#7c3aed] text-white shadow-[0_0_18px_rgba(124,58,237,0.6)]'
-                      : 'border border-[#1e1a3a] bg-[#0a0a18] text-[#475569] group-hover:border-[#7c3aed]/60'
+                      : 'border border-[#2a2550] bg-[#101022] text-[#475569] group-hover:border-[#7c3aed]/60'
                   }`}
                 >
                   {s.number}
@@ -121,7 +121,7 @@ export default function SetupJourney() {
       {/* Active step card */}
       <div
         key={active}
-        className="reveal-up-soft relative overflow-hidden rounded-2xl border border-[#1e1a3a] bg-gradient-to-br from-[#0f0f1e] via-[#0f0f1e] to-[#1a0a3a]/30 p-5 sm:p-7 lg:p-8"
+        className="reveal-up-soft relative overflow-hidden rounded-2xl border border-[#2a2550] bg-gradient-to-br from-[#15152a] via-[#15152a] to-[#1a0a3a]/30 p-5 sm:p-7 lg:p-8"
       >
         <div
           aria-hidden
@@ -153,14 +153,14 @@ export default function SetupJourney() {
               <button
                 onClick={() => setActive((i) => Math.max(0, i - 1))}
                 disabled={active === 0}
-                className="rounded-lg border border-[#1e1a3a] px-3 py-1.5 text-xs font-medium text-[#94a3b8] transition-colors hover:border-[#7c3aed]/60 hover:text-[#e2e8f0] disabled:cursor-not-allowed disabled:opacity-30"
+                className="rounded-lg border border-[#2a2550] px-3 py-1.5 text-xs font-medium text-[#94a3b8] transition-colors hover:border-[#7c3aed]/60 hover:text-[#e2e8f0] disabled:cursor-not-allowed disabled:opacity-30"
               >
                 ← Previous
               </button>
               <button
                 onClick={() => setActive((i) => Math.min(STEPS.length - 1, i + 1))}
                 disabled={active === STEPS.length - 1}
-                className="rounded-lg bg-[#7c3aed] px-4 py-1.5 text-xs font-medium text-white transition-all hover:bg-[#6d28d9] hover:shadow-[0_0_18px_rgba(124,58,237,0.4)] disabled:cursor-not-allowed disabled:bg-[#1e1a3a] disabled:text-[#475569] disabled:shadow-none"
+                className="rounded-lg bg-[#7c3aed] px-4 py-1.5 text-xs font-medium text-white transition-all hover:bg-[#6d28d9] hover:shadow-[0_0_18px_rgba(124,58,237,0.4)] disabled:cursor-not-allowed disabled:bg-[#2a2550] disabled:text-[#475569] disabled:shadow-none"
               >
                 Next →
               </button>
@@ -171,7 +171,7 @@ export default function SetupJourney() {
           </div>
 
           {/* Inline mock per step */}
-          <div className="rounded-xl border border-[#1e1a3a] bg-black/40 p-4">
+          <div className="rounded-xl border border-[#2a2550] bg-black/40 p-4">
             <StepMock kind={step.mock} />
           </div>
         </div>
@@ -205,7 +205,7 @@ function StepMock({ kind }: { kind: Step['mock'] }) {
         ].map(([name, hint, ok]) => (
           <div
             key={name as string}
-            className="flex items-center justify-between rounded-md border border-[#1e1a3a] bg-black/40 px-2.5 py-1.5"
+            className="flex items-center justify-between rounded-md border border-[#2a2550] bg-black/40 px-2.5 py-1.5"
           >
             <span className="text-[#e2e8f0] font-semibold">{name}</span>
             <span className={ok ? 'text-emerald-400 text-[10px]' : 'text-[#7c3aed] text-[10px]'}>
@@ -228,7 +228,7 @@ function StepMock({ kind }: { kind: Step['mock'] }) {
         ].map(([name, status, color]) => (
           <div
             key={name}
-            className="flex items-center justify-between rounded-md border border-[#1e1a3a] bg-black/40 px-2.5 py-1.5"
+            className="flex items-center justify-between rounded-md border border-[#2a2550] bg-black/40 px-2.5 py-1.5"
           >
             <span className="text-[#cbd0e2]">{name}</span>
             <span className="text-[10px]" style={{ color }}>● {status}</span>
@@ -249,7 +249,7 @@ function StepMock({ kind }: { kind: Step['mock'] }) {
           {[['Void', '#7c3aed'], ['Soul', '#c084fc']].map(([n, c]) => (
             <div
               key={n}
-              className={`rounded-md border px-2 py-1.5 text-center ${n === 'Soul' ? 'border-[#7c3aed]' : 'border-[#1e1a3a]'}`}
+              className={`rounded-md border px-2 py-1.5 text-center ${n === 'Soul' ? 'border-[#7c3aed]' : 'border-[#2a2550]'}`}
               style={{ background: n === 'Soul' ? 'rgba(124,58,237,0.12)' : 'transparent' }}
             >
               <p className="text-[10px] text-[#64748b]">{n === 'Void' ? 'male' : 'female'}</p>
@@ -266,7 +266,7 @@ function StepMock({ kind }: { kind: Step['mock'] }) {
   if (kind === 'mcp') {
     return (
       <div className="space-y-2 text-[11px]">
-        <div className="rounded-md border border-[#1e1a3a] bg-black/60 p-2.5 font-mono">
+        <div className="rounded-md border border-[#2a2550] bg-black/60 p-2.5 font-mono">
           <p className="text-[9px] uppercase tracking-widest text-[#475569]">Command</p>
           <p className="mt-1 text-[#a855f7] text-[10px] break-all">
             npx -y @modelcontextprotocol/server-filesystem ~/Projects
@@ -289,7 +289,7 @@ function StepMock({ kind }: { kind: Step['mock'] }) {
             Mode: <span className="text-[#a855f7]">Indie Dev</span> · 4 threads
           </p>
         </div>
-        <div className="rounded-md border border-[#1e1a3a] bg-black/40 p-2.5">
+        <div className="rounded-md border border-[#2a2550] bg-black/40 p-2.5">
           <p className="text-[9px] uppercase tracking-widest text-[#475569]">Instructions</p>
           <p className="mt-1 text-[10px] text-[#94a3b8] italic">
             Always assume Unreal 5.5, prefer C++ over Blueprints, my main is C:/Spiritless…

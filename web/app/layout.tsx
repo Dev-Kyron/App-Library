@@ -123,7 +123,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: '#0a0a12',
+  themeColor: '#0f0f1a',
   width: 'device-width',
   initialScale: 1,
   // Allow zooming up to 5× for accessibility — never lock at 1×.
@@ -135,7 +135,7 @@ export const viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-AU" className={`${spaceGrotesk.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col bg-[#0a0a12]">
+      <body className="flex min-h-full flex-col bg-[#0f0f1a]">
         {/* Site-wide structured data — Organization + WebSite. Lives in the
             body so Next.js streams it on first paint and crawlers index it
             without waiting for client JS. Per-page schemas (VideoGame,
@@ -148,7 +148,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             iPhones don't slide content under the Dynamic Island. */}
         <main
           className="flex-1"
-          style={{ paddingTop: 'calc(69px + env(safe-area-inset-top, 0px))' }}
+          style={{ paddingTop: 'calc(77px + env(safe-area-inset-top, 0px))' }}
         >
           {children}
         </main>

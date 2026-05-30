@@ -21,8 +21,8 @@ export default function HomePage() {
             sizes="100vw"
             className="object-cover opacity-40"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a12]/60 via-transparent to-[#0a0a12]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a12]/80 via-transparent to-[#0a0a12]/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0f0f1a]/60 via-transparent to-[#0f0f1a]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0f0f1a]/80 via-transparent to-[#0f0f1a]/40" />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
@@ -58,7 +58,7 @@ export default function HomePage() {
                 href="https://www.youtube.com/@voidsoul_studio"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg border border-[#1e1a3a] px-6 py-3 text-sm font-medium text-[#94a3b8] transition-all hover:border-[#7c3aed] hover:text-[#e2e8f0]"
+                className="rounded-lg border border-[#2a2550] px-6 py-3 text-sm font-medium text-[#94a3b8] transition-all hover:border-[#7c3aed] hover:text-[#e2e8f0]"
               >
                 Watch Devlog ↗
               </a>
@@ -75,9 +75,9 @@ export default function HomePage() {
           </h2>
           <Link
             href={`/games/${featured.slug}`}
-            className="group relative flex flex-col overflow-hidden rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] md:flex-row transition-all duration-300 hover:border-[#7c3aed] hover:shadow-[0_0_40px_rgba(124,58,237,0.2)]"
+            className="group relative flex flex-col overflow-hidden rounded-2xl border border-[#2a2550] bg-[#15152a] md:flex-row transition-all duration-300 hover:border-[#7c3aed] hover:shadow-[0_0_40px_rgba(124,58,237,0.2)]"
           >
-            <div className="relative aspect-video w-full overflow-hidden md:aspect-auto md:w-1/2 bg-[#0a0a20]">
+            <div className="relative aspect-video w-full overflow-hidden md:aspect-auto md:w-1/2 bg-[#101028]">
               {featured.thumbnail ? (
                 <Image
                   src={featured.thumbnail}
@@ -181,7 +181,7 @@ export default function HomePage() {
       )}
 
       {/* About */}
-      <section id="about" className="relative border-t border-[#1e1a3a] overflow-hidden">
+      <section id="about" className="relative border-t border-[#2a2550] overflow-hidden">
         {/* Space background */}
         <div className="absolute inset-0">
           <Image
@@ -192,10 +192,10 @@ export default function HomePage() {
             className="object-cover object-center opacity-30"
           />
           {/* Soft blur + dark veil over the background */}
-          <div className="absolute inset-0 backdrop-blur-sm bg-[#0a0a12]/60" />
+          <div className="absolute inset-0 backdrop-blur-sm bg-[#0f0f1a]/60" />
           {/* Edge fade so it blends with surrounding sections */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a12] via-transparent to-[#0a0a12]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a12]/50 via-transparent to-[#0a0a12]/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0f0f1a] via-transparent to-[#0f0f1a]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0f0f1a]/50 via-transparent to-[#0f0f1a]/50" />
         </div>
         {/* Ambient purple glow */}
         <div

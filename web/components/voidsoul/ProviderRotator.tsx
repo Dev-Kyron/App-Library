@@ -34,7 +34,7 @@ export default function ProviderRotator({ className = '' }: { className?: string
 
   return (
     <div
-      className={`relative w-full max-w-[340px] rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-4 shadow-xl shadow-[#7c3aed]/10 ${className}`}
+      className={`relative w-full max-w-[340px] rounded-2xl border border-[#2a2550] bg-[#15152a] p-4 shadow-xl shadow-[#7c3aed]/10 ${className}`}
     >
       <div className="mb-3 flex items-center justify-between">
         <p className="text-[10px] font-semibold uppercase tracking-widest text-[#7c3aed]">
@@ -54,7 +54,7 @@ export default function ProviderRotator({ className = '' }: { className?: string
               className={`relative flex items-center justify-between rounded-lg border px-3 py-2 transition-all duration-700 ${
                 isActive
                   ? 'border-[#7c3aed] bg-[#7c3aed]/15 shadow-[0_0_20px_rgba(124,58,237,0.35)]'
-                  : 'border-[#1e1a3a] bg-black/30 opacity-50'
+                  : 'border-[#2a2550] bg-black/30 opacity-50'
               }`}
             >
               <div className="flex items-center gap-2 min-w-0">

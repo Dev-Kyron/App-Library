@@ -81,7 +81,7 @@ export default function ChatPanelMock({ className = '' }: { className?: string }
   return (
     <div
       aria-hidden
-      className={`relative w-full max-w-[420px] rounded-2xl border border-[#1e1a3a] shadow-2xl shadow-[#7c3aed]/20 overflow-hidden ${className}`}
+      className={`relative w-full max-w-[420px] rounded-2xl border border-[#2a2550] shadow-2xl shadow-[#7c3aed]/20 overflow-hidden ${className}`}
       style={{
         background:
           'linear-gradient(155deg, rgba(26,29,61,0.92) 0%, rgba(8,10,22,0.96) 100%)',
@@ -89,7 +89,7 @@ export default function ChatPanelMock({ className = '' }: { className?: string }
       }}
     >
       {/* Header */}
-      <div className="flex items-center gap-2 border-b border-[#1e1a3a] px-3 py-2.5">
+      <div className="flex items-center gap-2 border-b border-[#2a2550] px-3 py-2.5">
         <button className="flex items-center gap-1 rounded-md px-1.5 py-1 text-[11px] text-[#64748b]">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M15 18l-6-6 6-6" />
@@ -109,7 +109,7 @@ export default function ChatPanelMock({ className = '' }: { className?: string }
           if (m.tool) {
             return (
               <div key={i} className="flex justify-start">
-                <div className="rounded-lg border border-[#1e1a3a] bg-black/40 px-2 py-1.5 text-[10px]">
+                <div className="rounded-lg border border-[#2a2550] bg-black/40 px-2 py-1.5 text-[10px]">
                   <div className="flex items-center gap-1.5">
                     <span className="text-[#a855f7]">⚡</span>
                     <span className="font-mono font-semibold text-[#e2e8f0]">
@@ -133,7 +133,7 @@ export default function ChatPanelMock({ className = '' }: { className?: string }
                 className={`max-w-[86%] rounded-2xl px-3 py-2 text-[12px] leading-snug ${
                   isUser
                     ? 'rounded-br-sm bg-[#7c3aed] text-white'
-                    : 'rounded-bl-sm border border-[#1e1a3a] bg-black/30 text-[#cbd0e2]'
+                    : 'rounded-bl-sm border border-[#2a2550] bg-black/30 text-[#cbd0e2]'
                 }`}
               >
                 {text}
@@ -147,11 +147,11 @@ export default function ChatPanelMock({ className = '' }: { className?: string }
       </div>
 
       {/* Composer */}
-      <div className="border-t border-[#1e1a3a] bg-black/30 px-3 py-2.5">
+      <div className="border-t border-[#2a2550] bg-black/30 px-3 py-2.5">
         <div className="mb-1.5 flex items-center justify-end">
           <button className="flex items-center gap-1 rounded-full border border-[#7c3aed]/40 bg-[#7c3aed]/15 px-2 py-0.5 text-[9px] text-[#a855f7]">
-            <span className="text-emerald-400">👁</span>
-            claude-sonnet-4-5
+            <span>✨</span>
+            Auto · claude-sonnet-4-5
             <span className="text-[#475569]">▾</span>
           </button>
         </div>
@@ -166,7 +166,7 @@ export default function ChatPanelMock({ className = '' }: { className?: string }
               </span>
             ))}
           </div>
-          <div className="scrollbar-void flex-1 rounded-xl border border-[#1e1a3a] bg-black/40 px-3 py-2 text-[12px] text-[#64748b]">
+          <div className="scrollbar-void flex-1 rounded-xl border border-[#2a2550] bg-black/40 px-3 py-2 text-[12px] text-[#64748b]">
             Ask VoidSoul anything…
           </div>
           <button className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#7c3aed] text-white">

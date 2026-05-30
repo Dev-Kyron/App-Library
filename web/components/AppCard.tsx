@@ -27,10 +27,10 @@ export default function AppCard({ app }: { app: AppItem }) {
   return (
     <Link
       href={app.href}
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-[#1e1a3a] bg-[#0f0f1e] transition-all duration-300 hover:border-[#7c3aed] hover:shadow-[0_0_28px_0px_rgba(124,58,237,0.3)]"
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-[#2a2550] bg-[#15152a] transition-all duration-300 hover:border-[#7c3aed] hover:shadow-[0_0_28px_0px_rgba(124,58,237,0.3)]"
     >
       {/* Orb-as-thumbnail */}
-      <div className="relative aspect-video w-full overflow-hidden bg-[#0a0a20]">
+      <div className="relative aspect-video w-full overflow-hidden bg-[#101028]">
         <div
           className="absolute inset-0 opacity-50"
           style={{
@@ -74,7 +74,7 @@ export default function AppCard({ app }: { app: AppItem }) {
             {app.platforms.map((p) => (
               <span
                 key={p}
-                className="rounded-full border border-[#1e1a3a] px-2 py-0.5 text-[10px] text-[#64748b]"
+                className="rounded-full border border-[#2a2550] px-2 py-0.5 text-[10px] text-[#64748b]"
               >
                 {PLATFORM_LABEL[p]}
               </span>

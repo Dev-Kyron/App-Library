@@ -84,13 +84,13 @@ export default function AgentChatMock({ className = '' }: { className?: string }
   return (
     <div
       aria-hidden
-      className={`relative w-full max-w-[400px] overflow-hidden rounded-2xl border border-[#1e1a3a] shadow-2xl shadow-[#7c3aed]/20 ${className}`}
+      className={`relative w-full max-w-[400px] overflow-hidden rounded-2xl border border-[#2a2550] shadow-2xl shadow-[#7c3aed]/20 ${className}`}
       style={{
         background: 'linear-gradient(155deg, rgba(26,29,61,0.92) 0%, rgba(8,10,22,0.96) 100%)',
       }}
     >
       {/* Header */}
-      <div className="flex items-center gap-2 border-b border-[#1e1a3a] px-3 py-2.5">
+      <div className="flex items-center gap-2 border-b border-[#2a2550] px-3 py-2.5">
         <div className="flex h-5 w-5 items-center justify-center rounded-md bg-[#7c3aed]/20 text-[11px]">
           🤖
         </div>
@@ -131,7 +131,7 @@ export default function AgentChatMock({ className = '' }: { className?: string }
                 className={`max-w-[88%] rounded-2xl px-3 py-2 text-[12px] leading-snug ${
                   isUser
                     ? 'rounded-br-sm bg-[#7c3aed] text-white'
-                    : 'rounded-bl-sm border border-[#1e1a3a] bg-black/30 text-[#cbd0e2]'
+                    : 'rounded-bl-sm border border-[#2a2550] bg-black/30 text-[#cbd0e2]'
                 }`}
               >
                 {text}
@@ -139,7 +139,7 @@ export default function AgentChatMock({ className = '' }: { className?: string }
                   <span className="ml-0.5 inline-block h-3 w-[2px] bg-[#a855f7] align-middle animate-pulse" />
                 )}
                 {!isUser && done && m.source && (
-                  <p className="mt-2 border-t border-[#1e1a3a] pt-1.5 text-[10px] text-[#64748b]">
+                  <p className="mt-2 border-t border-[#2a2550] pt-1.5 text-[10px] text-[#64748b]">
                     Source ·{' '}
                     <span className="text-[#a855f7]">{m.source}</span>
                   </p>
@@ -151,12 +151,12 @@ export default function AgentChatMock({ className = '' }: { className?: string }
       </div>
 
       {/* Composer */}
-      <div className="border-t border-[#1e1a3a] bg-black/30 px-3 py-2.5">
+      <div className="border-t border-[#2a2550] bg-black/30 px-3 py-2.5">
         <div className="flex items-end gap-1.5">
           <button className="flex h-7 w-7 items-center justify-center rounded-lg border border-[#7c3aed]/40 bg-[#7c3aed]/10 text-[12px] text-[#a855f7]">
             🔗
           </button>
-          <div className="flex-1 rounded-xl border border-[#1e1a3a] bg-black/40 px-3 py-2 text-[11px] text-[#64748b]">
+          <div className="flex-1 rounded-xl border border-[#2a2550] bg-black/40 px-3 py-2 text-[11px] text-[#64748b]">
             Ask AgentHub…
           </div>
           <button className="flex h-7 w-7 items-center justify-center rounded-xl bg-[#7c3aed] text-white">

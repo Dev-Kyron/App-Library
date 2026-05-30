@@ -14,10 +14,10 @@ export default function GameCard({ game }: { game: Game }) {
   return (
     <Link
       href={`/games/${game.slug}`}
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-[#1e1a3a] bg-[#0f0f1e] transition-all duration-300 hover:border-[#7c3aed] hover:shadow-[0_0_24px_0px_rgba(124,58,237,0.25)]"
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-[#2a2550] bg-[#15152a] transition-all duration-300 hover:border-[#7c3aed] hover:shadow-[0_0_24px_0px_rgba(124,58,237,0.25)]"
     >
       {/* Thumbnail */}
-      <div className="relative aspect-video w-full overflow-hidden bg-[#0a0a20]">
+      <div className="relative aspect-video w-full overflow-hidden bg-[#101028]">
         {game.thumbnail ? (
           <Image
             src={game.thumbnail}
@@ -77,7 +77,7 @@ export default function GameCard({ game }: { game: Game }) {
             {game.genre.slice(0, 2).map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-[#1e1a3a] px-2 py-0.5 text-xs text-[#64748b]"
+                className="rounded-full border border-[#2a2550] px-2 py-0.5 text-xs text-[#64748b]"
               >
                 {tag}
               </span>

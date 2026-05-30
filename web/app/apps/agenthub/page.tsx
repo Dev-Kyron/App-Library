@@ -370,7 +370,7 @@ export default function AgentHubPage() {
                 href={REPO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex w-full items-center justify-center gap-2.5 rounded-xl border border-[#1e1a3a] bg-[#0f0f1e] px-5 py-3 text-sm font-medium text-[#cbd0e2] transition-all hover:border-[#7c3aed] hover:text-[#c084fc] sm:w-auto"
+                className="flex w-full items-center justify-center gap-2.5 rounded-xl border border-[#2a2550] bg-[#15152a] px-5 py-3 text-sm font-medium text-[#cbd0e2] transition-all hover:border-[#7c3aed] hover:text-[#c084fc] sm:w-auto"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
@@ -513,7 +513,7 @@ export default function AgentHubPage() {
               {POSSIBILITIES.map((line, i) => (
                 <li
                   key={i}
-                  className="possibility-row flex items-start gap-3 rounded-xl border border-[#1e1a3a]/60 bg-gradient-to-br from-[#0f0f1e]/80 to-transparent px-4 py-3 transition-all hover:translate-x-1 hover:border-[#7c3aed]/60 hover:bg-[#7c3aed]/5 reveal-stagger"
+                  className="possibility-row flex items-start gap-3 rounded-xl border border-[#2a2550]/60 bg-gradient-to-br from-[#15152a]/80 to-transparent px-4 py-3 transition-all hover:translate-x-1 hover:border-[#7c3aed]/60 hover:bg-[#7c3aed]/5 reveal-stagger"
                   style={{
                     animationDelay: `${i * 50}ms`,
                     ['--ml' as string]: i % 2 === 0 ? '0px' : '12px',
@@ -550,11 +550,11 @@ export default function AgentHubPage() {
             </h2>
           </div>
 
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-[#1e1a3a] bg-[#1e1a3a]/50 sm:rounded-3xl md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-[#2a2550] bg-[#2a2550]/50 sm:rounded-3xl md:grid-cols-2 lg:grid-cols-3">
             {PILLARS.map((p, i) => (
               <div
                 key={p.title}
-                className="group relative overflow-hidden bg-[#0a0a18] p-5 transition-all duration-300 hover:bg-[#0f0f1e] reveal-stagger sm:p-7"
+                className="group relative overflow-hidden bg-[#101022] p-5 transition-all duration-300 hover:bg-[#15152a] reveal-stagger sm:p-7"
                 style={{ animationDelay: `${i * 50}ms` }}
               >
                 <div
@@ -583,10 +583,10 @@ export default function AgentHubPage() {
       {/* ========================= AI FLOW ========================= */}
       <section
         id="how-ai-works"
-        className="relative border-y border-[#1e1a3a]"
+        className="relative border-y border-[#2a2550]"
         style={{
           background:
-            'radial-gradient(ellipse 50% 50% at 50% 0%, rgba(124,58,237,0.10) 0%, transparent 60%), linear-gradient(to bottom, #06060f 0%, #0a0a12 100%)',
+            'radial-gradient(ellipse 50% 50% at 50% 0%, rgba(124,58,237,0.10) 0%, transparent 60%), linear-gradient(to bottom, #0b0b16 0%, #0f0f1a 100%)',
         }}
       >
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:py-32">
@@ -609,7 +609,7 @@ export default function AgentHubPage() {
             {FLOW_STEPS.map((step) => (
               <div
                 key={step.n}
-                className="group relative overflow-hidden rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-5 transition-all hover:border-[#7c3aed]/60 hover:bg-[#0a0a18] sm:p-6"
+                className="group relative overflow-hidden rounded-2xl border border-[#2a2550] bg-[#15152a] p-5 transition-all hover:border-[#7c3aed]/60 hover:bg-[#101022] sm:p-6"
               >
                 <div className="mb-3 flex items-center gap-3">
                   <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[#7c3aed]/40 bg-[#7c3aed]/15 font-mono text-sm font-semibold text-[#a855f7]">
@@ -720,7 +720,7 @@ export default function AgentHubPage() {
             {SCREENSHOTS.map((shot, i) => (
               <Tilt3D key={shot.src} strength={6} liftZ={12}>
                 <div
-                  className="group relative overflow-hidden rounded-2xl border border-[#1e1a3a] bg-[#0a0a20] shadow-2xl shadow-[#7c3aed]/20 transition-all hover:border-[#7c3aed]/60"
+                  className="group relative overflow-hidden rounded-2xl border border-[#2a2550] bg-[#101028] shadow-2xl shadow-[#7c3aed]/20 transition-all hover:border-[#7c3aed]/60"
                   style={{
                     backgroundImage:
                       'radial-gradient(ellipse at 30% 50%, rgba(124,58,237,0.2) 0%, transparent 60%), radial-gradient(ellipse at 70% 30%, rgba(168,85,247,0.12) 0%, transparent 50%)',
@@ -739,7 +739,7 @@ export default function AgentHubPage() {
                       {shot.tag}
                     </span>
                   </div>
-                  <div className="border-t border-[#1e1a3a] bg-black/40 p-4 sm:p-5">
+                  <div className="border-t border-[#2a2550] bg-black/40 p-4 sm:p-5">
                     <p className="text-base font-semibold text-[#e2e8f0]">{shot.title}</p>
                     <p className="mt-1.5 text-sm leading-relaxed text-[#94a3b8]">{shot.caption}</p>
                   </div>
@@ -753,7 +753,7 @@ export default function AgentHubPage() {
       {/* ======================= SECURITY / IT ======================= */}
       <section
         id="security"
-        className="relative border-y border-[#1e1a3a] bg-[#06060f]/60"
+        className="relative border-y border-[#2a2550] bg-[#0b0b16]/60"
       >
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:py-32">
           <div className="grid gap-10 lg:gap-14 lg:grid-cols-[1fr_1.2fr]">
@@ -800,11 +800,11 @@ export default function AgentHubPage() {
               <p className="text-xs font-semibold uppercase tracking-widest text-[#7c3aed] mb-3">
                 Permissions, by surface
               </p>
-              <div className="space-y-2 rounded-2xl border border-[#1e1a3a] bg-gradient-to-br from-[#0f0f1e] to-[#0a0a18] p-3">
+              <div className="space-y-2 rounded-2xl border border-[#2a2550] bg-gradient-to-br from-[#15152a] to-[#101022] p-3">
                 {PERMISSIONS.map((p) => (
                   <div
                     key={p.name}
-                    className="flex items-center gap-3 rounded-lg border border-[#1e1a3a] bg-black/30 px-3.5 py-3 transition-all hover:border-[#7c3aed]/40 hover:bg-[#7c3aed]/5 hover:translate-x-1"
+                    className="flex items-center gap-3 rounded-lg border border-[#2a2550] bg-black/30 px-3.5 py-3 transition-all hover:border-[#7c3aed]/40 hover:bg-[#7c3aed]/5 hover:translate-x-1"
                   >
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold text-[#e2e8f0]">{p.name}</p>
@@ -842,7 +842,7 @@ export default function AgentHubPage() {
       {/* ============================ PRICING ============================ */}
       <section
         id="pricing"
-        className="relative border-t border-[#1e1a3a] overflow-hidden"
+        className="relative border-t border-[#2a2550] overflow-hidden"
       >
         <div
           aria-hidden
@@ -869,7 +869,7 @@ export default function AgentHubPage() {
           {/* Free tier */}
           <div className="mx-auto mb-8 max-w-3xl">
             <Tilt3D strength={5} liftZ={10}>
-              <div className="relative rounded-2xl border border-emerald-500/30 bg-[#0f0f1e] p-6 transition-colors hover:border-emerald-500/60 sm:rounded-3xl sm:p-8">
+              <div className="relative rounded-2xl border border-emerald-500/30 bg-[#15152a] p-6 transition-colors hover:border-emerald-500/60 sm:rounded-3xl sm:p-8">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     <div className="mb-2 flex items-center gap-2">
@@ -928,7 +928,7 @@ export default function AgentHubPage() {
                 without diluting the team-tier framing below. */}
             <div className="mb-6 sm:mb-7">
               <Tilt3D strength={4} liftZ={8}>
-                <div className="group relative flex flex-col items-stretch gap-4 overflow-hidden rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-5 transition-colors hover:border-[#7c3aed]/60 sm:flex-row sm:items-center sm:p-6">
+                <div className="group relative flex flex-col items-stretch gap-4 overflow-hidden rounded-2xl border border-[#2a2550] bg-[#15152a] p-5 transition-colors hover:border-[#7c3aed]/60 sm:flex-row sm:items-center sm:p-6">
                   <div
                     aria-hidden
                     className="pointer-events-none absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100"
@@ -970,8 +970,8 @@ export default function AgentHubPage() {
                   <div
                     className={`relative h-full rounded-2xl border p-5 transition-colors sm:p-6 ${
                       i === 1
-                        ? 'border-[#7c3aed] bg-gradient-to-b from-[#1a0a3a]/40 to-[#0f0f1e] shadow-2xl shadow-[#7c3aed]/30'
-                        : 'border-[#1e1a3a] bg-[#0f0f1e] hover:border-[#7c3aed]/60'
+                        ? 'border-[#7c3aed] bg-gradient-to-b from-[#1a0a3a]/40 to-[#15152a] shadow-2xl shadow-[#7c3aed]/30'
+                        : 'border-[#2a2550] bg-[#15152a] hover:border-[#7c3aed]/60'
                     }`}
                   >
                     {i === 1 && (
@@ -1048,13 +1048,13 @@ export default function AgentHubPage() {
               href={REPO_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full max-w-xs rounded-lg border border-[#1e1a3a] px-6 py-3 text-sm font-medium text-[#94a3b8] transition-all hover:border-[#7c3aed] hover:text-[#e2e8f0] sm:w-auto"
+              className="w-full max-w-xs rounded-lg border border-[#2a2550] px-6 py-3 text-sm font-medium text-[#94a3b8] transition-all hover:border-[#7c3aed] hover:text-[#e2e8f0] sm:w-auto"
             >
               View on GitHub
             </a>
             <Link
               href="/"
-              className="w-full max-w-xs rounded-lg border border-[#1e1a3a] px-6 py-3 text-sm font-medium text-[#94a3b8] transition-all hover:border-[#7c3aed] hover:text-[#e2e8f0] sm:w-auto"
+              className="w-full max-w-xs rounded-lg border border-[#2a2550] px-6 py-3 text-sm font-medium text-[#94a3b8] transition-all hover:border-[#7c3aed] hover:text-[#e2e8f0] sm:w-auto"
             >
               Back to the Library
             </Link>
@@ -1126,7 +1126,7 @@ function SubscribeButton({
         type="button"
         disabled
         title="Add the Square Checkout Link URL in SQUARE_CHECKOUT_URLS to activate this button."
-        className={`${base} cursor-not-allowed border border-dashed border-[#1e1a3a] bg-black/30 text-[#475569]`}
+        className={`${base} cursor-not-allowed border border-dashed border-[#2a2550] bg-black/30 text-[#475569]`}
       >
         Set up in Square
       </button>
@@ -1167,7 +1167,7 @@ function CloseUpPanel({
 }) {
   return (
     <div
-      className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-[#1e1a3a] bg-[#0f0f1e] transition-all duration-500 hover:border-[#7c3aed]/60 hover:shadow-[0_0_32px_rgba(124,58,237,0.18)] ${className}`}
+      className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-[#2a2550] bg-[#15152a] transition-all duration-500 hover:border-[#7c3aed]/60 hover:shadow-[0_0_32px_rgba(124,58,237,0.18)] ${className}`}
     >
       <div
         aria-hidden
@@ -1185,7 +1185,7 @@ function CloseUpPanel({
           <h3 className="text-xl font-semibold leading-snug text-[#e2e8f0]">{title}</h3>
           <p className="mt-2.5 text-sm leading-relaxed text-[#64748b]">{caption}</p>
         </div>
-        <div className="mt-6 flex-1 border-t border-[#1e1a3a] bg-[#0a0a18]/60 sm:mt-8">
+        <div className="mt-6 flex-1 border-t border-[#2a2550] bg-[#101022]/60 sm:mt-8">
           {children}
         </div>
       </div>
@@ -1203,7 +1203,7 @@ function SecurityRow({
   body: string;
 }) {
   return (
-    <div className="flex items-start gap-3 rounded-xl border border-[#1e1a3a] bg-black/30 px-4 py-3.5 transition-all hover:border-[#7c3aed]/40 hover:translate-x-1">
+    <div className="flex items-start gap-3 rounded-xl border border-[#2a2550] bg-black/30 px-4 py-3.5 transition-all hover:border-[#7c3aed]/40 hover:translate-x-1">
       <span className="text-xl mt-0.5">{icon}</span>
       <div>
         <p className="text-sm font-semibold text-[#e2e8f0]">{title}</p>

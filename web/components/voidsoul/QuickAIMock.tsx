@@ -50,7 +50,7 @@ export default function QuickAIMock({ className = '' }: { className?: string }) 
       {/* Backdrop tint */}
       <div className="absolute inset-0 -m-6 rounded-3xl bg-black/40 backdrop-blur-md" />
       <div
-        className="relative overflow-hidden rounded-xl border border-[#1e1a3a] shadow-2xl shadow-[#7c3aed]/25"
+        className="relative overflow-hidden rounded-xl border border-[#2a2550] shadow-2xl shadow-[#7c3aed]/25"
         style={{
           background: 'linear-gradient(155deg, rgba(26,29,61,0.95) 0%, rgba(8,10,22,0.98) 100%)',
         }}
@@ -66,12 +66,12 @@ export default function QuickAIMock({ className = '' }: { className?: string }) 
             placeholder="Quick AI…"
           />
           <span className="ml-1 inline-block h-3 w-[2px] bg-[#a855f7] animate-pulse" />
-          <kbd className="rounded border border-[#1e1a3a] bg-black/40 px-1.5 py-0.5 text-[9px] font-mono text-[#64748b]">
+          <kbd className="rounded border border-[#2a2550] bg-black/40 px-1.5 py-0.5 text-[9px] font-mono text-[#64748b]">
             ⌘ ⇧ J
           </kbd>
         </div>
         {text.length > 0 && (
-          <div className="border-t border-[#1e1a3a] px-3 py-3 text-[11px] leading-relaxed text-[#94a3b8]">
+          <div className="border-t border-[#2a2550] px-3 py-3 text-[11px] leading-relaxed text-[#94a3b8]">
             <p className="mb-1 text-[9px] uppercase tracking-widest text-[#7c3aed]">
               Streaming answer
             </p>

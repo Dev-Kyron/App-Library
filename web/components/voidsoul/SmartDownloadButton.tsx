@@ -29,7 +29,7 @@ export default function SmartDownloadButton() {
     return (
       <button
         disabled
-        className="mt-8 w-full cursor-not-allowed rounded-lg border border-[#1e1a3a] bg-black/40 py-3 text-sm font-medium text-[#64748b]"
+        className="mt-8 w-full cursor-not-allowed rounded-lg border border-[#2a2550] bg-black/40 py-3 text-sm font-medium text-[#64748b]"
       >
         Free when downloads open
       </button>

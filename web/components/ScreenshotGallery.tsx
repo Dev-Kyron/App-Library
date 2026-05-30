@@ -31,7 +31,7 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
     <div className="mb-6">
       {/* Main image */}
       <div
-        className="relative w-full overflow-hidden rounded-xl border border-[#1e1a3a] bg-[#0a0a20]"
+        className="relative w-full overflow-hidden rounded-xl border border-[#2a2550] bg-[#101028]"
         style={{ aspectRatio: '16/9' }}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
@@ -49,7 +49,7 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
         {/* Arrows */}
         <button
           onClick={prev}
-          className="absolute left-3 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full border border-[#2a1a4e] bg-[#0a0a12]/80 text-[#a855f7] backdrop-blur-sm transition-all hover:bg-[#7c3aed]/30 hover:border-[#7c3aed] active:scale-95"
+          className="absolute left-3 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full border border-[#2a1a4e] bg-[#0f0f1a]/80 text-[#a855f7] backdrop-blur-sm transition-all hover:bg-[#7c3aed]/30 hover:border-[#7c3aed] active:scale-95"
           aria-label="Previous"
         >
           <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
@@ -58,7 +58,7 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
         </button>
         <button
           onClick={next}
-          className="absolute right-3 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full border border-[#2a1a4e] bg-[#0a0a12]/80 text-[#a855f7] backdrop-blur-sm transition-all hover:bg-[#7c3aed]/30 hover:border-[#7c3aed] active:scale-95"
+          className="absolute right-3 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full border border-[#2a1a4e] bg-[#0f0f1a]/80 text-[#a855f7] backdrop-blur-sm transition-all hover:bg-[#7c3aed]/30 hover:border-[#7c3aed] active:scale-95"
           aria-label="Next"
         >
           <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
@@ -67,7 +67,7 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
         </button>
 
         {/* Counter */}
-        <span className="absolute bottom-3 right-3 rounded-full bg-[#0a0a12]/80 px-2.5 py-1 text-xs text-[#64748b] backdrop-blur-sm">
+        <span className="absolute bottom-3 right-3 rounded-full bg-[#0f0f1a]/80 px-2.5 py-1 text-xs text-[#64748b] backdrop-blur-sm">
           {active + 1} / {shots.length}
         </span>
       </div>
@@ -81,7 +81,7 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
             className={`relative flex-none overflow-hidden rounded-lg border transition-all active:scale-95 ${
               i === active
                 ? 'border-[#7c3aed] shadow-[0_0_12px_rgba(124,58,237,0.4)]'
-                : 'border-[#1e1a3a] opacity-50 hover:opacity-80 hover:border-[#2a1a4e]'
+                : 'border-[#2a2550] opacity-50 hover:opacity-80 hover:border-[#2a1a4e]'
             }`}
             style={{ width: 96, height: 60 }}
           >

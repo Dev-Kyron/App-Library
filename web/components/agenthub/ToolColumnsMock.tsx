@@ -85,13 +85,13 @@ export default function ToolColumnsMock({ className = '' }: { className?: string
   return (
     <div
       aria-hidden
-      className={`relative w-full max-w-[560px] overflow-hidden rounded-2xl border border-[#1e1a3a] shadow-2xl shadow-[#7c3aed]/20 ${className}`}
+      className={`relative w-full max-w-[560px] overflow-hidden rounded-2xl border border-[#2a2550] shadow-2xl shadow-[#7c3aed]/20 ${className}`}
       style={{
         background: 'linear-gradient(155deg, rgba(26,29,61,0.92) 0%, rgba(8,10,22,0.96) 100%)',
       }}
     >
       {/* Faux app chrome — left sidebar rail + top header */}
-      <div className="flex items-center gap-2 border-b border-[#1e1a3a] px-3 py-2.5">
+      <div className="flex items-center gap-2 border-b border-[#2a2550] px-3 py-2.5">
         <div className="flex h-6 w-6 items-center justify-center rounded-md bg-[#7c3aed]/20 text-[10px] font-bold text-[#a855f7]">
           A
         </div>
@@ -99,7 +99,7 @@ export default function ToolColumnsMock({ className = '' }: { className?: string
         <span className="text-[10px] text-[#475569]">·</span>
         <span className="text-[10px] text-[#64748b]">agenthub.solutions</span>
         <div className="ml-auto flex items-center gap-1">
-          <span className="rounded border border-[#1e1a3a] bg-black/40 px-1.5 py-0.5 text-[9px] text-[#64748b]">
+          <span className="rounded border border-[#2a2550] bg-black/40 px-1.5 py-0.5 text-[9px] text-[#64748b]">
             Share
           </span>
           <span className="rounded border border-[#7c3aed]/30 bg-[#7c3aed]/10 px-1.5 py-0.5 text-[9px] text-[#a855f7]">
@@ -113,7 +113,7 @@ export default function ToolColumnsMock({ className = '' }: { className?: string
         {COLUMNS.map((col) => (
           <div
             key={col.id}
-            className="relative flex flex-col gap-1.5 rounded-lg border border-[#1e1a3a] bg-black/30 p-2"
+            className="relative flex flex-col gap-1.5 rounded-lg border border-[#2a2550] bg-black/30 p-2"
           >
             <div className="flex items-center justify-between">
               <p className="text-[8.5px] font-semibold uppercase tracking-widest text-[#7c3aed]">
@@ -132,7 +132,7 @@ export default function ToolColumnsMock({ className = '' }: { className?: string
                   className={`flex items-center gap-1.5 rounded-md border px-1.5 py-1 transition-all duration-500 ${
                     isActive
                       ? 'border-[#7c3aed] bg-[#7c3aed]/15 shadow-[0_0_14px_rgba(124,58,237,0.35)]'
-                      : 'border-[#1e1a3a] bg-black/40'
+                      : 'border-[#2a2550] bg-black/40'
                   }`}
                 >
                   <span
@@ -162,7 +162,7 @@ export default function ToolColumnsMock({ className = '' }: { className?: string
       </div>
 
       {/* Boot-up footer button */}
-      <div className="flex items-center justify-between border-t border-[#1e1a3a] bg-black/40 px-3 py-2">
+      <div className="flex items-center justify-between border-t border-[#2a2550] bg-black/40 px-3 py-2">
         <button className="flex items-center gap-1.5 rounded-full bg-[#7c3aed] px-3 py-1 text-[10px] font-semibold text-white shadow-[0_0_18px_rgba(124,58,237,0.4)]">
           ⚡ Boot Up My Day
         </button>

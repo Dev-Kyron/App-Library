@@ -51,7 +51,7 @@ export default function ThemeRotator({ className = '' }: { className?: string })
   return (
     <div
       aria-hidden
-      className={`relative w-full max-w-[320px] rounded-2xl border border-[#1e1a3a] bg-[#0f0f1e] p-4 shadow-xl shadow-[#7c3aed]/10 ${className}`}
+      className={`relative w-full max-w-[320px] rounded-2xl border border-[#2a2550] bg-[#15152a] p-4 shadow-xl shadow-[#7c3aed]/10 ${className}`}
     >
       <div className="mb-3 flex items-center justify-between">
         <p className="text-[10px] font-semibold uppercase tracking-widest text-[#7c3aed]">

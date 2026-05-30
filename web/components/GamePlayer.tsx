@@ -39,7 +39,7 @@ export default function GamePlayer({ url, title }: { url: string; title: string 
       {/* Player */}
       <div
         ref={containerRef}
-        className="relative w-full overflow-hidden rounded-xl border border-[#1e1a3a] bg-[#0a0818] select-none"
+        className="relative w-full overflow-hidden rounded-xl border border-[#2a2550] bg-[#0a0818] select-none"
         style={{ aspectRatio: '16/9', WebkitUserSelect: 'none', WebkitTouchCallout: 'none' } as React.CSSProperties}
       >
         <iframe
